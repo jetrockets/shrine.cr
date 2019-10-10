@@ -1,0 +1,20 @@
+name: shrine.cr
+version: 0.1.0
+description: |
+  File Attachment toolkit for Crystal applications
+
+
+authors:
+  - Igor Alexandrov <igor.alexandrov@gmail.com>
+
+crystal: 0.31.1
+
+license: MIT
+
+dependencies:
+  habitat:
+    github: luckyframework/habitat
+
+development_dependencies:
+  spectator:
+    gitlab: arctic-fox/spectator
