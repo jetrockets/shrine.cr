@@ -85,7 +85,6 @@ class FileImport < Granite::Base
   end
 
   def asset=(upload : Amber::Router::File)
-    # @asset_data = FileImport::AssetUploader.upload(upload.file, :disk, metadata: { filename: upload.filename }, location: "uploads/test")
     @asset_data = FileImport::AssetUploader.upload(upload.file, :cache, metadata: { filename: upload.filename })
     @asset_changed = true
   end
