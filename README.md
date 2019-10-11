@@ -66,8 +66,6 @@ FileImport::AssetUploader.upload(file, :store, context: { model: YOUR_ORM_MODEL 
 Currently ORM adapters are not implmented. Below you can find a very rought usage example of Shrine.cr with Granite.
 
 ``` crystal
-# require "../lib/uploaded_file"
-
 class FileImport < Granite::Base
   connection pg
   table file_imports
