@@ -2,7 +2,7 @@
 
 # shrine.cr
 
-Shrine is a toolkit for file attachments in Crystal applications. Heavily inspired by Shrine for Ruby
+Shrine is a toolkit for file attachments in Crystal applications. Heavily inspired by [Shrine for Ruby](https://shrinerb.com).
 
 ## Installation
 
