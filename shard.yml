@@ -1,4 +1,4 @@
-name: shrine.cr
+name: shrine
 version: 0.1.0
 description: |
   File Attachment toolkit for Crystal applications
