@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jetrockets/shrine.cr.svg?branch=master)](https://travis-ci.org/jetrockets/shrine.cr)
+
 # shrine.cr
 
 Shrine is a toolkit for file attachments in Crystal applications. Heavily inspired by Shrine for Ruby
