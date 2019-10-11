@@ -14,7 +14,7 @@ Spectator.describe Storage::FileSystem do
     )
   }
 
-  let(root) { File.join(Dir.tempdir, "shrine") } 
+  let(root) { File.join(Dir.tempdir, "shrine") }
   let(prefix) { nil }
   let(permissions) { Storage::FileSystem::DEFAULT_PERMISSIONS }
   let(directory_permissions) { Storage::FileSystem::DEFAULT_DIRECTORY_PERMISSIONS }
@@ -180,7 +180,7 @@ Spectator.describe Storage::FileSystem do
 
         it "sets file permissions" do
           subject.upload(tempfile("file"), "bar.jpg", move: true)
-          
+
           expect(
             subject.open("bar.jpg").path
           ).to have_permissions(permissions)
@@ -212,13 +212,13 @@ Spectator.describe Storage::FileSystem do
         subject.url("foo.jpg", host: "http://124.83.12.24")
       ).to eq("http://124.83.12.24#{root}/foo.jpg")
     end
-    
+
     context "with `prefix`" do
       let(prefix) { "prefix" }
 
       it "returns the path relative to the :prefix" do
         subject.upload(fakeio, "foo.jpg")
-        
+
         expect(
           subject.url("foo.jpg")
         ).to eq("/#{prefix}/foo.jpg")

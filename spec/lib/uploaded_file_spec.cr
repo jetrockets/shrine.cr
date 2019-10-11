@@ -61,7 +61,7 @@ Spectator.describe UploadedFile do
     context "without extension in `id`" do
       let(id) { "foo" }
       it is_expected.to be_nil
-    end  
+    end
 
     context "with filename and extension in `metadata`" do
       let(metadata) { NamedTuple.new(filename: "foo.jpg") }
@@ -109,7 +109,7 @@ Spectator.describe UploadedFile do
         expect(uploaded_file.size).to be_nil
       end
     end
-    
+
     context "with size in `metadata`" do
       let(metadata) { NamedTuple.new(size: 50) }
 

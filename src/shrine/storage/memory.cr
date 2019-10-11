@@ -17,6 +17,7 @@ module Storage
 
     def open(id)
       # StringIO.new(store.fetch(id))
+
     rescue KeyError
       raise Shrine::FileNotFound.new("file #{id.inspect} not found on storage")
     end

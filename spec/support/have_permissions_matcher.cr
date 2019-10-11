@@ -12,7 +12,7 @@ module Spectator::Matchers
     private def failure_message(actual : Spectator::TestExpression(T)) : String forall T
       "#{actual.label} does not have permissions of #{expected.label}"
     end
-    
+
     private def failure_message_when_negated(actual : Spectator::TestExpression(T)) : String
       "#{actual.label} should not have permissions of #{expected.label}"
     end

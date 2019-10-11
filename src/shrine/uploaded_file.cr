@@ -20,9 +20,9 @@ class UploadedFile
 
     def data
       {
-        size: size,
+        size:      size,
         mime_type: mime_type,
-        filename: filename
+        filename:  filename,
       }
     end
   end
@@ -31,7 +31,7 @@ class UploadedFile
 
   JSON.mapping(
     id: {type: String},
-    storage_key: { type: String },
+    storage_key: {type: String},
     metadata: {type: UploadedFile::Metadata}
   )
 
@@ -51,6 +51,7 @@ class UploadedFile
 
   delegate pos, to: file
   delegate gets_to_end, to: file
+
   # delegate close, to: file
   # delegate path, to: file
 

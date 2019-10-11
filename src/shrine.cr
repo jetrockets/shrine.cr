@@ -54,11 +54,11 @@ class Shrine
   #   uploader.upload(io, metadata: { "foo" => "bar" })           # add metadata
   #   uploader.upload(io, location: "path/to/file")               # specify location
   #   uploader.upload(io, upload_options: { acl: "public-read" }) # add upload options
-  # def upload(io : IO | UploadedFile, options : NamedTuple? = NamedTuple.new)    
-  def upload(io : IO | UploadedFile, **options)    
+  # def upload(io : IO | UploadedFile, options : NamedTuple? = NamedTuple.new)
+  def upload(io : IO | UploadedFile, **options)
     metadata = get_metadata(io, **options)
-    # location = get_location(io, metadata: metadata, location: options[:location]?, context: options[:context]?)    
-    location = get_location(io, **options.merge(metadata: metadata))    
+    # location = get_location(io, metadata: metadata, location: options[:location]?, context: options[:context]?)
+    location = get_location(io, **options.merge(metadata: metadata))
 
     _upload(io, **options.merge(location: location, metadata: metadata))
 
@@ -80,15 +80,15 @@ class Shrine
   # accessible through UploadedFile#metadata.
   private def extract_metadata(io)
     {
-      filename: extract_filename(io),
-      size: extract_size(io),
-      mime_type: extract_mime_type(io)
+      filename:  extract_filename(io),
+      size:      extract_size(io),
+      mime_type: extract_mime_type(io),
     }
   end
 
   # private def _upload(io : IO, location, metadata, upload_options, close = true, delete = false)
   private def _upload(io : IO | UploadedFile, location, metadata, close = true, delete = false, **options)
-    storage.upload(io, location, **options.merge(metadata: metadata)) 
+    storage.upload(io, location, **options.merge(metadata: metadata))
   ensure
     # io.close if close
     File.delete(io.path) if delete && io.responds_to?(:path) && File.exists?(io.path)
@@ -115,7 +115,7 @@ class Shrine
     #   io.content_type.split(";").first # exclude media type parameters
     # end
 
-    return nil if io.size.try &.zero?  # file command returns "application/x-empty" for empty files
+    return nil if io.size.try &.zero? # file command returns "application/x-empty" for empty files
 
     stdout = IO::Memory.new
     stderr = IO::Memory.new

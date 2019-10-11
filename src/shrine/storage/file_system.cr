@@ -5,10 +5,10 @@ module Storage
     getter directory : String
     getter prefix : String?
     getter? clean
-    getter permissions 
+    getter permissions
     getter directory_permissions
 
-    DEFAULT_PERMISSIONS = 0o644
+    DEFAULT_PERMISSIONS           = 0o644
     DEFAULT_DIRECTORY_PERMISSIONS = 0o755
 
     def initialize(directory : String, prefix : String? = nil, @clean = true, @permissions : Int = DEFAULT_PERMISSIONS, @directory_permissions : Int = DEFAULT_DIRECTORY_PERMISSIONS)
@@ -18,7 +18,7 @@ module Storage
       else
         @directory = File.expand_path(directory)
       end
-    
+
       unless Dir.exists?(@directory)
         Dir.mkdir_p(@directory, mode: directory_permissions)
       end
@@ -74,13 +74,13 @@ module Storage
     end
 
     # Moves the file to the given location.
-    private def move(io : IO, path)       
-      if io.responds_to?(:path)        
+    private def move(io : IO, path)
+      if io.responds_to?(:path)
         File.rename io.path, path
       end
     end
 
-    private def move(io : UploadedFile, path)       
+    private def move(io : UploadedFile, path)
       File.rename io.storage.path(io.id), path
       io.storage.clean(io.storage.path(io.id)) if io.storage.clean?
     end
@@ -100,7 +100,7 @@ module Storage
     end
 
     private def relative_path(id : String)
-      Path["/"] / prefix.not_nil! / id.gsub("/", File::SEPARATOR) 
+      Path["/"] / prefix.not_nil! / id.gsub("/", File::SEPARATOR)
     end
 
     private def relative(path)
