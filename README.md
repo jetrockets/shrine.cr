@@ -1,6 +1,6 @@
 # shrine.cr
 
-TODO: Write a description here
+Shrine is a toolkit for file attachments in Crystal applications. Heavily inspired by Shrine for Ruby
 
 ## Installation
 
@@ -9,7 +9,7 @@ TODO: Write a description here
    ```yaml
    dependencies:
      shrine.cr:
-       github: your-github-user/shrine.cr
+       github: jetrockets/shrine.cr
    ```
 
 2. Run `shards install`
@@ -20,11 +20,25 @@ TODO: Write a description here
 require "shrine.cr"
 ```
 
-TODO: Write usage instructions here
+### Feature Progress
 
-## Development
+In no particular order, features that have been implemented and are planned.
+Items not marked as completed may have partial implementations.
 
-TODO: Write development instructions here
+- [X] Shrine
+- [X] Shrine::UploadedFile
+- [ ] Shrine::Attacher
+- [ ] Shrine::Attachment
+- [ ] Shrine::Storage
+    - [X] Shrine::Storage::Memory
+    - [X] Shrine::Storage::FileSystem
+    - [ ] Shrine::Storage::S3
+- [ ] Uploaders
+    - [X] Custom uploaders
+    - [ ] Deviations
+- [ ] Plugins
+
+
 
 ## Contributing
 
@@ -36,4 +50,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [Igor Alexandrov](https://github.com/your-github-user) - creator and maintainer
+- [Igor Alexandrov](https://github.com/igor-alexandrov) - creator and maintainer
