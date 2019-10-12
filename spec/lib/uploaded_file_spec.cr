@@ -1,11 +1,11 @@
 require "../spec_helper"
 
-Spectator.describe UploadedFile do
+Spectator.describe Shrine::UploadedFile do
   include ShrineHelpers
   include FileHelpers
 
   subject(uploaded_file) {
-    UploadedFile.new(id, :store, metadata)
+    Shrine::UploadedFile.new(id, :store, metadata)
   }
 
   # let(uploader) { u = uploader(:store)}
@@ -18,7 +18,7 @@ Spectator.describe UploadedFile do
 
       expect(
         metadata
-      ).to be_a(UploadedFile::Metadata)
+      ).to be_a(Shrine::UploadedFile::Metadata)
 
       expect(
         metadata

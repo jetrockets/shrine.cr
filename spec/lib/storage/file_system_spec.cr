@@ -1,13 +1,12 @@
 require "file_utils"
 
 require "../../spec_helper"
-# require "../../../src/lib/storage/file_system"
 
-Spectator.describe Storage::FileSystem do
+Spectator.describe Shrine::Storage::FileSystem do
   include FileHelpers
 
   subject {
-    Storage::FileSystem.new(root,
+    Shrine::Storage::FileSystem.new(root,
       prefix: prefix,
       permissions: permissions,
       directory_permissions: directory_permissions
@@ -16,8 +15,8 @@ Spectator.describe Storage::FileSystem do
 
   let(root) { File.join(Dir.tempdir, "shrine") }
   let(prefix) { nil }
-  let(permissions) { Storage::FileSystem::DEFAULT_PERMISSIONS }
-  let(directory_permissions) { Storage::FileSystem::DEFAULT_DIRECTORY_PERMISSIONS }
+  let(permissions) { Shrine::Storage::FileSystem::DEFAULT_PERMISSIONS }
+  let(directory_permissions) { Shrine::Storage::FileSystem::DEFAULT_DIRECTORY_PERMISSIONS }
 
   describe "#initialize" do
     context "without `prefix`" do
@@ -69,7 +68,7 @@ Spectator.describe Storage::FileSystem do
       end
 
       it "sets directory permissions" do
-        expect(File.info(subject.directory).permissions.value).to eq(Storage::FileSystem::DEFAULT_DIRECTORY_PERMISSIONS)
+        expect(File.info(subject.directory).permissions.value).to eq(Shrine::Storage::FileSystem::DEFAULT_DIRECTORY_PERMISSIONS)
       end
     end
 

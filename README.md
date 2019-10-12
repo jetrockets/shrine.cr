@@ -71,7 +71,7 @@ class FileImport < Granite::Base
   table file_imports
 
   column id : Int64, primary: true
-  column asset_data : UploadedFile, converter: Granite::Converters::Json(UploadedFile, JSON::Any)
+  column asset_data : Shrine::UploadedFile, converter: Granite::Converters::Json(Shrine::UploadedFile, JSON::Any)
 
   after_save do
     if @asset_changed && @asset_data
