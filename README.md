@@ -63,7 +63,9 @@ FileImport::AssetUploader.upload(file, :store, context: { model: YOUR_ORM_MODEL 
 
 ### ORM usage example
 
-Currently ORM adapters are not implmented. Below you can find a very rought usage example of Shrine.cr with Granite.
+Currently ORM adapters are not implmented.
+
+#### Granite.
 
 ``` crystal
 class FileImport < Granite::Base
@@ -89,6 +91,52 @@ class FileImport < Granite::Base
 end
 
 ```
+
+#### Jennifer
+
+``` crystal
+class FileImport < Jennifer::Model::Base
+  @asset_changed : Bool | Nil
+
+  with_timestamps
+
+  mapping(
+    id: Primary32,
+    asset_data: JSON::Any?,
+    created_at: Time?,
+    updated_at: Time?
+  )
+
+  after_save :move_to_store
+
+  def asset=(upload : Amber::Router::File)
+    self.asset_data = JSON.parse(FileImport::AssetUploader.upload(upload.file, :cache, metadata: { filename: upload.filename }).to_json)
+    asset_changed! if asset_data
+  end
+
+  def asset
+    Shrine::UploadedFile.from_json(asset_data.not_nil!.to_json) if asset_data
+  end
+
+  def asset_changed?
+    @asset_changed || false
+  end
+
+  private def asset_changed!
+    @asset_changed = true
+  end
+
+  private def move_to_store
+    if asset_changed?
+      self.asset_data = JSON.parse(FileImport::AssetUploader.upload(asset.not_nil!, :store, move: true, context: { model: self }).to_json)
+      @asset_changed = false
+      save!
+    end
+  end
+end
+
+```
+
 
 ### Feature Progress
 

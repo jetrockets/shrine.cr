@@ -1,7 +1,6 @@
 require "spectator"
 
-
-require "../src//*"
+require "../src/*"
 require "./support/file_helpers"
 require "./support/shrine_helpers"
 require "./support/have_permissions_matcher"

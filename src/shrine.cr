@@ -129,7 +129,6 @@ class Shrine
   end
 
   private def extract_mime_type(io : UploadedFile)
-    # extract_mime_type(io.file)
     io.metadata.mime_type
   end
 

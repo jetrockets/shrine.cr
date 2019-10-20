@@ -28,7 +28,7 @@ class Shrine
       end
     end
 
-    getter file : File?
+    getter io : IO?
 
     JSON.mapping(
       id: {type: String},
@@ -50,8 +50,8 @@ class Shrine
     delegate size, to: @metadata
     delegate mime_type, to: @metadata
 
-    delegate pos, to: file
-    delegate gets_to_end, to: file
+    delegate pos, to: io
+    delegate gets_to_end, to: io
 
     # delegate close, to: file
     # delegate path, to: file
@@ -73,6 +73,11 @@ class Shrine
       metadata[key]?
     end
 
+    def open(**options)
+      @io.not_nil!.close if @io
+      @io = _open(**options)
+    end
+
     # Calls `#url` on the storage, forwarding any given URL options.
     def url(**options)
       storage.url(id, options)
@@ -89,8 +94,8 @@ class Shrine
       Shrine.find_storage(storage_key.not_nil!).not_nil!
     end
 
-    private def file
-      (@file ||= _open).not_nil!
+    private def io : IO
+      (@io ||= _open).not_nil!
     end
 
     private def _open(**options)
