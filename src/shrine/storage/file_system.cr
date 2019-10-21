@@ -30,7 +30,8 @@ class Shrine
         if move && movable?(io)
           move(io, path!(id))
         else
-          File.write(path!(id), content: io.gets_to_end, perm: permissions)
+          File.write(path!(id), content: io, perm: permissions)
+          # IO.copy(io, path!(id))
         end
       end
 
