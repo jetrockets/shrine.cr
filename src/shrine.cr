@@ -43,7 +43,7 @@ class Shrine
     {% else %}
       {% PLUGINS << plugin %}
     {% end %}
- 
+    
     {% if plugin.constant(:InstanceMethods) %}
       include {{plugin.constant(:InstanceMethods)}}
     {% end %}
@@ -119,6 +119,11 @@ class Shrine
     # location.
     def generate_location(io : IO | UploadedFile, metadata, **options)
       basic_location(io, metadata: metadata)
+    end
+
+    # Prints a warning to the logger.
+    def warn(message)
+      Shrine.logger.warn "SHRINE WARNING: #{message}"
     end
 
     # Extracts filename, size and MIME type from the file, which is later
