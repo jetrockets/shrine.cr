@@ -53,13 +53,13 @@ class Shrine
     {% end %}
 
     {% if plugin.constant(:FileClassMethods) %}
-      class UploadedFile
+      class UploadedFile < Shrine::UploadedFile
         extend {{plugin.constant(:FileClassMethods)}}
       end
     {% end %}
 
     {% if plugin.constant(:FileMethods) %}
-      class UploadedFile
+      class UploadedFile < Shrine::UploadedFile
         include {{plugin.constant(:FileMethods)}}
       end
     {% end %}

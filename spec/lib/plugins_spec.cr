@@ -64,6 +64,8 @@ Spectator.describe "Shrine.plugin" do
     it "responds to .foo with \"foo\"" do
       expect(uploaded_file).to respond_to("foo")
       expect(uploaded_file.foo).to eq("plugin_foo")
+
+      # expect(Shrine::UploadedFile.new).to be_true
     end
 
     it "does not pollute superclass" do
