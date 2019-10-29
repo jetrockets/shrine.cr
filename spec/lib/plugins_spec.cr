@@ -1,8 +1,11 @@
 require "../spec_helper"
 
 module FooPlugin
-  module ClassMethods;    def foo; "plugin_foo"; end; end
-  module InstanceMethods; def foo; "plugin_foo"; end; end
+  module ClassMethods;      def foo; "plugin_foo"; end; end
+  module InstanceMethods;   def foo; "plugin_foo"; end; end
+
+  module FileClassMethods;  def foo; "plugin_foo"; end; end
+  module FileMethods;       def foo; "plugin_foo"; end; end
 end
 
 class NonPluginUploader < Shrine
@@ -48,9 +51,23 @@ Spectator.describe "Shrine.plugin" do
       expect(uploader.foo).to eq("plugin_foo")
     end
 
-    it "responds to #foo" do
+    it "responds to #foo with \"foo\"" do
       expect(uploader_instance).to respond_to("foo")
       expect(uploader_instance.foo).to eq("plugin_foo")
+    end
+  end
+
+  describe "PluginUploader::UploadedFile" do
+    let(superclass_file) { Shrine::UploadedFile }
+    let(uploaded_file) { PluginUploader::UploadedFile }
+
+    it "responds to .foo with \"foo\"" do
+      expect(uploaded_file).to respond_to("foo")
+      expect(uploaded_file.foo).to eq("plugin_foo")
+    end
+
+    it "does not pollute superclass" do
+      expect(superclass_file).not_to respond_to("foo")
     end
   end
 end

@@ -51,6 +51,18 @@ class Shrine
     {% if plugin.constant(:ClassMethods) %}
       extend {{plugin.constant(:ClassMethods)}}
     {% end %}
+
+    {% if plugin.constant(:FileClassMethods) %}
+      class UploadedFile
+        extend {{plugin.constant(:FileClassMethods)}}
+      end
+    {% end %}
+
+    {% if plugin.constant(:FileMethods) %}
+      class UploadedFile
+        include {{plugin.constant(:FileMethods)}}
+      end
+    {% end %}
   end
  
   macro create_plugins_class_method
