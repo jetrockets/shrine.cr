@@ -8,7 +8,6 @@ require "logger"
 class Shrine
   PLUGINS = [] of Nil
 
-
   class Error < Exception; end
 
   # Raised when a file is not a valid IO.
@@ -64,7 +63,7 @@ class Shrine
       end
     {% end %}
   end
- 
+
   macro create_plugins_class_method
     def self.plugins
       {% if @type.constant(:PLUGINS) %}

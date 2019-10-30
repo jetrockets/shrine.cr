@@ -1,20 +1,42 @@
 require "../spec_helper"
 
 module FooPlugin
-  module ClassMethods;      def foo; "plugin_foo"; end; end
-  module InstanceMethods;   def foo; "plugin_foo"; end; end
+  module ClassMethods
+    def foo
+      "plugin_foo"
+    end
+  end
 
-  module FileClassMethods;  def foo; "plugin_foo"; end; end
-  module FileMethods;       def foo; "plugin_foo"; end; end
+  module InstanceMethods
+    def foo
+      "plugin_foo"
+    end
+  end
+
+  module FileClassMethods
+    def foo
+      "plugin_foo"
+    end
+  end
+
+  module FileMethods
+    def foo
+      "plugin_foo"
+    end
+  end
 end
 
 class NonPluginUploader < Shrine
   module ClassMethods
-    def foo; "foo"; end;
+    def foo
+      "foo"
+    end
   end
 
   module InstanceMethods
-    def foo; "foo"; end;
+    def foo
+      "foo"
+    end
   end
 
   extend ClassMethods

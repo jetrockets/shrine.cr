@@ -183,7 +183,7 @@ Spectator.describe Shrine::UploadedFile do
 
       dup = IO::Memory.new
       uploaded_file.open { |io| dup = io.not_nil! }
-      expect{ dup.gets_to_end }.to raise_error(IO::Error)
+      expect { dup.gets_to_end }.to raise_error(IO::Error)
     end
 
     it "resets the uploaded file ready to be opened again" do
@@ -206,7 +206,7 @@ Spectator.describe Shrine::UploadedFile do
       uploaded_file = uploader.upload(fakeio)
       dup = IO::Memory.new
 
-      expect{
+      expect {
         uploaded_file.open do |io|
           dup = io.not_nil!
           raise "error ocurred"
@@ -214,6 +214,16 @@ Spectator.describe Shrine::UploadedFile do
       }.to raise_error(Exception)
 
       expect(dup.closed?).to be_true
+    end
+  end
+
+  describe "#stream" do
+    it "opens and closes the file after streaming if it was not open" do
+      uploaded_file = uploader.upload(fakeio("content"))
+      uploaded_file.stream(destination = IO::Memory.new)
+
+      expect(destination.to_s).to eq("content")
+      expect(uploaded_file.opened?).to be_false
     end
   end
 end

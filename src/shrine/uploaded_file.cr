@@ -100,7 +100,7 @@ class Shrine
       open(**options)
 
       begin
-        yield @io
+        yield @io.not_nil!
       ensure
         close
         @io = nil
@@ -108,22 +108,21 @@ class Shrine
     end
 
     # Streams uploaded file content into the specified destination. The
-    # destination object is given directly to `IO.copy_stream`, so it can
-    # be either a path on disk or an object that responds to `#write`.
+    # destination object is given directly to `IO.copy`.
     #
     # If the uploaded file is already opened, it will be simply rewinded
     # after streaming finishes. Otherwise the uploaded file is opened and
     # then closed after streaming.
     #
-    #     uploaded_file.stream(StringIO.new)
-    #     # or
-    #     uploaded_file.stream("/path/to/destination")
-    def stream(destination, **options)
+    # ```
+    # uploaded_file.stream(IO::Memory.new)
+    # ```
+    def stream(destination : IO, **options)
       if opened?
-        IO.copy_stream(io, destination)
+        IO.copy(io, destination)
         io.rewind
       else
-        open(**options) { |io| IO.copy_stream(io, destination) }
+        open(**options) { |io| IO.copy(io, destination) }
       end
     end
 
