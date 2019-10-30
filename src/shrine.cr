@@ -184,6 +184,7 @@ class Shrine
       status = Process.run("file", args: ["--mime-type", "--brief", "-"], output: stdout, error: stderr, input: io)
 
       if status.success?
+        io.rewind
         stdout.to_s.strip
       else
         raise Error.new "file command failed: #{stderr.to_s}"

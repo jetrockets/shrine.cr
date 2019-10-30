@@ -28,7 +28,8 @@ class Shrine
       end
     end
 
-    getter io : IO?
+    # getter io : IO?
+    @io : IO?
 
     JSON.mapping(
       id: {type: String},
@@ -73,9 +74,68 @@ class Shrine
       metadata[key]?
     end
 
+    # Calls `#open` on the storage to open the uploaded file for reading.
+    # Most storages will return a lazy IO object which dynamically
+    # retrieves file content from the storage as the object is being read.
+    #
+    # If a block is given, the opened IO object is yielded to the block,
+    # and at the end of the block it's automatically closed. In this case
+    # the return value of the method is the block return value.
+    #
+    # If no block is given, the opened IO object is returned.
+    #
+    #     uploaded_file.open #=> IO object returned by the storage
+    #     uploaded_file.read #=> "..."
+    #     uploaded_file.close
+    #
+    #     # or
+    #
+    #     uploaded_file.open { |io| io.read } # the IO is automatically closed
     def open(**options)
       @io.not_nil!.close if @io
       @io = _open(**options)
+    end
+
+    def open(**options, &block)
+      open(**options)
+
+      begin
+        yield @io
+      ensure
+        close
+        @io = nil
+      end
+    end
+
+    # Streams uploaded file content into the specified destination. The
+    # destination object is given directly to `IO.copy_stream`, so it can
+    # be either a path on disk or an object that responds to `#write`.
+    #
+    # If the uploaded file is already opened, it will be simply rewinded
+    # after streaming finishes. Otherwise the uploaded file is opened and
+    # then closed after streaming.
+    #
+    #     uploaded_file.stream(StringIO.new)
+    #     # or
+    #     uploaded_file.stream("/path/to/destination")
+    def stream(destination, **options)
+      if opened?
+        IO.copy_stream(io, destination)
+        io.rewind
+      else
+        open(**options) { |io| IO.copy_stream(io, destination) }
+      end
+    end
+
+    # Part of complying to the IO interface. It delegates to the internally
+    # opened IO object.
+    def close
+      io.close if opened?
+    end
+
+    # Returns whether the file has already been opened.
+    def opened?
+      !!@io
     end
 
     # Calls `#url` on the storage, forwarding any given URL options.
@@ -94,7 +154,7 @@ class Shrine
       Shrine.find_storage(storage_key.not_nil!).not_nil!
     end
 
-    private def io : IO
+    def io : IO
       (@io ||= _open).not_nil!
     end
 

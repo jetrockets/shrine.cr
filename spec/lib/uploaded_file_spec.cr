@@ -34,7 +34,7 @@ Spectator.describe Shrine::UploadedFile do
     end
 
     context "with filename in `metadata`" do
-      let(metadata) { NamedTuple.new(filename: "foo.jpg") }
+      let(metadata) { {filename: "foo.jpg"} }
 
       it "returns filename from metadata" do
         expect(uploaded_file.original_filename).to eq(metadata[:filename])
@@ -132,6 +132,88 @@ Spectator.describe Shrine::UploadedFile do
       it "converts the value to integer" do
         expect(uploaded_file.size).to eq(50)
       end
+    end
+  end
+
+  describe "#open" do
+    it "returns the underlying IO if no block given" do
+      uploaded_file = uploader.upload(fakeio)
+
+      expect(uploaded_file.open).to be_an(IO)
+      expect(uploaded_file.open.closed?).to be_false
+    end
+
+    it "closes the previuos IO" do
+      uploaded_file = uploader.upload(fakeio)
+      io1 = uploaded_file.open
+      io2 = uploaded_file.open
+
+      expect(io1).not_to eq(io2)
+      expect(io1.closed?).to be_true
+      expect(io2.closed?).to be_false
+    end
+
+    it "yields to the block if it's given" do
+      uploaded_file = uploader.upload(fakeio)
+
+      called = false
+      uploaded_file.open { called = true }
+      expect(called).to be_true
+    end
+
+    it "yields the opened IO" do
+      uploaded_file = uploader.upload(fakeio("file"))
+      uploaded_file.open do |io|
+        io = io.not_nil!
+
+        expect(io).to be_an(IO)
+        expect(io.gets_to_end).to eq("file")
+      end
+    end
+
+    it "makes itself open as well" do
+      uploaded_file = uploader.upload(fakeio)
+      uploaded_file.open do |io|
+        expect(io).to eq(uploaded_file.io)
+      end
+    end
+
+    it "closes the IO after block finishes" do
+      uploaded_file = uploader.upload(fakeio)
+
+      dup = IO::Memory.new
+      uploaded_file.open { |io| dup = io.not_nil! }
+      expect{ dup.gets_to_end }.to raise_error(IO::Error)
+    end
+
+    it "resets the uploaded file ready to be opened again" do
+      uploaded_file = uploader.upload(fakeio("file"))
+      uploaded_file.open { }
+
+      expect(uploaded_file.gets_to_end).to eq("file")
+    end
+
+    it "opens even if it was closed" do
+      uploaded_file = uploader.upload(fakeio("file"))
+      uploaded_file.gets_to_end
+      uploaded_file.close
+      uploaded_file.open { |io|
+        expect(io.not_nil!.gets_to_end).to eq("file")
+      }
+    end
+
+    it "closes the file even if error has occured" do
+      uploaded_file = uploader.upload(fakeio)
+      dup = IO::Memory.new
+
+      expect{
+        uploaded_file.open do |io|
+          dup = io.not_nil!
+          raise "error ocurred"
+        end
+      }.to raise_error(Exception)
+
+      expect(dup.closed?).to be_true
     end
   end
 end

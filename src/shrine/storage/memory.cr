@@ -12,13 +12,12 @@ class Shrine
       end
 
       def upload(io, id, **options)
-        # store[id.to_s] = io.read
         store[id.to_s] = io.gets_to_end
       end
 
       def open(id)
         # StringIO.new(store.fetch(id))
-
+        IO::Memory.new(store[id])
       rescue KeyError
         raise Shrine::FileNotFound.new("file #{id.inspect} not found on storage")
       end
