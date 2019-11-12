@@ -26,7 +26,7 @@ Shrine is a toolkit for file attachments in Crystal applications. Heavily inspir
 require "shrine.cr"
 ```
 
-Shrine.cr is under heavy development! 
+Shrine.cr is under heavy development!
 
 First of all you should configure `Shrine`.
 
@@ -152,7 +152,7 @@ Items not marked as completed may have partial implementations.
     - [X] #original_filename
     - [X] #extension
     - [X] #size
-    - [ ] #mime_type
+    - [X] #mime_type
     - [ ] #[]
     - [ ] #read
     - [ ] #eof?
