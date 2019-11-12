@@ -149,6 +149,22 @@ Items not marked as completed may have partial implementations.
 
 - [X] Shrine
 - [X] Shrine::UploadedFile
+    - [X] #original_filename
+    - [X] #extension
+    - [X] #size
+    - [ ] #mime_type
+    - [ ] #[]
+    - [ ] #read
+    - [ ] #eof?
+    - [ ] #rewind
+    - [ ] #close
+    - [ ] #url
+    - [ ] #exists?
+    - [X] #open
+    - [X] #download
+    - [X] #stream
+    - [ ] #replace
+    - [ ] #delete
 - [ ] Shrine::Attacher
 - [ ] Shrine::Attachment
 - [ ] Shrine::Storage
