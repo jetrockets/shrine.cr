@@ -4,6 +4,10 @@
 
 Shrine is a toolkit for file attachments in Crystal applications. Heavily inspired by [Shrine for Ruby](https://shrinerb.com).
 
+## Documentation
+
+[https://jetrockets.github.io/shrine.cr](https://jetrockets.github.io/shrine.cr)
+
 ## Installation
 
 1. Add the dependency to your `shard.yml`:
