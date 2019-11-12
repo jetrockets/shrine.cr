@@ -257,7 +257,7 @@ Spectator.describe Shrine::UploadedFile do
       uploaded_file = uploader.upload(fakeio)
 
       expect {
-        uploaded_file.download { |tempfile| "result" }
+        uploaded_file.download { |_tempfile| "result" }
       }.to eq("result")
     end
 

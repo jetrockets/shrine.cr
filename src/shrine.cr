@@ -28,7 +28,7 @@ class Shrine
 
   macro inherited
     {{@type}}::PLUGINS = [] of Nil
- 
+
     {% for plugin in @type.superclass.constant(:PLUGINS) %}
       load_plugin({{plugin}})
     {% end %}
@@ -36,17 +36,17 @@ class Shrine
 
   macro load_plugin(plugin)
     {% plugin = plugin.resolve %}
-  
+
     {% if PLUGINS.includes?(plugin) %}
       raise ArgumentError.new("Cannot load plugin {{plugin.stringify}} to {{@type}}. Plugin has already been initialized")
     {% else %}
       {% PLUGINS << plugin %}
     {% end %}
-    
+
     {% if plugin.constant(:InstanceMethods) %}
       include {{plugin.constant(:InstanceMethods)}}
     {% end %}
- 
+
     {% if plugin.constant(:ClassMethods) %}
       extend {{plugin.constant(:ClassMethods)}}
     {% end %}
