@@ -50,6 +50,10 @@ class Shrine
 
     delegate size, to: @metadata
     delegate mime_type, to: @metadata
+    def content_type
+      mime_type
+    end
+
 
     delegate pos, to: io
     delegate gets_to_end, to: io

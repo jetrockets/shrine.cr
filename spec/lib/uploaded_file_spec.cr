@@ -135,6 +135,34 @@ Spectator.describe Shrine::UploadedFile do
     end
   end
 
+  describe "#mime_type" do
+    context "with mime_type in `metadata`" do
+      let(metadata) { NamedTuple.new(mime_type: "image/jpeg") }
+
+      it "returns mime_type from metadata" do
+        expect(uploaded_file.mime_type).to eq(metadata[:mime_type])
+      end
+
+      it "has #content_type alias" do
+        expect(uploaded_file.content_type).to eq(metadata[:mime_type])
+      end
+    end
+
+    context "with blank mime_type in `metadata`" do
+      let(metadata) { NamedTuple.new(mime_type: nil) }
+
+      it "returns nil as a mime_type" do
+        expect(uploaded_file.mime_type).to be_nil
+      end
+    end
+
+    context "without mime_type in `metadata`" do
+      it "returns nil as a mime_type" do
+        expect(uploaded_file.mime_type).to be_nil
+      end
+    end
+  end
+
   describe "#open" do
     it "returns the underlying IO if no block given" do
       uploaded_file = uploader.upload(fakeio)
