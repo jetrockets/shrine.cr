@@ -9,7 +9,7 @@ module FileHelpers
     File.open(tempfile.path)
   end
 
-  def fakeio(content = "file")
-    FakeIO.new(content)
+  def fakeio(content = "file", **options)
+    FakeIO.new(content, **options)
   end
 end

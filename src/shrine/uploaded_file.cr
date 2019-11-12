@@ -84,13 +84,16 @@ class Shrine
     #
     # If no block is given, the opened IO object is returned.
     #
-    #     uploaded_file.open #=> IO object returned by the storage
-    #     uploaded_file.read #=> "..."
-    #     uploaded_file.close
+    # ```
+    # uploaded_file.open # => IO object returned by the storage
+    # uploaded_file.read # => "..."
+    # uploaded_file.close
     #
-    #     # or
+    # # or
     #
-    #     uploaded_file.open { |io| io.read } # the IO is automatically closed
+    # uploaded_file.open { |io| io.read } # the IO is automatically closed
+    # ```
+    #
     def open(**options)
       @io.not_nil!.close if @io
       @io = _open(**options)
@@ -104,6 +107,38 @@ class Shrine
       ensure
         close
         @io = nil
+      end
+    end
+
+    # Streams content into a newly created tempfile and returns it.
+    #
+    # ```
+    # uploaded_file.download
+    # # => #<File:/var/folders/.../20180302-33119-1h1vjbq.jpg>
+    # ```
+    #
+    def download(**options)
+      tempfile = File.tempfile("shrine", ".#{extension}")
+      stream(tempfile, **options)
+      tempfile.rewind
+    end
+
+    # Streams content into a newly created tempfile, yields it to the
+    # block, and at the end of the block automatically closes it.
+    # In this case the return value of the method is the block
+    # return value.
+    #
+    # ```
+    # uploaded_file.download { |tempfile| tempfile.gets_to_end } # tempfile is deleted
+    # ```
+    #
+    def download(**options, &block)
+      tempfile = download(**options)
+      yield(tempfile)
+    ensure
+      if tempfile
+        tempfile.not_nil!.close
+        tempfile.not_nil!.delete
       end
     end
 

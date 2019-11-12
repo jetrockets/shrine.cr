@@ -217,6 +217,63 @@ Spectator.describe Shrine::UploadedFile do
     end
   end
 
+  describe "#download" do
+    it "downloads file content to a Tempfile" do
+      uploaded_file = uploader.upload(fakeio("file"))
+      downloaded = uploaded_file.download
+
+      expect(downloaded).to be_a(File)
+      expect(downloaded.closed?).to be_false
+      expect(downloaded.gets_to_end).to eq("file")
+    end
+
+    it "applies extension from #id" do
+      uploaded_file = uploader.upload(fakeio, location: "foo.jpg")
+
+      expect(
+        uploaded_file.download.path
+      ).to match(/\.jpg$/)
+    end
+
+    it "applies extension from #original_filename" do
+      uploaded_file = uploader.upload(fakeio(filename: "foo.jpg"), location: "foo")
+
+      expect(
+        uploaded_file.download.path
+      ).to match(/\.jpg$/)
+    end
+
+    it "yields the tempfile if block is given" do
+      uploaded_file = uploader.upload(fakeio)
+
+      uploaded_file.download do |tempfile|
+        block = tempfile
+
+        expect(block).to be_a(File)
+      end
+    end
+
+    it "returns the block return value" do
+      uploaded_file = uploader.upload(fakeio)
+
+      expect {
+        uploaded_file.download { |tempfile| "result" }
+      }.to eq("result")
+    end
+
+    it "closes and deletes the tempfile after the block" do
+      uploaded_file = uploader.upload(fakeio)
+
+      tempfile = uploaded_file.download do |tempfile|
+        expect(tempfile.closed?).to be_false
+        tempfile
+      end
+
+      expect(tempfile.closed?).to be_true
+      expect(File.exists?(tempfile.path)).to be_false
+    end
+  end
+
   describe "#stream" do
     it "opens and closes the file after streaming if it was not open" do
       uploaded_file = uploader.upload(fakeio("content"))
