@@ -5,10 +5,9 @@ Spectator.describe Shrine::UploadedFile do
   include FileHelpers
 
   subject(uploaded_file) {
-    Shrine::UploadedFile.new(id, :store, metadata)
+    Shrine::UploadedFile.new(id, :cache, metadata)
   }
 
-  # let(uploader) { u = uploader(:store)}
   let(id) { "foo" }
   let(metadata) { NamedTuple.new }
 
@@ -160,6 +159,22 @@ Spectator.describe Shrine::UploadedFile do
       it "returns nil as a mime_type" do
         expect(uploaded_file.mime_type).to be_nil
       end
+    end
+  end
+
+  describe "#close" do
+    it "closes the underlying IO object" do
+      uploaded_file = uploader.upload(fakeio)
+      io = uploaded_file.io
+      uploaded_file.close
+
+      expect(io.closed?).to be_true
+    end
+  end
+
+  describe "#url" do
+    it "delegates to underlying storage" do
+      expect(uploaded_file.url).to eq("memory://foo")
     end
   end
 

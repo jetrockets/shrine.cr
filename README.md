@@ -154,11 +154,9 @@ Items not marked as completed may have partial implementations.
     - [X] #size
     - [X] #mime_type
     - [ ] #[]
-    - [ ] #read
-    - [ ] #eof?
     - [ ] #rewind
-    - [ ] #close
-    - [ ] #url
+    - [X] #close
+    - [X] #url
     - [ ] #exists?
     - [X] #open
     - [X] #download

@@ -177,8 +177,8 @@ class Shrine
     end
 
     # Calls `#url` on the storage, forwarding any given URL options.
-    def url(**options)
-      storage.url(id, options)
+    def url(**options) : String
+      storage.url(id, **options)
     end
 
     # Calls `#exists?` on the storage, which checks whether the file exists
@@ -188,7 +188,7 @@ class Shrine
     end
 
     # Returns the storage that this file was uploaded to.
-    def storage
+    def storage : Shrine::Storage::Base
       Shrine.find_storage(storage_key.not_nil!).not_nil!
     end
 

@@ -59,6 +59,7 @@ class Shrine
       # from the returned path (e.g. #directory can be set to "public" folder).
       # Both cases accept a `:host` value which will be prefixed to the
       # generated path.
+      # def url(id, host : String? = nil, **options)
       def url(id, host : String? = nil, **options)
         path = (prefix ? relative_path(id) : path(id)).to_s
         host ? host + path : path

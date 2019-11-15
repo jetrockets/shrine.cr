@@ -26,7 +26,7 @@ class Shrine
         store.has_key?(id)
       end
 
-      def url(id)
+      def url(id, **options)
         "memory://#{path(id)}"
       end
 
