@@ -178,6 +178,15 @@ Spectator.describe Shrine::UploadedFile do
     end
   end
 
+  describe "#exists?" do
+    it "delegates to underlying storage" do
+      uploaded_file = uploader.upload(fakeio)
+      expect(uploaded_file.exists?).to be_true
+
+      expect(subject.exists?).to be_false
+    end
+  end
+
   describe "#open" do
     it "returns the underlying IO if no block given" do
       uploaded_file = uploader.upload(fakeio)
@@ -326,4 +335,16 @@ Spectator.describe Shrine::UploadedFile do
       expect(uploaded_file.opened?).to be_false
     end
   end
+
+  # describe "#replace" do
+  #   it "uploads another file to the same location" do
+  #     uploaded_file = uploader.upload(fakeio("file"))
+  #     new_uploaded_file = uploaded_file.replace(fakeio("replaced"))
+
+  #     expect(new_uploaded_file.id).to eq(uploaded_file.id)
+  #     # assert_equal uploaded_file.id, new_uploaded_file.id
+  #     # assert_equal "replaced", new_uploaded_file.read
+  #     # assert_equal 8, new_uploaded_file.size
+  #   end
+  # end
 end

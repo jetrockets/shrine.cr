@@ -187,6 +187,16 @@ class Shrine
       storage.exists?(id)
     end
 
+    # Uploads a new file to this file's location and returns it.
+    # def replace(io, **options)
+    #   uploader.upload(io, **options, location: id)
+    # end
+
+    # Returns an uploader object for the corresponding storage.
+    # def uploader
+    #   Shrine.new(storage_key)
+    # end
+
     # Returns the storage that this file was uploaded to.
     def storage : Shrine::Storage::Base
       Shrine.find_storage(storage_key.not_nil!).not_nil!

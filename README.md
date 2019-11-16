@@ -149,6 +149,7 @@ Items not marked as completed may have partial implementations.
 
 - [X] Shrine
 - [X] Shrine::UploadedFile
+    - [ ] ==
     - [X] #original_filename
     - [X] #extension
     - [X] #size
@@ -157,7 +158,7 @@ Items not marked as completed may have partial implementations.
     - [ ] #rewind
     - [X] #close
     - [X] #url
-    - [ ] #exists?
+    - [X] #exists?
     - [X] #open
     - [X] #download
     - [X] #stream
