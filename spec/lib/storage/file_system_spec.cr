@@ -5,12 +5,27 @@ require "../../spec_helper"
 Spectator.describe Shrine::Storage::FileSystem do
   include FileHelpers
 
+  # class FileStorage < Shrine::Storage::FileSystem
+  #   def directory
+  #     root
+  #   end
+  # end
+
   subject {
-    Shrine::Storage::FileSystem.new(root,
+    Shrine::Storage::FileSystem.new(
+      directory: root,
       prefix: prefix,
       permissions: permissions,
       directory_permissions: directory_permissions
     )
+  # Shrine::Storage::FileSystem.configure do |settings|
+  #   settings.directory = root
+  #   settings.prefix = prefix
+  #   settings.permissions = permissions
+  #   settings.directory_permissions = directory_permissions
+  # end
+
+  # Shrine::Storage::FileSystem.new
   }
 
   let(root) { File.join(Dir.tempdir, "shrine") }
@@ -28,13 +43,13 @@ Spectator.describe Shrine::Storage::FileSystem do
         path = File.expand_path(root)
 
         expect(
-          subject.directory
+          subject.expanded_directory
         ).to eq(path)
       end
 
       it "creates the given directory" do
         expect(
-          File.directory?(subject.directory)
+          File.directory?(subject.expanded_directory)
         ).to be_true
       end
     end
@@ -51,13 +66,13 @@ Spectator.describe Shrine::Storage::FileSystem do
         path = File.expand_path(File.join(root, prefix))
 
         expect(
-          subject.directory
+          subject.expanded_directory
         ).to eq(path)
       end
 
       it "creates the given directory" do
         expect(
-          File.directory?(File.join(subject.directory))
+          File.directory?(File.join(subject.expanded_directory))
         ).to be_true
       end
     end
@@ -68,7 +83,7 @@ Spectator.describe Shrine::Storage::FileSystem do
       end
 
       it "sets directory permissions" do
-        expect(File.info(subject.directory).permissions.value).to eq(Shrine::Storage::FileSystem::DEFAULT_DIRECTORY_PERMISSIONS)
+        expect(File.info(subject.expanded_directory).permissions.value).to eq(Shrine::Storage::FileSystem::DEFAULT_DIRECTORY_PERMISSIONS)
       end
     end
 
@@ -81,7 +96,7 @@ Spectator.describe Shrine::Storage::FileSystem do
 
       it "sets directory permissions" do
         expect(
-          File.info(subject.directory).permissions.value
+          File.info(subject.expanded_directory).permissions.value
         ).to eq(0o500)
       end
     end
@@ -127,15 +142,15 @@ Spectator.describe Shrine::Storage::FileSystem do
         subject.upload(FakeIO.new, "a/b/c/file.jpg")
 
         expect(
-          "#{subject.directory}/a"
+          "#{subject.expanded_directory}/a"
         ).to have_permissions(directory_permissions)
 
         expect(
-          "#{subject.directory}/a/b"
+          "#{subject.expanded_directory}/a/b"
         ).to have_permissions(directory_permissions)
 
         expect(
-          "#{subject.directory}/a/b/c"
+          "#{subject.expanded_directory}/a/b/c"
         ).to have_permissions(directory_permissions)
       end
     end
@@ -201,7 +216,7 @@ Spectator.describe Shrine::Storage::FileSystem do
 
       expect(
         subject.url("foo.jpg")
-      ).to eq("#{subject.directory}/foo.jpg")
+      ).to eq("#{subject.expanded_directory}/foo.jpg")
     end
 
     it "applies a host without :prefix" do

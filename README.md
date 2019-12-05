@@ -162,7 +162,7 @@ Items not marked as completed may have partial implementations.
     - [X] #open
     - [X] #download
     - [X] #stream
-    - [ ] #replace
+    - [X] #replace
     - [ ] #delete
 - [ ] Shrine::Attacher
 - [ ] Shrine::Attachment

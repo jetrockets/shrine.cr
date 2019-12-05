@@ -12,4 +12,8 @@ module FileHelpers
   def fakeio(content = "file", **options)
     FakeIO.new(content, **options)
   end
+
+  def image
+    File.open("spec/support/300x300.png")
+  end
 end

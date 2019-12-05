@@ -1,65 +1,35 @@
 require "json"
 
-# require "./storage/file_system"
-
 class Shrine
   class UploadedFile
-    class Metadata
-      JSON.mapping(
-        size: {type: UInt64, nilable: true, emit_null: true},
-        mime_type: {type: String, nilable: true, emit_null: true},
-        filename: {type: String, nilable: true, emit_null: true}
-      )
+    alias MetadataType = Hash(String, String | Int32 | Nil)
 
-      def initialize; end
+    include JSON::Serializable
 
-      def initialize(data : NamedTuple)
-        @size = data[:size]?.try &.to_u64
-        @mime_type = data[:mime_type]?
-        @filename = data[:filename]?
-      end
-
-      def data
-        {
-          size:      size,
-          mime_type: mime_type,
-          filename:  filename,
-        }
-      end
-    end
-
-    # getter io : IO?
     @io : IO?
 
-    JSON.mapping(
-      id: {type: String},
-      storage_key: {type: String},
-      metadata: {type: UploadedFile::Metadata}
-    )
+    @[JSON::Field(key: "id")]
+    property id : String
 
-    def initialize(id : String, storage : String, metadata : NamedTuple = NamedTuple.new)
+    @[JSON::Field(key: "storage_key")]
+    property storage_key : String
+
+    @[JSON::Field(key: "metadata")]
+    property metadata : MetadataType
+
+    def initialize(id : String, storage : String, metadata : MetadataType = MetadataType.new)
       @storage_key = storage
-      @metadata = UploadedFile::Metadata.new(metadata)
+      @metadata = metadata
 
       @id = id
     end
 
-    def initialize(id : String, storage : Symbol, metadata : NamedTuple = NamedTuple.new)
+    def initialize(id : String, storage : Symbol, metadata : MetadataType = MetadataType.new)
       initialize(id, storage.to_s, metadata)
     end
 
-    delegate size, to: @metadata
-    delegate mime_type, to: @metadata
-    def content_type
-      mime_type
-    end
-
-
     delegate pos, to: io
     delegate gets_to_end, to: io
-
-    # delegate close, to: file
-    # delegate path, to: file
 
     def extension
       result = File.extname(id)[1..-1]?
@@ -69,8 +39,21 @@ class Shrine
       result
     end
 
+    def size
+      metadata["size"]?.try &.to_i
+    rescue ArgumentError
+      nil
+    end
+
+    def mime_type
+      metadata["mime_type"]?.try &.to_s
+    end
+
+    def content_type; mime_type; end
+
     def original_filename
-      metadata.filename if metadata
+      # metadata.filename if metadata
+      metadata["filename"]?.try &.to_s
     end
 
     # Shorthand for accessing metadata values.
@@ -188,14 +171,20 @@ class Shrine
     end
 
     # Uploads a new file to this file's location and returns it.
-    # def replace(io, **options)
-    #   uploader.upload(io, **options, location: id)
-    # end
+    def replace(io, **options)
+      uploader.upload(io, **options, location: id)
+    end
+
+    # Calls `#delete` on the storage, which deletes the file from the
+    # storage.
+    def delete
+      storage.delete(id)
+    end
 
     # Returns an uploader object for the corresponding storage.
-    # def uploader
-    #   Shrine.new(storage_key)
-    # end
+    def uploader
+      Shrine.new(storage_key)
+    end
 
     # Returns the storage that this file was uploaded to.
     def storage : Shrine::Storage::Base

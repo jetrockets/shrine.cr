@@ -4,11 +4,9 @@ class Shrine
   module Storage
     class Memory < Storage::Base
       getter store
-      getter? clean
 
-      def initialize(store : Hash = {} of String => String)
-        @store = store
-        @clean = false
+      def initialize
+        @store = {} of String => String
       end
 
       def upload(io, id, **options)

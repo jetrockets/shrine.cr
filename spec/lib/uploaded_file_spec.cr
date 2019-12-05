@@ -9,7 +9,18 @@ Spectator.describe Shrine::UploadedFile do
   }
 
   let(id) { "foo" }
-  let(metadata) { NamedTuple.new }
+
+  let(metadata) {
+    hash = Shrine::UploadedFile::MetadataType.new
+    hash["filename"] = filename
+    hash["mime_type"] = mime_type
+    hash["size"] = size
+    hash
+  }
+
+  let(filename) { nil }
+  let(mime_type) { nil }
+  let(size) { nil }
 
   describe "#initialize" do
     it "initializes metadata if absent" do
@@ -17,11 +28,7 @@ Spectator.describe Shrine::UploadedFile do
 
       expect(
         metadata
-      ).to be_a(Shrine::UploadedFile::Metadata)
-
-      expect(
-        metadata
-      ).to have_attributes(size: nil, mime_type: nil, filename: nil)
+      ).to be_a(Shrine::UploadedFile::MetadataType)
     end
   end
 
@@ -33,15 +40,15 @@ Spectator.describe Shrine::UploadedFile do
     end
 
     context "with filename in `metadata`" do
-      let(metadata) { {filename: "foo.jpg"} }
+      let(filename) { "foo.jpg" }
 
       it "returns filename from metadata" do
-        expect(uploaded_file.original_filename).to eq(metadata[:filename])
+        expect(uploaded_file.original_filename).to eq(filename)
       end
     end
 
     context "with blank filename in `metadata`" do
-      let(metadata) { NamedTuple.new(filename: nil) }
+      let(filename) { nil }
 
       it "returns nil" do
         expect(uploaded_file.original_filename).to be_nil
@@ -63,12 +70,12 @@ Spectator.describe Shrine::UploadedFile do
     end
 
     context "with filename and extension in `metadata`" do
-      let(metadata) { NamedTuple.new(filename: "foo.jpg") }
+      let(filename) { "foo.jpg" }
       it is_expected.to eq("jpg")
     end
 
     context "with filename in `metadata`" do
-      let(metadata) { NamedTuple.new(filename: "foo") }
+      let(filename) { "foo" }
       it is_expected.to be_nil
     end
 
@@ -78,7 +85,8 @@ Spectator.describe Shrine::UploadedFile do
 
     context "with extension in `id` and in `metadata`" do
       let(id) { "foo.jpg" }
-      let(metadata) { NamedTuple.new(filename: "foo.png") }
+      # let(metadata) { NamedTuple.new(filename: "foo.png") }
+      let(filename) { "foo.png" }
 
       it "prefers extension from id over one from filename" do
         expect(uploaded_file.extension).to eq("jpg")
@@ -94,7 +102,8 @@ Spectator.describe Shrine::UploadedFile do
     end
 
     context "with UPCASED extension in `filename`" do
-      let(metadata) { NamedTuple.new(filename: "foo.PNG") }
+      # let(metadata) { NamedTuple.new(filename: "foo.PNG") }
+      let(filename) { "foo.PNG" }
 
       it "downcases the extracted extension" do
         expect(uploaded_file.extension).to eq("png")
@@ -110,46 +119,42 @@ Spectator.describe Shrine::UploadedFile do
     end
 
     context "with size in `metadata`" do
-      let(metadata) { NamedTuple.new(size: 50) }
+      let(size) { 50 }
 
       it "returns size from metadata" do
-        expect(uploaded_file.size).to eq(metadata[:size])
+        expect(uploaded_file.size).to eq(size)
       end
     end
 
     context "with blank size in `metadata`" do
-      let(metadata) { NamedTuple.new(size: nil) }
-
       it "returns nil" do
         expect(uploaded_file.size).to be_nil
       end
     end
 
     context "with size as String in `metadata`" do
-      let(metadata) { NamedTuple.new(size: "50") }
+      let(size) { "50" }
 
       it "converts the value to integer" do
-        expect(uploaded_file.size).to eq(50)
+        expect(uploaded_file.size).to eq(size.to_i)
       end
     end
   end
 
   describe "#mime_type" do
     context "with mime_type in `metadata`" do
-      let(metadata) { NamedTuple.new(mime_type: "image/jpeg") }
+      let(mime_type) { "image/jpeg" }
 
       it "returns mime_type from metadata" do
-        expect(uploaded_file.mime_type).to eq(metadata[:mime_type])
+        expect(uploaded_file.mime_type).to eq(mime_type)
       end
 
       it "has #content_type alias" do
-        expect(uploaded_file.content_type).to eq(metadata[:mime_type])
+        expect(uploaded_file.content_type).to eq(mime_type)
       end
     end
 
     context "with blank mime_type in `metadata`" do
-      let(metadata) { NamedTuple.new(mime_type: nil) }
-
       it "returns nil as a mime_type" do
         expect(uploaded_file.mime_type).to be_nil
       end
@@ -336,15 +341,23 @@ Spectator.describe Shrine::UploadedFile do
     end
   end
 
-  # describe "#replace" do
-  #   it "uploads another file to the same location" do
-  #     uploaded_file = uploader.upload(fakeio("file"))
-  #     new_uploaded_file = uploaded_file.replace(fakeio("replaced"))
+  describe "#replace" do
+    it "uploads another file to the same location" do
+      uploaded_file = uploader.upload(fakeio("file"))
+      new_uploaded_file = uploaded_file.replace(fakeio("replaced"))
 
-  #     expect(new_uploaded_file.id).to eq(uploaded_file.id)
-  #     # assert_equal uploaded_file.id, new_uploaded_file.id
-  #     # assert_equal "replaced", new_uploaded_file.read
-  #     # assert_equal 8, new_uploaded_file.size
-  #   end
-  # end
+      expect(new_uploaded_file.id).to eq(uploaded_file.id)
+      expect(new_uploaded_file.gets_to_end).to eq("replaced")
+      expect(new_uploaded_file.size).to eq("replaced".size)
+    end
+  end
+
+  describe "#delete" do
+    it "delegates to underlying storage" do
+      uploaded_file = uploader.upload(fakeio)
+      uploaded_file.delete
+
+      #     expect(uploaded_file.exists?).to be_false
+    end
+  end
 end

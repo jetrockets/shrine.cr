@@ -1,4 +1,5 @@
 require "./shrine/storage/*"
+require "./shrine/plugins/*"
 require "./shrine/uploaded_file"
 
 require "habitat"
@@ -26,21 +27,44 @@ class Shrine
     setting log_level : Logger::Severity = Logger::WARN
   end
 
+  struct PluginSettings
+    def all
+      [] of Nil
+    end
+  end
+
+  def self.plugin_settings
+    PluginSettings.new
+  end
+
   macro inherited
     {{@type}}::PLUGINS = [] of Nil
 
     {% for plugin in @type.superclass.constant(:PLUGINS) %}
-      load_plugin({{plugin}})
+      load_plugin({{plugin[:decl]}}, {{plugin[:options].double_splat}})
     {% end %}
   end
 
-  macro load_plugin(plugin)
+  macro load_plugin(plugin, **args)
     {% plugin = plugin.resolve %}
+    {% options = args %}
 
-    {% if PLUGINS.includes?(plugin) %}
+    {% if PLUGINS.map { |e| e[:decl] }.includes?(plugin) %}
       raise ArgumentError.new("Cannot load plugin {{plugin.stringify}} to {{@type}}. Plugin has already been initialized")
     {% else %}
-      {% PLUGINS << plugin %}
+      {% if plugin.constant(:DEFAULT_OPTIONS) %}
+        {% if !options %}
+          {% options = plugin.constant(:DEFAULT_OPTIONS) %}
+        {% end %}
+
+        {% for key in plugin.constant(:DEFAULT_OPTIONS).keys %}
+          {% unless options[key] %}
+            {{ options[key] = plugin.constant(:DEFAULT_OPTIONS)[key] }}
+          {% end %}
+        {% end %}
+      {% end %}
+
+      {% PLUGINS << {decl: plugin, options: options} %}
     {% end %}
 
     {% if plugin.constant(:InstanceMethods) %}
@@ -64,11 +88,40 @@ class Shrine
     {% end %}
   end
 
-  macro create_plugins_class_method
-    def self.plugins
-      {% if @type.constant(:PLUGINS) %}
-        {{@type.constant(:PLUGINS).map &.stringify}}
+  macro finalize_plugins!
+    class PluginsSettings
+      def all
+        {% if @type.constant(:PLUGINS) %}
+          {{
+            @type.constant(:PLUGINS).map do |plugin|
+              options = (plugin[:options].empty? ? nil : plugin[:options])
+
+              {
+                name: plugin[:decl].stringify.underscore.split("::").last,
+                options: options
+              }
+            end
+          }}
+        {% end %}
+      end
+
+      def [](key : Symbol | String)
+        all.find{ |plugin| plugin[:name] == key.to_s}.try &.[:options]
+      end
+
+      {% for plugin in @type.constant(:PLUGINS) %}
+        def {{ plugin[:decl].stringify.underscore.split("::").last.id }}
+          {% if plugin[:options].empty? %}
+            nil
+          {% else %}
+            {{ plugin[:options] }}
+          {% end %}
+        end
       {% end %}
+    end
+
+    def self.plugin_settings
+      PluginsSettings.new
     end
   end
 
@@ -78,22 +131,36 @@ class Shrine
     end
 
     # Retrieves the storage under the given identifier (Symbol), raising Shrine::Error if the storage is missing.
-    def find_storage(name : String | Symbol)
-      settings.storages[name.to_s]? || raise Error.new("storage #{name.inspect} isn't registered on #{self}")
+    def find_storage(name : String)
+      settings.storages[name]? || raise Error.new("storage #{name.inspect} isn't registered on #{self}")
     end
 
     # Uploads the file to the specified storage. It delegates to `Shrine#upload`.
     #
-    #     Shrine.upload(io, :store) #=> #<Shrine::UploadedFile>
+    # ```
+    # Shrine.upload(io, :store) # => #<Shrine::UploadedFile>
+    # ```
     def upload(io, storage, **options)
       new(storage).upload(io, **options)
+    end
+
+    def cache(io, **options)
+      new("cache").upload(io, **options)
+    end
+
+    def store(io, **options)
+      new("store").upload(io, **options)
+    end
+
+    def raise_if_missing_settings!
+      Habitat.raise_if_missing_settings!
     end
   end
 
   module InstanceMethods
-    getter storage_key : Symbol
+    getter storage_key : String
 
-    def initialize(@storage_key : Symbol)
+    def initialize(@storage_key : String)
     end
 
     # Returns the storage object referenced by the identifier.
@@ -113,7 +180,6 @@ class Shrine
     # def upload(io : IO | UploadedFile, options : NamedTuple? = NamedTuple.new)
     def upload(io : IO | UploadedFile, **options)
       metadata = get_metadata(io, **options)
-      # location = get_location(io, metadata: metadata, location: options[:location]?, context: options[:context]?)
       location = get_location(io, **options.merge(metadata: metadata))
 
       _upload(io, **options.merge(location: location, metadata: metadata))
@@ -139,12 +205,12 @@ class Shrine
 
     # Extracts filename, size and MIME type from the file, which is later
     # accessible through UploadedFile#metadata.
-    private def extract_metadata(io)
-      {
-        filename:  extract_filename(io),
-        size:      extract_size(io),
-        mime_type: extract_mime_type(io),
-      }
+    private def extract_metadata(io, **options) : Shrine::UploadedFile::MetadataType
+      hash = Shrine::UploadedFile::MetadataType.new
+      hash["filename"] = extract_filename(io)
+      hash["size"] = extract_size(io)
+      hash["mime_type"] = extract_mime_type(io)
+      hash
     end
 
     # private def _upload(io : IO, location, metadata, upload_options, close = true, delete = false)
@@ -195,9 +261,9 @@ class Shrine
     end
 
     # Generates a basic location for an uploaded file
-    private def basic_location(io, metadata : NamedTuple)
+    private def basic_location(io, metadata : Shrine::UploadedFile::MetadataType)
       extension = ".#{io.extension}" if io.is_a?(UploadedFile) && io.extension
-      extension ||= File.extname(metadata["filename"].not_nil!) if metadata["filename"]?
+      extension ||= File.extname(metadata["filename"].as(String)) if metadata["filename"]?
       basename = generate_uid(io)
 
       extension ? basename + extension : basename
@@ -219,8 +285,6 @@ class Shrine
 
     # Retrieves the location for the given IO and context. First it looks
     # for the `:location` option, otherwise it calls #generate_location.
-    # private def get_location(io : IO, metadata : Hash(String, String | Nil), location : String? = nil)
-    # private def get_location(io : IO | UploadedFile, metadata : NamedTuple, context : NamedTuple?, location : String? = nil)
     private def get_location(io, location : String? = nil, **options)
       location ||= generate_location(io, **options)
       raise Error.new("location generated for #{io.inspect} was nil") if location.nil?
@@ -236,6 +300,4 @@ class Shrine
 
   include InstanceMethods
   extend ClassMethods
-
-  Habitat.raise_if_missing_settings!
 end

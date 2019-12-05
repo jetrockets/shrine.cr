@@ -12,16 +12,17 @@ class Shrine
       DEFAULT_PERMISSIONS           = 0o644
       DEFAULT_DIRECTORY_PERMISSIONS = 0o755
 
-      def initialize(directory : String, prefix : String? = nil, @clean = true, @permissions : Int = DEFAULT_PERMISSIONS, @directory_permissions : Int = DEFAULT_DIRECTORY_PERMISSIONS)
-        if prefix
-          @prefix = relative(prefix)
-          @directory = File.expand_path(File.join(directory, @prefix.not_nil!))
+      def expanded_directory : String
+        if relative_prefix
+          File.expand_path(File.join(directory, relative_prefix.not_nil!))
         else
-          @directory = File.expand_path(directory)
+          File.expand_path(directory)
         end
+      end
 
-        unless Dir.exists?(@directory)
-          Dir.mkdir_p(@directory, mode: directory_permissions)
+      def initialize(@directory : String, @prefix : String? = nil, @clean = true, @permissions : Int = DEFAULT_PERMISSIONS, @directory_permissions : Int = DEFAULT_DIRECTORY_PERMISSIONS)
+        unless Dir.exists?(expanded_directory)
+          Dir.mkdir_p(expanded_directory, mode: directory_permissions)
         end
       end
 
@@ -31,7 +32,6 @@ class Shrine
           move(io, path!(id))
         else
           File.write(path!(id), content: io, perm: permissions)
-          # IO.copy(io, path!(id))
         end
       end
 
@@ -51,22 +51,30 @@ class Shrine
 
       # Returns the full path to the file.
       def path(id)
-        File.join(directory, id.gsub("/", File::SEPARATOR))
+        File.join(expanded_directory, id.gsub("/", File::SEPARATOR))
       end
 
-      # If #prefix is not present, returns a path composed of #directory and
-      # the given `id`. If #prefix is present, it excludes the #directory part
+      # If #relative_prefix is not present, returns a path composed of #directory and
+      # the given `id`. If #relative_prefix is present, it excludes the #directory part
       # from the returned path (e.g. #directory can be set to "public" folder).
       # Both cases accept a `:host` value which will be prefixed to the
       # generated path.
       # def url(id, host : String? = nil, **options)
       def url(id, host : String? = nil, **options)
-        path = (prefix ? relative_path(id) : path(id)).to_s
+        path = (relative_prefix ? relative_path(id) : path(id)).to_s
         host ? host + path : path
       end
 
+      # Delets the file, and by default deletes the containing directory if
+      # it's empty.
+      def delete(id)
+        path = path(id)
+        File.delete(path)
+        clean(path) if clean?
+      end
+
       # Cleans all empty subdirectories up the hierarchy.
-      protected def clean(path)
+      private def clean(path)
         Path[path].each_parent do |pathname|
           if Dir.empty?(pathname.to_s) && pathname != directory
             Dir.rmdir(pathname.to_s)
@@ -103,11 +111,15 @@ class Shrine
       end
 
       private def relative_path(id : String)
-        Path["/"] / prefix.not_nil! / id.gsub("/", File::SEPARATOR)
+        Path["/"] / relative_prefix.not_nil! / id.gsub("/", File::SEPARATOR)
       end
 
       private def relative(path)
         path.sub(%r{^/}, "")
+      end
+
+      private def relative_prefix : String?
+        relative(prefix.not_nil!) if prefix
       end
     end
   end

@@ -45,13 +45,13 @@ end
 
 class PluginUploader < NonPluginUploader
   load_plugin ::FooPlugin
-  create_plugins_class_method
+  finalize_plugins!
 end
 
 Spectator.describe "Shrine.plugin" do
   describe "NonPluginUploader" do
     let(uploader) { NonPluginUploader }
-    let(uploader_instance) { uploader.new(:store) }
+    let(uploader_instance) { uploader.new("store") }
 
     it "responds to .foo with \"foo\"" do
       expect(uploader).to respond_to("foo")
@@ -66,7 +66,7 @@ Spectator.describe "Shrine.plugin" do
 
   describe "PluginUploader" do
     let(uploader) { PluginUploader }
-    let(uploader_instance) { uploader.new(:store) }
+    let(uploader_instance) { uploader.new("store") }
 
     it "responds to .foo with \"foo\"" do
       expect(uploader).to respond_to("foo")
