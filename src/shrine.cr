@@ -155,6 +155,11 @@ class Shrine
     def raise_if_missing_settings!
       Habitat.raise_if_missing_settings!
     end
+
+    # Prints a warning to the logger.
+    def warn(message)
+      Shrine.logger.warn "SHRINE WARNING: #{message}"
+    end
   end
 
   module InstanceMethods
@@ -236,22 +241,9 @@ class Shrine
 
     # Attempts to extract the MIME type from the IO object.
     private def extract_mime_type(io : IO)
-      # if io.responds_to?(:content_type) && io.content_type
-      #   # Shrine.warn "The \"mime_type\" Shrine metadata field will be set from the \"Content-Type\" request header, which might not hold the actual MIME type of the file. It is recommended to load the determine_mime_type plugin which determines MIME type from file content."
-      #   io.content_type.split(";").first # exclude media type parameters
-      # end
-
-      return nil if io.size.try &.zero? # file command returns "application/x-empty" for empty files
-
-      stdout = IO::Memory.new
-      stderr = IO::Memory.new
-      status = Process.run("file", args: ["--mime-type", "--brief", "-"], output: stdout, error: stderr, input: io)
-
-      if status.success?
-        io.rewind
-        stdout.to_s.strip
-      else
-        raise Error.new "file command failed: #{stderr.to_s}"
+      if io.responds_to?(:content_type) && io.content_type
+        Shrine.warn "The \"mime_type\" Shrine metadata field will be set from the \"Content-Type\" request header, which might not hold the actual MIME type of the file. It is recommended to load the determine_mime_type plugin which determines MIME type from file content."
+        io.content_type.not_nil!.split(';').first # exclude media type parameters
       end
     end
 
