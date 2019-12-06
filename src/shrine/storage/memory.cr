@@ -45,7 +45,7 @@ class Shrine
         store.clear
       end
 
-      private def clean(path)
+      protected def clean(path)
       end
     end
   end

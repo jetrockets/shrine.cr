@@ -73,7 +73,7 @@ class Shrine
       end
 
       # Cleans all empty subdirectories up the hierarchy.
-      private def clean(path)
+      protected def clean(path)
         Path[path].each_parent do |pathname|
           if Dir.empty?(pathname.to_s) && pathname != directory
             Dir.rmdir(pathname.to_s)
