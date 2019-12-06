@@ -3,7 +3,7 @@ require "habitat"
 class Shrine
   module Storage
     abstract class Base
-      getter? clean, true
+      getter? :clean, true
 
       # uploads `io` to the location `id`, can accept upload options
       abstract def upload(io, id : String, move = false, **options)
