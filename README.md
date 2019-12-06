@@ -195,6 +195,7 @@ image.metadata["signature"]
 
 You can also extract multiple metadata values at once.
 
+``` crystal
 class Uploader < Shrine
   load_plugin(Shrine::Plugins::AddMetadata)
 
