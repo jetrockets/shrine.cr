@@ -4,73 +4,33 @@ class Shrine
   module Plugins
     module DetermineMimeType
       DEFAULT_OPTIONS = {
-        analyzer: :file,
+        analyzer: :file
       }
-
-      LOG_SUBSCRIBER = ->(event) do
-        Shrine.logger.info "MIME Type (#{event.duration}ms) – #{{
-                                                                  io:       event[:io].class,
-                                                                  uploader: event[:uploader],
-                                                                }.inspect}"
-      end
-
-      # def self.configure(uploader, log_subscriber: LOG_SUBSCRIBER, **opts)
-      #   uploader.opts[:determine_mime_type] ||= { analyzer: :file, analyzer_options: {} }
-      #   uploader.opts[:determine_mime_type].merge!(opts)
-
-      #   # instrumentation plugin integration
-      #   uploader.subscribe(:mime_type, &log_subscriber) if uploader.respond_to?(:subscribe)
-      # end
 
       module ClassMethods
         # Determines the MIME type of the IO object by calling the specified
         # analyzer.
         def determine_mime_type(io)
-          # puts plugins
-          # config = plugins.find{ |p| p[:name] == "Shrine::Plugins::DetermineMimeType" }.not_nil!#.not_nil![:options]
           config = plugin_settings.determine_mime_type
-          # puts config
-          # options = { analyzer: :file }.merge(options)
-
-          # analyzer = opts[:determine_mime_type][:analyzer]
-
           analyzer = mime_type_analyzer(config[:analyzer]) # if analyzer.is_a?(Symbol)
-          # args     = if analyzer.is_a?(Proc)
-          #     [io, mime_type_analyzers].take(analyzer.arity.abs)
-          #   else
-          #     [io, opts[:determine_mime_type][:analyzer_options]]
-          #   end
 
-          # mime_type = instrument_mime_type(io) { analyzer.call(*args) }
           mime_type = analyzer.call(io)
           io.rewind
 
           mime_type
         end
 
-        # alias mime_type determine_mime_type
 
         # Returns a hash of built-in MIME type analyzers, where keys are
         # analyzer names and values are `#call`-able objects which accepts the
         # IO object.
         def mime_type_analyzers
-          # @mime_type_analyzers ||= MimeTypeAnalyzer::SUPPORTED_TOOLS.inject({}) do |hash, tool|
-          #   hash.merge!(tool => mime_type_analyzer(tool))
-          # end
-
           MimeTypeAnalyzer::SUPPORTED_TOOLS
         end
 
         # Returns callable mime type analyzer object.
         def mime_type_analyzer(name : Symbol)
           MimeTypeAnalyzer.new(name)
-        end
-
-        # Sends a `mime_type.shrine` event for instrumentation plugin.
-        private def instrument_mime_type(io, &block)
-          return yield unless respond_to?(:instrument)
-
-          instrument(:mime_type, io: io, &block)
         end
       end
 
@@ -91,14 +51,9 @@ class Shrine
 
         def initialize(@tool : Symbol)
           # raise Error, "unknown mime type analyzer #{tool.inspect}, supported analyzers are: #{SUPPORTED_TOOLS.join(",")}" unless SUPPORTED_TOOLS.include?(tool)
-
-          # @tool = tool
         end
 
         def call(io, **options)
-          # mime_type = send(:"extract_with_#{@tool}", io, options)
-          # mime_type = SUPPORTED_TOOLS[@tool].call(io, options)
-
           mime_type = case @tool
                       when :file
                         extract_with_file(io, {a: 1})
@@ -151,7 +106,5 @@ class Shrine
         end
       end
     end
-
-    # register_plugin(:determine_mime_type, DetermineMimeType)
   end
 end

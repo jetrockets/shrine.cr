@@ -141,6 +141,31 @@ end
 
 ```
 
+## Plugins
+
+Shrine.cr has a plugins interface similar to Shrine.rb. You can extend functionality of uploaders inherited from `Shrine` and also extend `UploadedFile` class.
+
+### Determine MIME Type
+
+The `DetermineMimeType` plugin is used to get mime type of uploaded file in several ways.
+
+``` crystal
+class Uploader < Shrine
+  load_plugin(Shrine::Plugins::DetermineMimeType, analyzer: :file)
+
+  finalize_plugins!
+end
+```
+**Analyzers**
+
+The following analyzers are accepted:
+
+| Name            | Description                                                                                                                                                                                                         |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `:file`         | (**Default**). Uses the file utility to determine the MIME type from file contents. It is installed by default on most operating systems.                                                                           |
+| `:mime`         | Uses the [MIME.from_filename](https://crystal-lang.org/api/0.31.1/MIME.html) method to determine the MIME type from file.                                                                                               |
+| `:content_type` | Retrieves the value of the `#content_type` attribute of the IO object. Note that this value normally comes from the "Content-Type" request header, so it's not guaranteed to hold the actual MIME type of the file. |
+
 
 ### Feature Progress
 
@@ -154,8 +179,6 @@ Items not marked as completed may have partial implementations.
     - [X] #extension
     - [X] #size
     - [X] #mime_type
-    - [ ] #[]
-    - [ ] #rewind
     - [X] #close
     - [X] #url
     - [X] #exists?
@@ -163,7 +186,7 @@ Items not marked as completed may have partial implementations.
     - [X] #download
     - [X] #stream
     - [X] #replace
-    - [ ] #delete
+    - [X] #delete
 - [ ] Shrine::Attacher
 - [ ] Shrine::Attachment
 - [ ] Shrine::Storage
@@ -177,7 +200,7 @@ Items not marked as completed may have partial implementations.
     - [ ] `Granite` [https://github.com/amberframework/granite](https://github.com/amberframework/granite)
     - [ ] `crecto` [https://github.com/Crecto/crecto](https://github.com/Crecto/crecto)
     - [ ] `jennifer.cr` [https://github.com/imdrasil/jennifer.cr](https://github.com/imdrasil/jennifer.cr)
-- [ ] Plugins
+- [X] Plugins
 - [ ] Background processing
 
 
