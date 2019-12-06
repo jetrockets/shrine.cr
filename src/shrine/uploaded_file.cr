@@ -57,7 +57,6 @@ class Shrine
     def content_type; mime_type; end
 
     def original_filename
-      # metadata.filename if metadata
       metadata["filename"]?.try &.to_s
     end
 

@@ -81,7 +81,7 @@ class FileImport < Granite::Base
 
   after_save do
     if @asset_changed && @asset_data
-      @asset_data = FileImport::AssetUploader.upload(@asset_data.not_nil!, :store, move: true, context: { model: self })
+      @asset_data = FileImport::AssetUploader.store(@asset_data.not_nil!, move: true, context: { model: self })
       @asset_changed = false
 
       save!
@@ -89,7 +89,7 @@ class FileImport < Granite::Base
   end
 
   def asset=(upload : Amber::Router::File)
-    @asset_data = FileImport::AssetUploader.upload(upload.file, :cache, metadata: { filename: upload.filename })
+    @asset_data = FileImport::AssetUploader.cache(upload.file, metadata: { filename: upload.filename })
     @asset_changed = true
   end
 end
@@ -114,7 +114,7 @@ class FileImport < Jennifer::Model::Base
   after_save :move_to_store
 
   def asset=(upload : Amber::Router::File)
-    self.asset_data = JSON.parse(FileImport::AssetUploader.upload(upload.file, :cache, metadata: { filename: upload.filename }).to_json)
+    self.asset_data = JSON.parse(FileImport::AssetUploader.cache(upload.file, metadata: { filename: upload.filename }).to_json)
     asset_changed! if asset_data
   end
 
@@ -132,7 +132,7 @@ class FileImport < Jennifer::Model::Base
 
   private def move_to_store
     if asset_changed?
-      self.asset_data = JSON.parse(FileImport::AssetUploader.upload(asset.not_nil!, :store, move: true, context: { model: self }).to_json)
+      self.asset_data = JSON.parse(FileImport::AssetUploader.store(asset.not_nil!, move: true, context: { model: self }).to_json)
       @asset_changed = false
       save!
     end
