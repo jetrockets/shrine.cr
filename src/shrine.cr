@@ -269,7 +269,7 @@ class Shrine
     end
 
     private def get_metadata(io : UploadedFile, metadata : UploadedFile::MetadataType? = nil, **options)
-      result = io.metadata.data
+      result = io.metadata
       result = result.merge(metadata) if metadata
       result
     end
