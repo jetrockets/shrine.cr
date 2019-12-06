@@ -3,13 +3,7 @@ require "habitat"
 class Shrine
   module Storage
     abstract class Base
-      # macro inherited
-      #   puts "{{@type.name.id}} < Base"
-      # end
-
-      # Habitat.create do
-      #   setting clean : Bool = true
-      # end
+      getter? clean, true
 
       # uploads `io` to the location `id`, can accept upload options
       abstract def upload(io, id : String, move = false, **options)

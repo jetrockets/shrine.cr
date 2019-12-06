@@ -5,7 +5,6 @@ class Shrine
     class FileSystem < Storage::Base
       getter directory : String
       getter prefix : String?
-      getter? clean
       getter permissions
       getter directory_permissions
 
