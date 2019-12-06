@@ -177,7 +177,6 @@ class Shrine
     #   uploader.upload(io, metadata: { "foo" => "bar" })           # add metadata
     #   uploader.upload(io, location: "path/to/file")               # specify location
     #   uploader.upload(io, upload_options: { acl: "public-read" }) # add upload options
-    # def upload(io : IO | UploadedFile, options : NamedTuple? = NamedTuple.new)
     def upload(io : IO | UploadedFile, **options)
       metadata = get_metadata(io, **options)
       location = get_location(io, **options.merge(metadata: metadata))
@@ -261,7 +260,7 @@ class Shrine
     end
 
     # Generates a basic location for an uploaded file
-    private def basic_location(io, metadata : Shrine::UploadedFile::MetadataType)
+    private def basic_location(io, metadata : UploadedFile::MetadataType)
       extension = ".#{io.extension}" if io.is_a?(UploadedFile) && io.extension
       extension ||= File.extname(metadata["filename"].as(String)) if metadata["filename"]?
       basename = generate_uid(io)
@@ -271,13 +270,13 @@ class Shrine
 
     # If the IO object is a Shrine::UploadedFile, it simply copies over its
     # metadata, otherwise it calls #extract_metadata.
-    private def get_metadata(io : IO, metadata : NamedTuple? = nil, **options)
+    private def get_metadata(io : IO, metadata : UploadedFile::MetadataType? = nil, **options)
       result = extract_metadata(io)
       result = result.merge(metadata) if metadata
       result
     end
 
-    private def get_metadata(io : UploadedFile, metadata : NamedTuple? = nil, **options)
+    private def get_metadata(io : UploadedFile, metadata : UploadedFile::MetadataType? = nil, **options)
       result = io.metadata.data
       result = result.merge(metadata) if metadata
       result

@@ -85,7 +85,6 @@ Spectator.describe Shrine::UploadedFile do
 
     context "with extension in `id` and in `metadata`" do
       let(id) { "foo.jpg" }
-      # let(metadata) { NamedTuple.new(filename: "foo.png") }
       let(filename) { "foo.png" }
 
       it "prefers extension from id over one from filename" do
@@ -102,7 +101,6 @@ Spectator.describe Shrine::UploadedFile do
     end
 
     context "with UPCASED extension in `filename`" do
-      # let(metadata) { NamedTuple.new(filename: "foo.PNG") }
       let(filename) { "foo.PNG" }
 
       it "downcases the extracted extension" do
