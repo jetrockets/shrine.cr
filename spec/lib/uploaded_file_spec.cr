@@ -355,7 +355,7 @@ Spectator.describe Shrine::UploadedFile do
       uploaded_file = uploader.upload(fakeio)
       uploaded_file.delete
 
-      #     expect(uploaded_file.exists?).to be_false
+      expect(uploaded_file.exists?).to be_false
     end
   end
 end
