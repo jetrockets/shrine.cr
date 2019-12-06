@@ -151,7 +151,10 @@ The `DetermineMimeType` plugin is used to get mime type of uploaded file in seve
 
 ``` crystal
 class Uploader < Shrine
-  load_plugin(Shrine::Plugins::DetermineMimeType, analyzer: Shrine::Plugins::DetermineMimeType::Tools::File)
+  load_plugin(
+    Shrine::Plugins::DetermineMimeType,
+    analyzer: Shrine::Plugins::DetermineMimeType::Tools::File
+  )
 
   finalize_plugins!
 end
