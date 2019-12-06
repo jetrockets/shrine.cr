@@ -12,7 +12,7 @@ class Shrine
         # analyzer.
         def determine_mime_type(io)
           config = plugin_settings.determine_mime_type
-          analyzer = mime_type_analyzer(config[:analyzer]) # if analyzer.is_a?(Symbol)
+          analyzer = mime_type_analyzer(config[:analyzer])
 
           mime_type = analyzer.call(io)
           io.rewind
@@ -25,11 +25,11 @@ class Shrine
         # analyzer names and values are `#call`-able objects which accepts the
         # IO object.
         def mime_type_analyzers
-          MimeTypeAnalyzer::SUPPORTED_TOOLS
+          MimeTypeAnalyzer::Tools
         end
 
         # Returns callable mime type analyzer object.
-        def mime_type_analyzer(name : Symbol)
+        def mime_type_analyzer(name : Tools)
           MimeTypeAnalyzer.new(name)
         end
       end
@@ -41,26 +41,24 @@ class Shrine
         end
       end
 
-      class MimeTypeAnalyzer
-        # SUPPORTED_TOOLS = {
-        #   file: -> { extract_with_file },
-        #   mime: -> { extract_with_mime },
-        #   content_type: -> { extract_with_content_type }
-        # }
-        MAGIC_NUMBER = 256 * 1024
+      enum Tools
+        File
+        Mime
+        ContentType
+      end
 
-        def initialize(@tool : Symbol)
-          # raise Error, "unknown mime type analyzer #{tool.inspect}, supported analyzers are: #{SUPPORTED_TOOLS.join(",")}" unless SUPPORTED_TOOLS.include?(tool)
+      class MimeTypeAnalyzer
+        def initialize(@tool : Tools)
         end
 
         def call(io, **options)
           mime_type = case @tool
-                      when :file
-                        extract_with_file(io, {a: 1})
-                      when :mime
-                        extract_with_mime(io, {a: 1})
-                      when :content_type
-                        extract_with_content_type(io, {a: 1})
+                      when Tools::File
+                        extract_with_file(io, options)
+                      when Tools::Mime
+                        extract_with_mime(io, options)
+                      when Tools::ContentType
+                        extract_with_content_type(io, options)
                       end
 
           io.rewind

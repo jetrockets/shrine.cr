@@ -151,7 +151,7 @@ The `DetermineMimeType` plugin is used to get mime type of uploaded file in seve
 
 ``` crystal
 class Uploader < Shrine
-  load_plugin(Shrine::Plugins::DetermineMimeType, analyzer: :file)
+  load_plugin(Shrine::Plugins::DetermineMimeType, analyzer: Shrine::Plugins::DetermineMimeType::Tools::File)
 
   finalize_plugins!
 end
@@ -162,9 +162,9 @@ The following analyzers are accepted:
 
 | Name            | Description                                                                                                                                                                                                         |
 |-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `:file`         | (**Default**). Uses the file utility to determine the MIME type from file contents. It is installed by default on most operating systems.                                                                           |
-| `:mime`         | Uses the [MIME.from_filename](https://crystal-lang.org/api/0.31.1/MIME.html) method to determine the MIME type from file.                                                                                               |
-| `:content_type` | Retrieves the value of the `#content_type` attribute of the IO object. Note that this value normally comes from the "Content-Type" request header, so it's not guaranteed to hold the actual MIME type of the file. |
+| `File`         | (**Default**). Uses the file utility to determine the MIME type from file contents. It is installed by default on most operating systems.                                                                           |
+| `Mime`         | Uses the [MIME.from_filename](https://crystal-lang.org/api/0.31.1/MIME.html) method to determine the MIME type from file.                                                                                               |
+| `ContentType` | Retrieves the value of the `#content_type` attribute of the IO object. Note that this value normally comes from the "Content-Type" request header, so it's not guaranteed to hold the actual MIME type of the file. |
 
 
 ### Add Metadata

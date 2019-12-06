@@ -1,13 +1,13 @@
 require "../../spec_helper"
 
 class ShrineWithDetermineMimeTypeFile < Shrine
-  load_plugin(Shrine::Plugins::DetermineMimeType, analyzer: :file)
+  load_plugin(Shrine::Plugins::DetermineMimeType, analyzer: Shrine::Plugins::DetermineMimeType::Tools::File)
 
   finalize_plugins!
 end
 
 class ShrineWithDetermineMimeTypeMime < Shrine
-  load_plugin(Shrine::Plugins::DetermineMimeType, analyzer: :mime)
+  load_plugin(Shrine::Plugins::DetermineMimeType, analyzer: Shrine::Plugins::DetermineMimeType::Tools::Mime)
 
   finalize_plugins!
 end
