@@ -2,7 +2,7 @@ require "json"
 
 class Shrine
   class UploadedFile
-    alias MetadataType = Hash(String, String | Int32 | Nil)
+    alias MetadataType = Hash(String, String | Int32 | UInt32 | Int64 | UInt64 | Nil)
 
     include JSON::Serializable
 
