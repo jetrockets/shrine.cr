@@ -167,7 +167,57 @@ The following analyzers are accepted:
 | `:content_type` | Retrieves the value of the `#content_type` attribute of the IO object. Note that this value normally comes from the "Content-Type" request header, so it's not guaranteed to hold the actual MIME type of the file. |
 
 
-### Feature Progress
+### Add Metadata
+
+The `AddMetadata` plugin provides a convenient method for extracting and adding custom metadata values.
+
+``` crystal
+require "base64"
+
+class Uploader < Shrine
+  load_plugin(Shrine::Plugins::AddMetadata)
+
+  add_metadata :signature, -> {
+    Base64.encode(io.gets_to_end)
+  }
+
+  finalize_plugins!
+end
+```
+
+The above will add `"signature"` to the metadata hash.
+
+``` crystal
+image.metadata["signature"]
+```
+
+**Multiple values**
+
+You can also extract multiple metadata values at once.
+
+class Uploader < Shrine
+  load_plugin(Shrine::Plugins::AddMetadata)
+
+  add_metadata :multiple_values, -> {
+    text = io.gets_to_end
+
+    Shrine::UploadedFile::MetadataType{
+      "custom_1" => text,
+      "custom_2" => text * 2
+    }
+  }
+
+  finalize_plugins!
+end
+```
+
+``` crystal
+image.metadata["custom_1"]
+image.metadata["custom_2"]
+```
+
+
+## Feature Progress
 
 In no particular order, features that have been implemented and are planned.
 Items not marked as completed may have partial implementations.
