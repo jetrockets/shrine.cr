@@ -19,6 +19,9 @@ class Shrine
 
       # deletes the file from the storage
       abstract def delete(id)
+
+      # cleans the path in the storage
+      abstract def clean(path)
     end
   end
 end
