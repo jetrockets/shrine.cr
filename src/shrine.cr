@@ -1,5 +1,6 @@
 require "./shrine/storage/*"
 require "./shrine/plugins/*"
+require "./shrine/attacher"
 require "./shrine/uploaded_file"
 
 require "habitat"
@@ -24,6 +25,10 @@ class Shrine
   class FileNotFound < Error
   end
 
+  # Raised by the attacher when assigned uploaded file is not cached.
+  class NotCached < Error
+  end
+
   Habitat.create do
     setting storages : Hash(String, Storage::Base) = Hash(String, Storage::Base).new
   end
@@ -44,6 +49,18 @@ class Shrine
     {% for plugin in @type.superclass.constant(:PLUGINS) %}
       load_plugin({{plugin[:decl]}}, {{plugin[:options].double_splat}})
     {% end %}
+
+    class Attacher < Shrine::Attacher
+      def self.shrine_class
+        {{ @type }}
+      end
+    end
+
+    # class UploadedFile
+    #   def self.shrine_class
+    #     {{ @type }}
+    #   end
+    # end
   end
 
   macro load_plugin(plugin, **args)
@@ -85,6 +102,18 @@ class Shrine
     {% if plugin.constant(:FileMethods) %}
       class UploadedFile < Shrine::UploadedFile
         include {{plugin.constant(:FileMethods)}}
+      end
+    {% end %}
+
+    {% if plugin.constant(:AttacherClassMethods) %}
+      class Attacher < Shrine::Attacher
+        extend {{plugin.constant(:AttacherClassMethods)}}
+      end
+    {% end %}
+
+    {% if plugin.constant(:AttacherMethods) %}
+      class Attacher < Shrine::Attacher
+        include {{plugin.constant(:AttacherMethods)}}
       end
     {% end %}
   end
@@ -157,6 +186,18 @@ class Shrine
       Habitat.raise_if_missing_settings!
     end
 
+    def uploaded_file(hash : Hash(String, String | UploadedFile::MetadataType))
+      self.uploaded_file(hash.to_json)
+    end
+
+    def uploaded_file(json : String)
+      UploadedFile.from_json(json)
+    end
+
+    def uploaded_file(object : UploadedFile)
+      object
+    end
+
     # Prints a warning to the logger.
     def warn(message)
       Log.warn { "SHRINE WARNING: #{message}" }
@@ -191,7 +232,7 @@ class Shrine
 
       UploadedFile.new(
         id: location,
-        storage: storage_key,
+        storage_key: storage_key,
         metadata: metadata,
       )
     end

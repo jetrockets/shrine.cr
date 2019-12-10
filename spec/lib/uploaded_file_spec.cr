@@ -5,7 +5,7 @@ Spectator.describe Shrine::UploadedFile do
   include FileHelpers
 
   subject(uploaded_file) {
-    Shrine::UploadedFile.new(id, :cache, metadata)
+    Shrine::UploadedFile.new(id, "cache", metadata)
   }
 
   let(id) { "foo" }
@@ -21,6 +21,10 @@ Spectator.describe Shrine::UploadedFile do
   let(filename) { nil }
   let(mime_type) { nil }
   let(size) { nil }
+
+  after_each do
+    clear_storages
+  end
 
   describe "#initialize" do
     it "initializes metadata if absent" do
@@ -369,9 +373,9 @@ Spectator.describe Shrine::UploadedFile do
     it "returns uploaded file data hash" do
       expect(uploaded_file.data).to eq(
         {
-          "id"       => id,
-          "storage"  => "cache",
-          "metadata" => metadata,
+          "id"          => id,
+          "storage_key" => "cache",
+          "metadata"    => metadata,
         }
       )
     end

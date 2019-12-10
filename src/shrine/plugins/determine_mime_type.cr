@@ -76,7 +76,7 @@ class Shrine
             io.rewind
             stdout.to_s.strip
           else
-            raise Error.new "file command failed: #{stderr.to_s}"
+            raise Error.new "file command failed: #{stderr}"
           end
         rescue RuntimeError
           raise Error.new("file command-line tool is not installed")
