@@ -199,6 +199,11 @@ class Shrine
       (@io ||= _open).not_nil!
     end
 
+    # Returns serializable hash representation of the uploaded file.
+    def data : Hash(String, String | MetadataType)
+      { "id" => id, "storage" => storage_key, "metadata" => metadata }
+    end
+
     private def _open(**options)
       storage.open(id)
     end

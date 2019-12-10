@@ -11,11 +11,11 @@ Spectator.describe Shrine::UploadedFile do
   let(id) { "foo" }
 
   let(metadata) {
-    hash = Shrine::UploadedFile::MetadataType.new
-    hash["filename"] = filename
-    hash["mime_type"] = mime_type
-    hash["size"] = size
-    hash
+    Shrine::UploadedFile::MetadataType{
+      "filename" => filename,
+      "mime_type" => mime_type,
+      "size" => size
+    }
   }
 
   let(filename) { nil }
@@ -356,6 +356,24 @@ Spectator.describe Shrine::UploadedFile do
       uploaded_file.delete
 
       expect(uploaded_file.exists?).to be_false
+    end
+  end
+
+  describe "#data" do
+    let(metadata) {
+      Shrine::UploadedFile::MetadataType{
+        "foo" => "bar"
+      }
+    }
+
+    it "returns uploaded file data hash" do
+      expect(uploaded_file.data).to eq(
+        {
+          "id" => id,
+          "storage" => "cache",
+          "metadata" => metadata
+        }
+      )
     end
   end
 end
