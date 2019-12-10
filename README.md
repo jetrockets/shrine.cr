@@ -254,6 +254,7 @@ Items not marked as completed may have partial implementations.
     - [ ] `Granite` [https://github.com/amberframework/granite](https://github.com/amberframework/granite)
     - [ ] `crecto` [https://github.com/Crecto/crecto](https://github.com/Crecto/crecto)
     - [ ] `jennifer.cr` [https://github.com/imdrasil/jennifer.cr](https://github.com/imdrasil/jennifer.cr)
+    - [ ] `Avram` [https://github.com/luckyframework/avram](https://github.com/luckyframework/avram)
 - [X] Plugins
 - [ ] Background processing
 
