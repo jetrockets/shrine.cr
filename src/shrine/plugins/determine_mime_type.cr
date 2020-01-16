@@ -4,7 +4,7 @@ class Shrine
   module Plugins
     module DetermineMimeType
       DEFAULT_OPTIONS = {
-        analyzer: :file
+        analyzer: :file,
       }
 
       module ClassMethods
@@ -19,7 +19,6 @@ class Shrine
 
           mime_type
         end
-
 
         # Returns a hash of built-in MIME type analyzers, where keys are
         # analyzer names and values are `#call`-able objects which accepts the

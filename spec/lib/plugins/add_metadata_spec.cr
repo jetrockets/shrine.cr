@@ -11,16 +11,16 @@ class ShrineWithAddMetadata < Shrine
     super
   end
 
-  add_metadata :custom, -> {
+  add_metadata :custom, ->{
     "value"
   }
 
-  add_metadata :multiple_values, -> {
+  add_metadata :multiple_values, ->{
     text = io.gets_to_end
 
     Shrine::UploadedFile::MetadataType{
       "custom_1" => text,
-      "custom_2" => text * 2
+      "custom_2" => text * 2,
     }
   }
 

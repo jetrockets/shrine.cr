@@ -11,14 +11,22 @@ crystal: 0.31.1
 license: MIT
 
 dependencies:
+  awscr-s3:
+    github: taylorfinnell/awscr-s3
+    branch: master
+
   habitat:
     github: luckyframework/habitat
 
-development_dependencies:
-  spectator:
-    gitlab: arctic-fox/spectator
 
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
     version: ~> 0.10.1
+
+  spectator:
+    gitlab: arctic-fox/spectator
+    # version: 0.9.1
+  webmock:
+    github: manastech/webmock.cr
+    branch: master
