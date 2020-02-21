@@ -65,6 +65,41 @@ end
 FileImport::AssetUploader.upload(file, :store, context: { model: YOUR_ORM_MODEL } })
 ```
 
+### S3 storage
+
+#### Creating a Client
+
+``` crystal
+client = Awscr::S3::Client.new("region", "key", "secret")
+```
+
+For S3 compatible services, like DigitalOcean Spaces or Minio, you'll need to set a custom endpoint:
+
+``` crystal
+client = Awscr::S3::Client.new("nyc3", "key", "secret", endpoint: "https://nyc3.digitaloceanspaces.com")
+```
+
+
+#### Create a S3 storage
+
+The storage is initialized by providing your bucket and client:
+
+```crystal
+storage = Shrine::Storage::S3.new(bucket: "bucket_name", client: client, prefix: "prefix")
+```
+
+Sometimes you'll want to add additional upload options to all S3 uploads. You can do that by passing the :upload_options option:
+
+```crystal
+storage = Shrine::Storage::S3.new(bucket: "bucket_name", client: client, upload_options: { "x-amz-acl"=> "public-read" })
+```
+
+You can tell S3 storage to make uploads public:
+
+```crystal
+storage = Shrine::Storage::S3.new(bucket: "bucket_name", client: client, public: true)
+```
+
 ### ORM usage example
 
 Currently ORM adapters are not implmented.

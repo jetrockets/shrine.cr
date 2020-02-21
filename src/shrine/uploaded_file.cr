@@ -13,6 +13,7 @@ class Shrine
       storage_key: String,
       metadata: MetadataType
     )
+
     # @[JSON::Field(key: "id")]
     # property id : String
 
@@ -54,7 +55,9 @@ class Shrine
       metadata["mime_type"]?.try &.to_s
     end
 
-    def content_type; mime_type; end
+    def content_type
+      mime_type
+    end
 
     def original_filename
       metadata["filename"]?.try &.to_s
@@ -201,7 +204,7 @@ class Shrine
 
     # Returns serializable hash representation of the uploaded file.
     def data : Hash(String, String | MetadataType)
-      { "id" => id, "storage" => storage_key, "metadata" => metadata }
+      {"id" => id, "storage" => storage_key, "metadata" => metadata}
     end
 
     private def _open(**options)

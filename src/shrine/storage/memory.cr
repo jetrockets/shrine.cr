@@ -9,34 +9,34 @@ class Shrine
         @store = {} of String => String
       end
 
-      def upload(io, id, **options)
+      def upload(io : IO, id : String, **options)
         store[id.to_s] = io.gets_to_end
       end
 
-      def open(id)
+      def open(id : String) : IO
         # StringIO.new(store.fetch(id))
         IO::Memory.new(store[id])
       rescue KeyError
         raise Shrine::FileNotFound.new("file #{id.inspect} not found on storage")
       end
 
-      def exists?(id)
+      def exists?(id : String) : Bool
         store.has_key?(id)
       end
 
-      def url(id, **options)
+      def url(id : String, **options) : String
         "memory://#{path(id)}"
       end
 
-      def path(id)
+      def path(id : String) : String
         id
       end
 
-      def delete(id)
+      def delete(id : String)
         store.delete(id)
       end
 
-      def delete_prefixed(delete_prefix)
+      def delete_prefixed(delete_prefix : String)
         delete_prefix = delete_prefix.chomp("/") + "/"
         store.delete_if { |key, _value| key.start_with?(delete_prefix) }
       end

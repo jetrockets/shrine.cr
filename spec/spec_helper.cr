@@ -1,4 +1,5 @@
 require "spectator"
+require "webmock"
 
 require "../src/*"
 require "./support/file_helpers"
