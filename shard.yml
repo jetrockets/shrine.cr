@@ -1,5 +1,5 @@
 name: shrine
-version: 0.3.3
+version: 0.4.0
 description: |
   File Attachment toolkit for Crystal applications
 
@@ -26,7 +26,7 @@ development_dependencies:
 
   spectator:
     gitlab: arctic-fox/spectator
-    # version: 0.9.1
+
   webmock:
     github: manastech/webmock.cr
     branch: master

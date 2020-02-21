@@ -281,7 +281,7 @@ Items not marked as completed may have partial implementations.
 - [ ] Shrine::Storage
     - [X] Shrine::Storage::Memory
     - [X] Shrine::Storage::FileSystem
-    - [ ] Shrine::Storage::S3
+    - [X] Shrine::Storage::S3
 - [ ] Uploaders
     - [X] Custom uploaders
     - [ ] Derivatives
@@ -305,3 +305,4 @@ Items not marked as completed may have partial implementations.
 ## Contributors
 
 - [Igor Alexandrov](https://github.com/igor-alexandrov) - creator and maintainer
+- [Arina Shmeleva](https://github.com/arina1004) - helped with S3 Storage
