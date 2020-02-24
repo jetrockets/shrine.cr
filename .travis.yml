@@ -1,6 +1,23 @@
 language: crystal
+
+crystal:
+  - latest
+  - nightly
+
 install:
   - shards install
+
 script:
   - crystal spec
   - crystal bin/ameba.cr
+  - crystal docs
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  on:
+    branch: master
+  repo: jetrockets/jetrockets.github.io
+  local_dir: docs
