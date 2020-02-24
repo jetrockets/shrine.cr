@@ -13,7 +13,7 @@ script:
   - crystal docs
 
 deploy:
-  provider: pages:git
+  provider: pages
   skip_cleanup: true
   keep_history: true
   # on:
