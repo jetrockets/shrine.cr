@@ -13,11 +13,11 @@ script:
   - crystal docs
 
 deploy:
-  provider: pages
+  provider: pages:git
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
   keep_history: true
   on:
     branch: master
-  repo: jetrockets/jetrockets.github.io
+  # repo: jetrockets/jetrockets.github.io
   local_dir: docs
