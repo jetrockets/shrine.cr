@@ -16,6 +16,14 @@ Spectator.describe Shrine::Storage::S3 do
   let(prefix) { nil }
   let(id) { "ex" }
 
+  let(metadata) {
+    Shrine::UploadedFile::MetadataType{
+      "filename"  => id,
+      "mime_type" => "image/jpeg",
+      "size"      => "50",
+    }
+  }
+
   describe "#initialize" do
     context "without `prefix`" do
       it "object_key" do
@@ -59,6 +67,19 @@ Spectator.describe Shrine::Storage::S3 do
 
         expect(
           subject.upload(FakeIO.new, "a/a/a.jpg")
+        ).to be_true
+      end
+    end
+
+    context "with metadata" do
+      it "file uploads" do
+        WebMock.stub(:put, "http://s3-us-east-2.amazonaws.com/test/a/a/a.jpg?")
+          .with(body: "", headers: {"Content-Type" => "binary/octet-stream", "Content-Disposition" => "inline; filename=\"ex\"; filename*=UTF-8''ex"})
+          .to_return(status: 200, body: "", headers: {"ETag" => "etag"})
+        response = subject.upload(FakeIO.new, "a/a/a.jpg", metadata)
+        p response
+        expect(
+          subject.upload(FakeIO.new, "a/a/a.jpg", metadata)
         ).to be_true
       end
     end

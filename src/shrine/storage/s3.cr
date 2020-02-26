@@ -1,6 +1,7 @@
 require "./base"
 
 require "awscr-s3"
+require "content_disposition"
 
 class Shrine
   module Storage
@@ -36,6 +37,7 @@ class Shrine
       # Copies the file into the given location.
       def upload(io : IO, id : String, metadata : Shrine::UploadedFile::MetadataType? = nil, move = false, **upload_options)
         options = Hash(String, String).new
+        options["Content-Disposition"] = ContentDisposition.inline(metadata["filename"].to_s) if metadata && metadata["filename"]
         options["x-amz-acl"] = "public-read" if public?
         uploader = Awscr::S3::FileUploader.new(client)
 

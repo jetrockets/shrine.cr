@@ -15,8 +15,12 @@ dependencies:
     github: taylorfinnell/awscr-s3
     branch: master
 
+  content_disposition:
+    github: jetrockets/content_disposition.cr
+
   habitat:
     github: luckyframework/habitat
+
 
 
 development_dependencies:
