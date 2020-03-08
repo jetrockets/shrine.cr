@@ -14,7 +14,7 @@ Shrine is a toolkit for file attachments in Crystal applications. Heavily inspir
 
    ```yaml
    dependencies:
-     shrine.cr:
+     shrine:
        github: jetrockets/shrine.cr
    ```
 
@@ -23,7 +23,7 @@ Shrine is a toolkit for file attachments in Crystal applications. Heavily inspir
 ## Usage
 
 ```crystal
-require "shrine.cr"
+require "shrine"
 ```
 
 Shrine.cr is under heavy development!
