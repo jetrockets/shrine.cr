@@ -59,7 +59,7 @@ class Shrine
       def open(id : String, **options) : File
         # TODO pass other options
         File.open(path(id), mode: "rb")
-      rescue Errno
+      rescue RuntimeError
         raise Shrine::FileNotFound.new "file #{id.inspect} not found on storage"
       end
 

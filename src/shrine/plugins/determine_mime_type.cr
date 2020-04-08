@@ -78,7 +78,7 @@ class Shrine
           else
             raise Error.new "file command failed: #{stderr.to_s}"
           end
-        rescue Errno
+        rescue RuntimeError
           raise Error.new("file command-line tool is not installed")
         end
 

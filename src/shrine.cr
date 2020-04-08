@@ -4,7 +4,9 @@ require "./shrine/uploaded_file"
 
 require "habitat"
 
-require "logger"
+require "log"
+
+Log.setup_from_env
 
 class Shrine
   PLUGINS = [] of Nil
@@ -24,7 +26,6 @@ class Shrine
 
   Habitat.create do
     setting storages : Hash(String, Storage::Base) = Hash(String, Storage::Base).new
-    setting log_level : Logger::Severity = Logger::WARN
   end
 
   struct PluginSettings
@@ -127,7 +128,7 @@ class Shrine
 
   module ClassMethods
     macro extended
-      class_property logger = Logger.new(STDOUT, level: settings.log_level)
+      Log = ::Log.for("shrine.cr")
     end
 
     # Retrieves the storage under the given identifier (Symbol), raising Shrine::Error if the storage is missing.
@@ -158,7 +159,7 @@ class Shrine
 
     # Prints a warning to the logger.
     def warn(message)
-      Shrine.logger.warn "SHRINE WARNING: #{message}"
+      Log.warn { "SHRINE WARNING: #{message}" }
     end
   end
 
@@ -204,7 +205,7 @@ class Shrine
 
     # Prints a warning to the logger.
     def warn(message)
-      Shrine.logger.warn "SHRINE WARNING: #{message}"
+      Log.warn { "SHRINE WARNING: #{message}" }
     end
 
     # Extracts filename, size and MIME type from the file, which is later
