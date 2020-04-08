@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.32.1">
+<meta name="generator" content="Crystal Docs 0.33.0">
 
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/doc.js"></script>
@@ -259,56 +259,56 @@
   </h2>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/6e5e5652040114b863a38df0824ab2afb770e9a4/src/shrine/storage/base.cr#L3" target="_blank">
+      <a href="https://github.com/jetrockets/shrine.cr/blob/8f169f18090ca6b846ca0d649c7db8fd36f498f7/src/shrine/storage/base.cr#L3" target="_blank">
         shrine/storage/base.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/6e5e5652040114b863a38df0824ab2afb770e9a4/src/shrine/storage/file_system.cr#L3" target="_blank">
+      <a href="https://github.com/jetrockets/shrine.cr/blob/8f169f18090ca6b846ca0d649c7db8fd36f498f7/src/shrine/storage/file_system.cr#L3" target="_blank">
         shrine/storage/file_system.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/6e5e5652040114b863a38df0824ab2afb770e9a4/src/shrine/storage/memory.cr#L3" target="_blank">
+      <a href="https://github.com/jetrockets/shrine.cr/blob/8f169f18090ca6b846ca0d649c7db8fd36f498f7/src/shrine/storage/memory.cr#L3" target="_blank">
         shrine/storage/memory.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/6e5e5652040114b863a38df0824ab2afb770e9a4/src/shrine/storage/s3.cr#L6" target="_blank">
+      <a href="https://github.com/jetrockets/shrine.cr/blob/8f169f18090ca6b846ca0d649c7db8fd36f498f7/src/shrine/storage/s3.cr#L6" target="_blank">
         shrine/storage/s3.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/6e5e5652040114b863a38df0824ab2afb770e9a4/src/shrine/plugins/add_metadata.cr#L1" target="_blank">
+      <a href="https://github.com/jetrockets/shrine.cr/blob/8f169f18090ca6b846ca0d649c7db8fd36f498f7/src/shrine/plugins/add_metadata.cr#L1" target="_blank">
         shrine/plugins/add_metadata.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/6e5e5652040114b863a38df0824ab2afb770e9a4/src/shrine/plugins/determine_mime_type.cr#L3" target="_blank">
+      <a href="https://github.com/jetrockets/shrine.cr/blob/8f169f18090ca6b846ca0d649c7db8fd36f498f7/src/shrine/plugins/determine_mime_type.cr#L3" target="_blank">
         shrine/plugins/determine_mime_type.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/6e5e5652040114b863a38df0824ab2afb770e9a4/src/shrine/uploaded_file.cr#L3" target="_blank">
+      <a href="https://github.com/jetrockets/shrine.cr/blob/8f169f18090ca6b846ca0d649c7db8fd36f498f7/src/shrine/uploaded_file.cr#L3" target="_blank">
         shrine/uploaded_file.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/6e5e5652040114b863a38df0824ab2afb770e9a4/src/shrine.cr#L9" target="_blank">
+      <a href="https://github.com/jetrockets/shrine.cr/blob/8f169f18090ca6b846ca0d649c7db8fd36f498f7/src/shrine.cr#L11" target="_blank">
         shrine.cr
       </a>
     
@@ -330,7 +330,12 @@
   <dl>
     
       <dt class="entry-const" id="HABITAT_SETTINGS">
-        <strong>HABITAT_SETTINGS</strong> = <code>[{decl: storages : <span class="t">Hash</span>(<span class="t">String</span>, <span class="t">Storage</span><span class="t">::</span><span class="t">Base</span>) <span class="o">=</span> <span class="t">Hash</span>(<span class="t">String</span>, <span class="t">Storage</span><span class="t">::</span><span class="t">Base</span>).<span class="k">new</span>, example: <span class="n">nil</span>}, {decl: log_level : <span class="t">Logger</span><span class="t">::</span><span class="t">Severity</span> <span class="o">=</span> <span class="t">Logger</span><span class="t">::</span><span class="t">WARN</span>, example: <span class="n">nil</span>}] <span class="k">of</span> <span class="t">Nil</span></code>
+        <strong>HABITAT_SETTINGS</strong> = <code>[{decl: storages : <span class="t">Hash</span>(<span class="t">String</span>, <span class="t">Storage</span><span class="t">::</span><span class="t">Base</span>) <span class="o">=</span> <span class="t">Hash</span>(<span class="t">String</span>, <span class="t">Storage</span><span class="t">::</span><span class="t">Base</span>).<span class="k">new</span>, example: <span class="n">nil</span>}] <span class="k">of</span> <span class="t">Nil</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="Log">
+        <strong>Log</strong> = <code><span class="t">::</span><span class="t">Log</span>.<span class="k">for</span>(<span class="s">&quot;shrine.cr&quot;</span>)</code>
       </dt>
       
     
@@ -357,16 +362,6 @@
     
       <li class="entry-summary">
         <a href="#configure(&)-class-method" class="signature"><strong>.configure</strong>(&)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#logger-class-method" class="signature"><strong>.logger</strong></a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#logger=(logger)-class-method" class="signature"><strong>.logger=</strong>(logger)</a>
         
       </li>
     
@@ -547,35 +542,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/6e5e5652040114b863a38df0824ab2afb770e9a4/src/shrine.cr#L25" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="logger-class-method">
-      <div class="signature">
-        
-        def self.<strong>logger</strong>
-
-        <a class="method-permalink" href="#logger-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="logger=(logger)-class-method">
-      <div class="signature">
-        
-        def self.<strong>logger=</strong>(logger)
-
-        <a class="method-permalink" href="#logger=(logger)-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/8f169f18090ca6b846ca0d649c7db8fd36f498f7/src/shrine.cr#L27" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -591,7 +558,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/6e5e5652040114b863a38df0824ab2afb770e9a4/src/shrine.cr#L36" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/8f169f18090ca6b846ca0d649c7db8fd36f498f7/src/shrine.cr#L37" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -607,7 +574,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/6e5e5652040114b863a38df0824ab2afb770e9a4/src/shrine.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/8f169f18090ca6b846ca0d649c7db8fd36f498f7/src/shrine.cr#L27" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -635,7 +602,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/6e5e5652040114b863a38df0824ab2afb770e9a4/src/shrine.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/8f169f18090ca6b846ca0d649c7db8fd36f498f7/src/shrine.cr#L27" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -663,7 +630,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/6e5e5652040114b863a38df0824ab2afb770e9a4/src/shrine.cr#L91" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/8f169f18090ca6b846ca0d649c7db8fd36f498f7/src/shrine.cr#L92" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -679,7 +646,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/6e5e5652040114b863a38df0824ab2afb770e9a4/src/shrine.cr#L48" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/8f169f18090ca6b846ca0d649c7db8fd36f498f7/src/shrine.cr#L49" target="_blank">View source</a>]
         
       </div>
     </div>
