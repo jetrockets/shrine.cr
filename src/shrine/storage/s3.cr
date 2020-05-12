@@ -30,12 +30,23 @@ class Shrine
       # :public
       # : Sets public access to all uploading files.
       #
-      def initialize(@bucket : String, @client : Awscr::S3::Client?, @prefix : String? = nil,
-                     @upload_options : Hash(String, String) = Hash(String, String).new, @public : Bool = false)
+      def initialize(
+        @bucket : String,
+        @client : Awscr::S3::Client?,
+        @prefix : String? = nil,
+        @upload_options : Hash(String, String) = Hash(String, String).new,
+        @public : Bool = false
+      )
       end
 
       # Copies the file into the given location.
-      def upload(io : IO, id : String, metadata : Shrine::UploadedFile::MetadataType? = nil, move = false, **upload_options)
+      def upload(
+        io : IO,
+        id : String,
+        metadata : Shrine::UploadedFile::MetadataType? = nil,
+        move = false,
+        **upload_options
+      )
         options = Hash(String, String).new
         options["Content-Disposition"] = ContentDisposition.inline(metadata["filename"].to_s) if metadata && metadata["filename"]
         options["x-amz-acl"] = "public-read" if public?
