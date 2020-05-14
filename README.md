@@ -1,4 +1,10 @@
-[![Build Status](https://api.travis-ci.org/jetrockets/shrine.cr.svg?branch=master)](https://travis-ci.org/jetrockets/shrine.cr)
+<p align="center">
+  <p align="center">
+    <a href="https://travis-ci.org/jetrockets/shrine.cr"><img src="https://api.travis-ci.org/jetrockets/shrine.cr.svg?branch=master"></a>
+    <a href="https://github.com/jetrockets/shrine.cr/releases"><img src="https://img.shields.io/github/release/jetrockets/shrine.cr.svg?maxAge=360"></a>
+    <a href="https://github.com/jetrockets/shrine.cr/blob/master/LICENSE"><img src="https://img.shields.io/github/license/jetrockets/shrine.cr.svg"></a>
+  </p>
+</p>
 
 # shrine.cr
 
