@@ -319,9 +319,9 @@ Spectator.describe Shrine::UploadedFile do
     it "closes and deletes the tempfile after the block" do
       uploaded_file = uploader.upload(fakeio)
 
-      tempfile = uploaded_file.download do |tempfile|
-        expect(tempfile.closed?).to be_false
-        tempfile
+      tempfile = uploaded_file.download do |_tempfile|
+        expect(_tempfile.closed?).to be_false
+        _tempfile
       end
 
       expect(tempfile.closed?).to be_true
