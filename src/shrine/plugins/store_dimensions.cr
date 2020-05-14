@@ -4,7 +4,7 @@ class Shrine
   module Plugins
     module StoreDimensions
       DEFAULT_OPTIONS = {
-        analyzer: :pixie,
+        analyzer: :built_in,
       }
 
       module ClassMethods
