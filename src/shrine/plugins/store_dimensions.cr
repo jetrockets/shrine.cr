@@ -35,10 +35,10 @@ class Shrine
 
       module InstanceMethods
         # We update the metadata with "width" and "height".
-        def extract_metadata(io : IO)
-          width, height = self.class.extract_dimensions(io)
+        private def extract_metadata(io, **options) : Shrine::UploadedFile::MetadataType
+          width, height = self.class.extract_dimensions(io).as(Tuple(Int32, Int32))
 
-          super.merge!({"width" => width, "height" => height})
+          super.merge({"width" => width, "height" => height})
         end
       end
 

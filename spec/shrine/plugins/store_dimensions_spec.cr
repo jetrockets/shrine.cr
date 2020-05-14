@@ -4,6 +4,11 @@ class ShrineWithStoreDimensionsUsingBuiltIn < Shrine
   load_plugin(Shrine::Plugins::StoreDimensions,
     analyzer: Shrine::Plugins::StoreDimensions::Tools::BuiltIn)
 
+  # redefine Shrine#extract_metadata to make it public
+  def extract_metadata(io : IO, **options) : Shrine::UploadedFile::MetadataType
+    super
+  end
+
   finalize_plugins!
 end
 
@@ -16,6 +21,19 @@ end
 
 Spectator.describe Shrine::Plugins::StoreDimensions do
   include FileHelpers
+
+  describe "primary purpose" do
+    let(uploader) {
+      ShrineWithStoreDimensionsUsingBuiltIn.new("store")
+    }
+
+    it "stores width and height in metadata" do
+      metadata = uploader.extract_metadata(image("320x180.jpg"))
+
+      expect(metadata["width"]).to eq(320)
+      expect(metadata["height"]).to eq(180)
+    end
+  end
 
   describe "built in analyzer" do
     subject { ShrineWithStoreDimensionsUsingBuiltIn }
