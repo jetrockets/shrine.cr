@@ -1,4 +1,4 @@
-require "../spec_helper"
+require "./spec_helper"
 
 Spectator.describe Shrine do
   include ShrineHelpers
