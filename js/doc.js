@@ -1,11 +1,11 @@
-window.CrystalDocs = (window.CrystalDocs || {});
+window.CrystalDoc = (window.CrystalDoc || {});
 
-CrystalDocs.base_path = (CrystalDocs.base_path || "");
+CrystalDoc.base_path = (CrystalDoc.base_path || "");
 
-CrystalDocs.searchIndex = (CrystalDocs.searchIndex || false);
-CrystalDocs.MAX_RESULTS_DISPLAY = 140;
+CrystalDoc.searchIndex = (CrystalDoc.searchIndex || false);
+CrystalDoc.MAX_RESULTS_DISPLAY = 140;
 
-CrystalDocs.runQuery = function(query) {
+CrystalDoc.runQuery = function(query) {
   function searchType(type, query, results) {
     var matches = [];
     var matchedFields = [];
@@ -145,11 +145,11 @@ CrystalDocs.runQuery = function(query) {
   }
 
   var results = [];
-  searchType(CrystalDocs.searchIndex.program, query, results);
+  searchType(CrystalDoc.searchIndex.program, query, results);
   return results;
 };
 
-CrystalDocs.rankResults = function(results, query) {
+CrystalDoc.rankResults = function(results, query) {
   function uniqueArray(ar) {
     var j = {};
 
@@ -171,42 +171,42 @@ CrystalDocs.rankResults = function(results, query) {
     var bOnlyDocs = bHasDocs && b.matched_fields.length == 1;
 
     if (a.result_type == "type" && b.result_type != "type" && !aOnlyDocs) {
-      if(CrystalDocs.DEBUG) { console.log("a is type b not"); }
+      if(CrystalDoc.DEBUG) { console.log("a is type b not"); }
       return -1;
     } else if (b.result_type == "type" && a.result_type != "type" && !bOnlyDocs) {
-      if(CrystalDocs.DEBUG) { console.log("b is type, a not"); }
+      if(CrystalDoc.DEBUG) { console.log("b is type, a not"); }
       return 1;
     }
     if (a.matched_fields.includes("name")) {
       if (b.matched_fields.includes("name")) {
-        var a_name = (CrystalDocs.prefixForType(a.result_type) || "") + ((a.result_type == "type") ? a.full_name : a.name);
-        var b_name = (CrystalDocs.prefixForType(b.result_type) || "") + ((b.result_type == "type") ? b.full_name : b.name);
+        var a_name = (CrystalDoc.prefixForType(a.result_type) || "") + ((a.result_type == "type") ? a.full_name : a.name);
+        var b_name = (CrystalDoc.prefixForType(b.result_type) || "") + ((b.result_type == "type") ? b.full_name : b.name);
         a_name = a_name.toLowerCase();
         b_name = b_name.toLowerCase();
         for(var i = 0; i < query.normalizedTerms.length; i++) {
           var term = query.terms[i].replace(/^::?|::?$/, "");
           var a_orig_index = a_name.indexOf(term);
           var b_orig_index = b_name.indexOf(term);
-          if(CrystalDocs.DEBUG) { console.log("term: " + term + " a: " + a_name + " b: " + b_name); }
-          if(CrystalDocs.DEBUG) { console.log(a_orig_index, b_orig_index, a_orig_index - b_orig_index); }
+          if(CrystalDoc.DEBUG) { console.log("term: " + term + " a: " + a_name + " b: " + b_name); }
+          if(CrystalDoc.DEBUG) { console.log(a_orig_index, b_orig_index, a_orig_index - b_orig_index); }
           if (a_orig_index >= 0) {
             if (b_orig_index >= 0) {
-              if(CrystalDocs.DEBUG) { console.log("both have exact match", a_orig_index > b_orig_index ? -1 : 1); }
+              if(CrystalDoc.DEBUG) { console.log("both have exact match", a_orig_index > b_orig_index ? -1 : 1); }
               if(a_orig_index != b_orig_index) {
-                if(CrystalDocs.DEBUG) { console.log("both have exact match at different positions", a_orig_index > b_orig_index ? 1 : -1); }
+                if(CrystalDoc.DEBUG) { console.log("both have exact match at different positions", a_orig_index > b_orig_index ? 1 : -1); }
                 return a_orig_index > b_orig_index ? 1 : -1;
               }
             } else {
-              if(CrystalDocs.DEBUG) { console.log("a has exact match, b not"); }
+              if(CrystalDoc.DEBUG) { console.log("a has exact match, b not"); }
               return -1;
             }
           } else if (b_orig_index >= 0) {
-            if(CrystalDocs.DEBUG) { console.log("b has exact match, a not"); }
+            if(CrystalDoc.DEBUG) { console.log("b has exact match, a not"); }
             return 1;
           }
         }
       } else {
-        if(CrystalDocs.DEBUG) { console.log("a has match in name, b not"); }
+        if(CrystalDoc.DEBUG) { console.log("a has match in name, b not"); }
         return -1;
       }
     } else if (
@@ -217,19 +217,19 @@ CrystalDocs.rankResults = function(results, query) {
     }
 
     if (matchedTermsDiff != 0 || (aHasDocs != bHasDocs)) {
-      if(CrystalDocs.DEBUG) { console.log("matchedTermsDiff: " + matchedTermsDiff, aHasDocs, bHasDocs); }
+      if(CrystalDoc.DEBUG) { console.log("matchedTermsDiff: " + matchedTermsDiff, aHasDocs, bHasDocs); }
       return matchedTermsDiff;
     }
 
     var matchedFieldsDiff = b.matched_fields.length - a.matched_fields.length;
     if (matchedFieldsDiff != 0) {
-      if(CrystalDocs.DEBUG) { console.log("matched to different number of fields: " + matchedFieldsDiff); }
+      if(CrystalDoc.DEBUG) { console.log("matched to different number of fields: " + matchedFieldsDiff); }
       return matchedFieldsDiff > 0 ? 1 : -1;
     }
 
     var nameCompare = a.name.localeCompare(b.name);
     if(nameCompare != 0){
-      if(CrystalDocs.DEBUG) { console.log("nameCompare resulted in: " + a.name + "<=>" + b.name + ": " + nameCompare); }
+      if(CrystalDoc.DEBUG) { console.log("nameCompare resulted in: " + a.name + "<=>" + b.name + ": " + nameCompare); }
       return nameCompare > 0 ? 1 : -1;
     }
 
@@ -238,7 +238,7 @@ CrystalDocs.rankResults = function(results, query) {
         var term = query.terms[i];
         var aIndex = a.args_string.indexOf(term);
         var bIndex = b.args_string.indexOf(term);
-        if(CrystalDocs.DEBUG) { console.log("index of " + term + " in args_string: " + aIndex + " - " + bIndex); }
+        if(CrystalDoc.DEBUG) { console.log("index of " + term + " in args_string: " + aIndex + " - " + bIndex); }
         if(aIndex >= 0){
           if(bIndex >= 0){
             if(aIndex != bIndex){
@@ -267,7 +267,7 @@ CrystalDocs.rankResults = function(results, query) {
   return results;
 };
 
-CrystalDocs.prefixForType = function(type) {
+CrystalDoc.prefixForType = function(type) {
   switch (type) {
     case "instance_method":
       return "#";
@@ -282,14 +282,14 @@ CrystalDocs.prefixForType = function(type) {
   }
 };
 
-CrystalDocs.displaySearchResults = function(results, query) {
+CrystalDoc.displaySearchResults = function(results, query) {
   function sanitize(html){
     return html.replace(/<(?!\/?code)[^>]+>/g, "");
   }
 
   // limit results
-  if (results.length > CrystalDocs.MAX_RESULTS_DISPLAY) {
-    results = results.slice(0, CrystalDocs.MAX_RESULTS_DISPLAY);
+  if (results.length > CrystalDoc.MAX_RESULTS_DISPLAY) {
+    results = results.slice(0, CrystalDoc.MAX_RESULTS_DISPLAY);
   }
 
   var $frag = document.createDocumentFragment();
@@ -297,12 +297,12 @@ CrystalDocs.displaySearchResults = function(results, query) {
   $resultsElem.innerHTML = "<!--" + JSON.stringify(query) + "-->";
 
   results.forEach(function(result, i) {
-    var url = CrystalDocs.base_path + result.href;
+    var url = CrystalDoc.base_path + result.href;
     var type = false;
 
     var title = query.highlight(result.result_type == "type" ? result.full_name : result.name);
 
-    var prefix = CrystalDocs.prefixForType(result.result_type);
+    var prefix = CrystalDoc.prefixForType(result.result_type);
     if (prefix) {
       title = "<b>" + prefix + "</b>" + title;
     }
@@ -351,10 +351,10 @@ CrystalDocs.displaySearchResults = function(results, query) {
 
   $resultsElem.appendChild($frag);
 
-  CrystalDocs.toggleResultsList(true);
+  CrystalDoc.toggleResultsList(true);
 };
 
-CrystalDocs.toggleResultsList = function(visible) {
+CrystalDoc.toggleResultsList = function(visible) {
   if (visible) {
     document.querySelector(".types-list").classList.add("hidden");
     document.querySelector(".search-results").classList.remove("hidden");
@@ -364,20 +364,20 @@ CrystalDocs.toggleResultsList = function(visible) {
   }
 };
 
-CrystalDocs.Query = function(string) {
+CrystalDoc.Query = function(string) {
   this.original = string;
   this.terms = string.split(/\s+/).filter(function(word) {
-    return CrystalDocs.Query.stripModifiers(word).length > 0;
+    return CrystalDoc.Query.stripModifiers(word).length > 0;
   });
 
-  var normalized = this.terms.map(CrystalDocs.Query.normalizeTerm);
+  var normalized = this.terms.map(CrystalDoc.Query.normalizeTerm);
   this.normalizedTerms = normalized;
 
   function runMatcher(field, matcher) {
     if (!field) {
       return false;
     }
-    var normalizedValue = CrystalDocs.Query.normalizeTerm(field);
+    var normalizedValue = CrystalDoc.Query.normalizeTerm(field);
 
     var matches = [];
     normalized.forEach(function(term) {
@@ -435,7 +435,7 @@ CrystalDocs.Query = function(string) {
         methodName = term.substring(i+1);
 
         if(termType != "") {
-          if(CrystalDocs.Query.normalizeTerm(type.full_name).indexOf(termType) < 0){
+          if(CrystalDoc.Query.normalizeTerm(type.full_name).indexOf(termType) < 0){
             return false;
           }
         }
@@ -461,10 +461,10 @@ CrystalDocs.Query = function(string) {
     );
   };
 };
-CrystalDocs.Query.normalizeTerm = function(term) {
+CrystalDoc.Query.normalizeTerm = function(term) {
   return term.toLowerCase();
 };
-CrystalDocs.Query.stripModifiers = function(term) {
+CrystalDoc.Query.stripModifiers = function(term) {
   switch (term[0]) {
     case "#":
     case ".":
@@ -476,34 +476,34 @@ CrystalDocs.Query.stripModifiers = function(term) {
   }
 }
 
-CrystalDocs.search = function(string) {
-  if(!CrystalDocs.searchIndex) {
-    console.log("CrystalDocs search index not initialized, delaying search");
+CrystalDoc.search = function(string) {
+  if(!CrystalDoc.searchIndex) {
+    console.log("CrystalDoc search index not initialized, delaying search");
 
-    document.addEventListener("CrystalDocs:loaded", function listener(){
-      document.removeEventListener("CrystalDocs:loaded", listener);
-      CrystalDocs.search(string);
+    document.addEventListener("CrystalDoc:loaded", function listener(){
+      document.removeEventListener("CrystalDoc:loaded", listener);
+      CrystalDoc.search(string);
     });
     return;
   }
 
-  document.dispatchEvent(new Event("CrystalDocs:searchStarted"));
+  document.dispatchEvent(new Event("CrystalDoc:searchStarted"));
 
-  var query = new CrystalDocs.Query(string);
-  var results = CrystalDocs.runQuery(query);
-  results = CrystalDocs.rankResults(results, query);
-  CrystalDocs.displaySearchResults(results, query);
+  var query = new CrystalDoc.Query(string);
+  var results = CrystalDoc.runQuery(query);
+  results = CrystalDoc.rankResults(results, query);
+  CrystalDoc.displaySearchResults(results, query);
 
-  document.dispatchEvent(new Event("CrystalDocs:searchPerformed"));
+  document.dispatchEvent(new Event("CrystalDoc:searchPerformed"));
 };
 
-CrystalDocs.initializeIndex = function(data) {
-  CrystalDocs.searchIndex = data;
+CrystalDoc.initializeIndex = function(data) {
+  CrystalDoc.searchIndex = data;
 
-  document.dispatchEvent(new Event("CrystalDocs:loaded"));
+  document.dispatchEvent(new Event("CrystalDoc:loaded"));
 };
 
-CrystalDocs.loadIndex = function() {
+CrystalDoc.loadIndex = function() {
   function loadJSON(file, callback) {
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
@@ -523,7 +523,7 @@ CrystalDocs.loadIndex = function() {
   }
 
   function parseJSON(json) {
-    CrystalDocs.initializeIndex(JSON.parse(json));
+    CrystalDoc.initializeIndex(JSON.parse(json));
   }
 
   for(var i = 0; i < document.scripts.length; i++){
@@ -546,7 +546,7 @@ CrystalDocs.loadIndex = function() {
 
 // Callback for jsonp
 function crystal_doc_search_index_callback(data) {
-  CrystalDocs.initializeIndex(data);
+  CrystalDoc.initializeIndex(data);
 }
 
 Navigator = function(sidebar, searchInput, list, leaveSearchScope){
@@ -555,23 +555,23 @@ Navigator = function(sidebar, searchInput, list, leaveSearchScope){
 
   var performingSearch = false;
 
-  document.addEventListener('CrystalDocs:searchStarted', function(){
+  document.addEventListener('CrystalDoc:searchStarted', function(){
     performingSearch = true;
   });
-  document.addEventListener('CrystalDocs:searchDebounceStarted', function(){
+  document.addEventListener('CrystalDoc:searchDebounceStarted', function(){
     performingSearch = true;
   });
-  document.addEventListener('CrystalDocs:searchPerformed', function(){
+  document.addEventListener('CrystalDoc:searchPerformed', function(){
     performingSearch = false;
   });
-  document.addEventListener('CrystalDocs:searchDebounceStopped', function(event){
+  document.addEventListener('CrystalDoc:searchDebounceStopped', function(event){
     performingSearch = false;
   });
 
   function delayWhileSearching(callback) {
     if(performingSearch){
-      document.addEventListener('CrystalDocs:searchPerformed', function listener(){
-        document.removeEventListener('CrystalDocs:searchPerformed', listener);
+      document.addEventListener('CrystalDoc:searchPerformed', function listener(){
+        document.removeEventListener('CrystalDoc:searchPerformed', listener);
 
         // add some delay to let search results display kick in
         setTimeout(callback, 100);
@@ -783,74 +783,6 @@ Navigator = function(sidebar, searchInput, list, leaveSearchScope){
   this.move();
 };
 
-CrystalDocs.initializeVersions = function () {
-  function loadJSON(file, callback) {
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open("GET", file, true);
-    xobj.onreadystatechange = function() {
-      if (xobj.readyState == 4 && xobj.status == "200") {
-        callback(xobj.responseText);
-      }
-    };
-    xobj.send(null);
-  }
-
-  function parseJSON(json) {
-    CrystalDocs.loadConfig(JSON.parse(json));
-  }
-
-  $elem = document.querySelector("html > head > meta[name=\"crystal_docs.json_config_url\"]")
-  if ($elem == undefined) {
-    return
-  }
-  jsonURL = $elem.getAttribute("content")
-  if (jsonURL && jsonURL != "") {
-    loadJSON(jsonURL, parseJSON);
-  }
-}
-
-CrystalDocs.loadConfig = function (config) {
-  var projectVersions = config["versions"]
-  var currentVersion = document.querySelector("html > head > meta[name=\"crystal_docs.project_version\"]").getAttribute("content")
-
-  var currentVersionInList = projectVersions.find(function (element) {
-    return element.name == currentVersion
-  })
-
-  if (!currentVersionInList) {
-    projectVersions.unshift({ name: currentVersion, url: '#' })
-  }
-
-  $version = document.querySelector(".project-summary > .project-version")
-  $version.innerHTML = ""
-
-  $select = document.createElement("select")
-  $select.classList.add("project-versions-nav")
-  $select.addEventListener("change", function () {
-    window.location.href = this.value
-  })
-  projectVersions.forEach(function (version) {
-    $item = document.createElement("option")
-    $item.setAttribute("value", version.url)
-    $item.append(document.createTextNode(version.name))
-
-    if (version.name == currentVersion) {
-      $item.setAttribute("selected", true)
-      $item.setAttribute("disabled", true)
-    }
-    $select.append($item)
-  });
-  $form = document.createElement("form")
-  $form.setAttribute("autocomplete", "off")
-  $form.append($select)
-  $version.append($form)
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  CrystalDocs.initializeVersions()
-})
-
 var UsageModal = function(title, content) {
   var $body = document.body;
   var self = this;
@@ -951,28 +883,28 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   var leaveSearchScope = function(){
-    CrystalDocs.toggleResultsList(false);
+    CrystalDoc.toggleResultsList(false);
     window.focus();
   }
 
   var navigator = new Navigator(document.querySelector('.types-list'), searchInput, document.querySelector(".search-results"), leaveSearchScope);
 
-  CrystalDocs.loadIndex();
+  CrystalDoc.loadIndex();
   var searchTimeout;
   var lastSearchText = false;
   var performSearch = function() {
-    document.dispatchEvent(new Event("CrystalDocs:searchDebounceStarted"));
+    document.dispatchEvent(new Event("CrystalDoc:searchDebounceStarted"));
 
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(function() {
       var text = searchInput.value;
 
       if(text == "") {
-        CrystalDocs.toggleResultsList(false);
+        CrystalDoc.toggleResultsList(false);
       }else if(text == lastSearchText){
-        document.dispatchEvent(new Event("CrystalDocs:searchDebounceStopped"));
+        document.dispatchEvent(new Event("CrystalDoc:searchDebounceStopped"));
       }else{
-        CrystalDocs.search(text);
+        CrystalDoc.search(text);
         navigator.highlightFirst();
         searchInput.focus();
       }
@@ -988,7 +920,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var searchQuery = location.hash.substring(3);
     history.pushState({searchQuery: searchQuery}, "Search for " + searchQuery, location.href.replace(/#q=.*/, ""));
     searchInput.value = searchQuery;
-    document.addEventListener('CrystalDocs:loaded', performSearch);
+    document.addEventListener('CrystalDoc:loaded', performSearch);
   }
 
   if (searchInput.value.length == 0) {
@@ -1074,10 +1006,11 @@ document.addEventListener('DOMContentLoaded', function() {
   var scrollToEntryFromLocationHash = function() {
     var hash = window.location.hash;
     if (hash) {
-      var targetAnchor = decodeURI(hash.substr(1));
-      var targetEl = document.getElementById(targetAnchor)
-      if (targetEl) {
-        targetEl.offsetParent.scrollTop = targetEl.offsetTop;
+      var targetAnchor = unescape(hash.substr(1));
+      var targetEl = document.querySelectorAll('.entry-detail[id="' + targetAnchor + '"]');
+
+      if (targetEl && targetEl.length > 0) {
+        targetEl[0].offsetParent.scrollTop = targetEl[0].offsetTop;
       }
     }
   };
