@@ -47,7 +47,7 @@ Spectator.describe Shrine::Storage::S3 do
   describe "#upload" do
     context "without `prefix`" do
       it "creates subdirectories" do
-        WebMock.stub(:put, "http://s3-us-east-2.amazonaws.com/test/object?")
+        WebMock.stub(:put, "https://s3-us-east-2.amazonaws.com/test/object?")
           .with(body: "", headers: {"Content-Type" => "binary/octet-stream"})
           .to_return(status: 200, body: "", headers: {"ETag" => "etag"})
 
@@ -61,7 +61,7 @@ Spectator.describe Shrine::Storage::S3 do
       let(prefix) { "prefix" }
 
       it "creates subdirectories" do
-        WebMock.stub(:put, "http://s3-us-east-2.amazonaws.com/test/#{prefix}/a/a/a.jpg?")
+        WebMock.stub(:put, "https://s3-us-east-2.amazonaws.com/test/#{prefix}/a/a/a.jpg?")
           .with(body: "", headers: {"Content-Type" => "binary/octet-stream"})
           .to_return(status: 200, body: "", headers: {"ETag" => "etag"})
 
@@ -73,7 +73,7 @@ Spectator.describe Shrine::Storage::S3 do
 
     context "with metadata" do
       it "file uploads" do
-        WebMock.stub(:put, "http://s3-us-east-2.amazonaws.com/test/a/a/a.jpg?")
+        WebMock.stub(:put, "https://s3-us-east-2.amazonaws.com/test/a/a/a.jpg?")
           .with(body: "", headers: {"Content-Type" => "binary/octet-stream", "Content-Disposition" => "inline; filename=\"ex\"; filename*=UTF-8''ex"})
           .to_return(status: 200, body: "", headers: {"ETag" => "etag"})
         response = subject.upload(FakeIO.new, "a/a/a.jpg", metadata)
@@ -87,7 +87,7 @@ Spectator.describe Shrine::Storage::S3 do
 
   describe "#exists?" do
     it "file exists" do
-      WebMock.stub(:head, "http://s3-us-east-2.amazonaws.com/test/a/a/a.jpg?")
+      WebMock.stub(:head, "https://s3-us-east-2.amazonaws.com/test/a/a/a.jpg?")
         .to_return(status: 200, headers: {"Content-Type" => "binary/octet-stream", "Last-Modified" => "Sun, 10 Jan 2020 4:47:46 UTC"})
       expect(
         subject.exists?("a/a/a.jpg")
@@ -95,7 +95,7 @@ Spectator.describe Shrine::Storage::S3 do
     end
 
     it "file does not exist" do
-      WebMock.stub(:head, "http://s3-us-east-2.amazonaws.com/test/ex.jpg?")
+      WebMock.stub(:head, "https://s3-us-east-2.amazonaws.com/test/ex.jpg?")
         .to_return(status: 404)
       expect(
         subject.exists?("ex.jpg")
@@ -125,7 +125,7 @@ Spectator.describe Shrine::Storage::S3 do
   describe "#open" do
     context "without `prefix`" do
       it "returns a IO-like object" do
-        WebMock.stub(:get, "http://s3-us-east-2.amazonaws.com/test/foo.jpg?")
+        WebMock.stub(:get, "https://s3-us-east-2.amazonaws.com/test/foo.jpg?")
           .to_return(body_io: FakeIO.new)
         expect(
           subject.open("foo.jpg")
@@ -135,7 +135,7 @@ Spectator.describe Shrine::Storage::S3 do
     context "with `prefix`" do
       let(prefix) { "prefix" }
       it "returns a IO-like object" do
-        WebMock.stub(:get, "http://s3-us-east-2.amazonaws.com/test/#{prefix}/foo.jpg?")
+        WebMock.stub(:get, "https://s3-us-east-2.amazonaws.com/test/#{prefix}/foo.jpg?")
           .to_return(body_io: FakeIO.new)
         expect(
           subject.open("foo.jpg")
@@ -147,7 +147,7 @@ Spectator.describe Shrine::Storage::S3 do
   describe "#delete" do
     context "without `prefix`" do
       it "deletes objects" do
-        WebMock.stub(:delete, "http://s3-us-east-2.amazonaws.com/test/foo.jpg?")
+        WebMock.stub(:delete, "https://s3-us-east-2.amazonaws.com/test/foo.jpg?")
           .to_return(status: 204)
         expect(
           subject.delete("foo.jpg")
@@ -158,7 +158,7 @@ Spectator.describe Shrine::Storage::S3 do
     context "with `prefix`" do
       let(prefix) { "prefix" }
       it "deletes objects" do
-        WebMock.stub(:delete, "http://s3-us-east-2.amazonaws.com/test/#{prefix}/foo.jpg?")
+        WebMock.stub(:delete, "https://s3-us-east-2.amazonaws.com/test/#{prefix}/foo.jpg?")
           .to_return(status: 204)
         expect(
           subject.delete("foo.jpg")
