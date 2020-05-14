@@ -2,26 +2,15 @@ require "json"
 
 class Shrine
   class UploadedFile
-    alias MetadataType = Hash(String, String | Int32 | UInt32 | Int64 | UInt64 | Nil)
+    include JSON::Serializable
 
-    # include JSON::Serializable
+    alias MetadataType = Hash(String, String | Int32 | UInt32 | Int64 | UInt64 | Nil)
 
     @io : IO?
 
-    JSON.mapping(
-      id: String,
-      storage_key: String,
-      metadata: MetadataType
-    )
-
-    # @[JSON::Field(key: "id")]
-    # property id : String
-
-    # @[JSON::Field(key: "storage_key")]
-    # property storage_key : String
-
-    # @[JSON::Field(key: "metadata")]
-    # property metadata : MetadataType
+    property id : String
+    property storage_key : String
+    property metadata : MetadataType
 
     def initialize(id : String, storage : String, metadata : MetadataType = MetadataType.new)
       @storage_key = storage
