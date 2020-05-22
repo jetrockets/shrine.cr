@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="shrine">
-  <title>Shrine::Plugins::AddMetadata - shrine HEAD</title>
+  <title>Shrine::Attacher::ClassMethods - shrine HEAD</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -56,12 +56,12 @@
       
         <ul>
   
-  <li class="parent " data-id="shrine/Shrine/Attacher" data-name="shrine::attacher">
+  <li class="parent open current" data-id="shrine/Shrine/Attacher" data-name="shrine::attacher">
       <a href="../../Shrine/Attacher.html">Attacher</a>
       
         <ul>
   
-  <li class=" " data-id="shrine/Shrine/Attacher/ClassMethods" data-name="shrine::attacher::classmethods">
+  <li class=" current" data-id="shrine/Shrine/Attacher/ClassMethods" data-name="shrine::attacher::classmethods">
       <a href="../../Shrine/Attacher/ClassMethods.html">ClassMethods</a>
       
     </li>
@@ -106,12 +106,12 @@
       
     </li>
   
-  <li class="parent open current" data-id="shrine/Shrine/Plugins" data-name="shrine::plugins">
+  <li class="parent " data-id="shrine/Shrine/Plugins" data-name="shrine::plugins">
       <a href="../../Shrine/Plugins.html">Plugins</a>
       
         <ul>
   
-  <li class="parent open current" data-id="shrine/Shrine/Plugins/AddMetadata" data-name="shrine::plugins::addmetadata">
+  <li class="parent " data-id="shrine/Shrine/Plugins/AddMetadata" data-name="shrine::plugins::addmetadata">
       <a href="../../Shrine/Plugins/AddMetadata.html">AddMetadata</a>
       
         <ul>
@@ -265,7 +265,7 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Shrine::Plugins::AddMetadata
+  <span class="kind">module</span> Shrine::Attacher::ClassMethods
 
 </h1>
 
@@ -296,8 +296,8 @@
   </h2>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/8a0ac0deeb379f03e3513769b0e7cb3b597a6792/src/shrine/plugins/add_metadata.cr#L3" target="_blank">
-        shrine/plugins/add_metadata.cr
+      <a href="https://github.com/jetrockets/shrine.cr/blob/8a0ac0deeb379f03e3513769b0e7cb3b597a6792/src/shrine/attacher.cr#L11" target="_blank">
+        shrine/attacher.cr
       </a>
     
     <br/>
@@ -311,6 +311,25 @@
 
 
 
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#from_data(data:Hash(String,String%7CUploadedFile::MetadataType)?,**options)-instance-method" class="signature"><strong>#from_data</strong>(data : Hash(String, String | UploadedFile::MetadataType)?, **options)</a>
+        
+          <div class="summary"><p>Initializes the attacher from a data hash generated from <code>Attacher#data</code>.</p></div>
+        
+      </li>
+    
+  </ul>
+
 
 
 
@@ -323,6 +342,40 @@
 
 
 
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="from_data(data:Hash(String,String|UploadedFile::MetadataType)?,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>from_data</strong>(data : Hash(String, String | <a href="../../Shrine/UploadedFile/MetadataType.html">UploadedFile::MetadataType</a>)?, **options)
+
+        <a class="method-permalink" href="#from_data(data:Hash(String,String%7CUploadedFile::MetadataType)?,**options)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Initializes the attacher from a data hash generated from <code>Attacher#data</code>.</p>
+
+<pre><code>attacher <span class="o">=</span> <span class="t">Attacher</span>.from_data({ <span class="s">&quot;id&quot;</span> => <span class="s">&quot;...&quot;</span>, <span class="s">&quot;storage&quot;</span> => <span class="s">&quot;...&quot;</span>, <span class="s">&quot;metadata&quot;</span> => { ... } })
+attacher.file <span class="c">#=&gt; #&lt;Shrine::UploadedFile&gt;</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/8a0ac0deeb379f03e3513769b0e7cb3b597a6792/src/shrine/attacher.cr#L16" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 

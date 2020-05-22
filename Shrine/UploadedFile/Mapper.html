@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="shrine">
-  <title>Shrine::Plugins::AddMetadata - shrine HEAD</title>
+  <title>Shrine::UploadedFile::Mapper - shrine HEAD</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -106,12 +106,12 @@
       
     </li>
   
-  <li class="parent open current" data-id="shrine/Shrine/Plugins" data-name="shrine::plugins">
+  <li class="parent " data-id="shrine/Shrine/Plugins" data-name="shrine::plugins">
       <a href="../../Shrine/Plugins.html">Plugins</a>
       
         <ul>
   
-  <li class="parent open current" data-id="shrine/Shrine/Plugins/AddMetadata" data-name="shrine::plugins::addmetadata">
+  <li class="parent " data-id="shrine/Shrine/Plugins/AddMetadata" data-name="shrine::plugins::addmetadata">
       <a href="../../Shrine/Plugins/AddMetadata.html">AddMetadata</a>
       
         <ul>
@@ -231,12 +231,12 @@
       
     </li>
   
-  <li class="parent " data-id="shrine/Shrine/UploadedFile" data-name="shrine::uploadedfile">
+  <li class="parent open current" data-id="shrine/Shrine/UploadedFile" data-name="shrine::uploadedfile">
       <a href="../../Shrine/UploadedFile.html">UploadedFile</a>
       
         <ul>
   
-  <li class=" " data-id="shrine/Shrine/UploadedFile/Mapper" data-name="shrine::uploadedfile::mapper">
+  <li class=" current" data-id="shrine/Shrine/UploadedFile/Mapper" data-name="shrine::uploadedfile::mapper">
       <a href="../../Shrine/UploadedFile/Mapper.html">Mapper</a>
       
     </li>
@@ -265,17 +265,33 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Shrine::Plugins::AddMetadata
+  <span class="kind">struct</span> Shrine::UploadedFile::Mapper
 
 </h1>
 
 
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Shrine/UploadedFile/Mapper.html">Shrine::UploadedFile::Mapper</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
 
 
 
+
+
+  <h2>
+    <a id="included-modules" class="anchor" href="#included-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Included Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type">JSON::Serializable</li>
+    
+  </ul>
 
 
 
@@ -296,8 +312,8 @@
   </h2>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/8a0ac0deeb379f03e3513769b0e7cb3b597a6792/src/shrine/plugins/add_metadata.cr#L3" target="_blank">
-        shrine/plugins/add_metadata.cr
+      <a href="https://github.com/jetrockets/shrine.cr/blob/8a0ac0deeb379f03e3513769b0e7cb3b597a6792/src/shrine/uploaded_file.cr#L9" target="_blank">
+        shrine/uploaded_file.cr
       </a>
     
     <br/>
@@ -307,9 +323,58 @@
 
 
 
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(id,storage_key,metadata)-class-method" class="signature"><strong>.new</strong>(id, storage_key, metadata)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new(pull:JSON::PullParser)-class-method" class="signature"><strong>.new</strong>(pull : JSON::PullParser)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#id:String-instance-method" class="signature"><strong>#id</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#metadata:MetadataType-instance-method" class="signature"><strong>#metadata</strong> : MetadataType</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#storage_key:String-instance-method" class="signature"><strong>#storage_key</strong> : String</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -317,12 +382,152 @@
 
 <div class="methods-inherited">
   
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
 </div>
 
 
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(id,storage_key,metadata)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(id, storage_key, metadata)
+
+        <a class="method-permalink" href="#new(id,storage_key,metadata)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/8a0ac0deeb379f03e3513769b0e7cb3b597a6792/src/shrine/uploaded_file.cr#L16" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(pull:JSON::PullParser)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(pull : JSON::PullParser)
+
+        <a class="method-permalink" href="#new(pull:JSON::PullParser)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/8a0ac0deeb379f03e3513769b0e7cb3b597a6792/src/shrine/uploaded_file.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="id:String-instance-method">
+      <div class="signature">
+        
+        def <strong>id</strong> : String
+
+        <a class="method-permalink" href="#id:String-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/8a0ac0deeb379f03e3513769b0e7cb3b597a6792/src/shrine/uploaded_file.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="metadata:MetadataType-instance-method">
+      <div class="signature">
+        
+        def <strong>metadata</strong> : <a href="../../Shrine/UploadedFile/MetadataType.html">MetadataType</a>
+
+        <a class="method-permalink" href="#metadata:MetadataType-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/8a0ac0deeb379f03e3513769b0e7cb3b597a6792/src/shrine/uploaded_file.cr#L14" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="storage_key:String-instance-method">
+      <div class="signature">
+        
+        def <strong>storage_key</strong> : String
+
+        <a class="method-permalink" href="#storage_key:String-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/8a0ac0deeb379f03e3513769b0e7cb3b597a6792/src/shrine/uploaded_file.cr#L13" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
