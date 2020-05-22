@@ -9,7 +9,7 @@ class Shrine
         @store = {} of String => String
       end
 
-      def upload(io : IO, id : String, **options)
+      def upload(io : IO | UploadedFile, id : String, **options)
         store[id.to_s] = io.gets_to_end
       end
 

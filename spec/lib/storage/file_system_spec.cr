@@ -5,12 +5,6 @@ require "../../spec_helper"
 Spectator.describe Shrine::Storage::FileSystem do
   include FileHelpers
 
-  # class FileStorage < Shrine::Storage::FileSystem
-  #   def directory
-  #     root
-  #   end
-  # end
-
   subject {
     Shrine::Storage::FileSystem.new(
       directory: root,
@@ -18,14 +12,6 @@ Spectator.describe Shrine::Storage::FileSystem do
       permissions: permissions,
       directory_permissions: directory_permissions
     )
-  # Shrine::Storage::FileSystem.configure do |settings|
-  #   settings.directory = root
-  #   settings.prefix = prefix
-  #   settings.permissions = permissions
-  #   settings.directory_permissions = directory_permissions
-  # end
-
-  # Shrine::Storage::FileSystem.new
   }
 
   let(root) { File.join(Dir.tempdir, "shrine") }

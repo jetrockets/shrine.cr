@@ -6,7 +6,7 @@ class Shrine
       getter? clean : Bool = true
 
       # uploads `io` to the location `id`, can accept upload options
-      abstract def upload(io : IO, id : String, move = false, **options)
+      abstract def upload(io : IO | UploadedFile, id : String, move = false, **options)
 
       # returns the remote file as an IO-like object
       abstract def open(id : String, **options) : IO

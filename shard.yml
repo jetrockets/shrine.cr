@@ -21,12 +21,9 @@ dependencies:
   habitat:
     github: luckyframework/habitat
 
-
-
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
-    version: ~> 0.11.0
 
   spectator:
     gitlab: arctic-fox/spectator

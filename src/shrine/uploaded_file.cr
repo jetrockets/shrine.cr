@@ -6,21 +6,35 @@ class Shrine
 
     alias MetadataType = Hash(String, String | Int32 | UInt32 | Int64 | UInt64 | Nil)
 
-    @io : IO?
+    struct Mapper
+      include JSON::Serializable
 
-    property id : String
-    property storage_key : String
-    property metadata : MetadataType
+      getter id : String
+      getter storage_key : String
+      getter metadata : MetadataType
 
-    def initialize(id : String, storage : String, metadata : MetadataType = MetadataType.new)
-      @storage_key = storage
-      @metadata = metadata
-
-      @id = id
+      def initialize(@id, @storage_key, @metadata)
+      end
     end
 
-    def initialize(id : String, storage : Symbol, metadata : MetadataType = MetadataType.new)
-      initialize(id, storage.to_s, metadata)
+    {% begin %}
+      {% for method in %w[id storage_key metadata to_json] %}
+        delegate {{method.id}}, to: @mapper
+      {% end %}
+    {% end %}
+
+    @io : IO?
+    @mapper : Mapper
+
+    def self.from_json(json : String)
+      new(Mapper.from_json(json))
+    end
+
+    def initialize(@mapper : Mapper)
+    end
+
+    def initialize(id : String, storage_key : String, metadata : MetadataType = MetadataType.new)
+      @mapper = Mapper.new(id: id, storage_key: storage_key, metadata: metadata)
     end
 
     delegate pos, to: io
@@ -193,7 +207,15 @@ class Shrine
 
     # Returns serializable hash representation of the uploaded file.
     def data : Hash(String, String | MetadataType)
-      {"id" => id, "storage" => storage_key, "metadata" => metadata}
+      {"id" => id, "storage_key" => storage_key, "metadata" => metadata}
+    end
+
+    # Returns true if the other UploadedFile is uploaded to the same
+    # storage and it has the same #id.
+    def ==(other : UploadedFile)
+      self.class == other.class &&
+        self.id == other.id &&
+        self.storage_key == other.storage_key
     end
 
     private def _open(**options)
