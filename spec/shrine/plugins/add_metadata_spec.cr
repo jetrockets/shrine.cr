@@ -1,8 +1,5 @@
 require "../../spec_helper"
 
-class UploadedFileWithMetadata
-end
-
 class ShrineWithAddMetadata < Shrine
   load_plugin Shrine::Plugins::AddMetadata
 

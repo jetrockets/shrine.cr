@@ -46,7 +46,7 @@ class Shrine
       end
 
       # Copies the file into the given location.
-      def upload(io : IO, id : String, move = false, **options)
+      def upload(io : IO | UploadedFile, id : String, move = false, **options)
         if move && movable?(io)
           move(io, path!(id))
         else

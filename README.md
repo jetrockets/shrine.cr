@@ -8,6 +8,8 @@
 
 # shrine.cr
 
+[![Join the chat at https://gitter.im/shrine-cr/community](https://badges.gitter.im/shrine-cr/community.svg)](https://gitter.im/shrine-cr/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Shrine is a toolkit for file attachments in Crystal applications. Heavily inspired by [Shrine for Ruby](https://shrinerb.com).
 
 ## Documentation

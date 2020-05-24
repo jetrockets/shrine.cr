@@ -9,6 +9,7 @@ class Shrine
       getter bucket : String
       getter client : Awscr::S3::Client
       getter? public : Bool
+      getter uploader : Awscr::S3::FileUploader
 
       # Initializes a storage for uploading to S3. All options are forwarded to
       # [`Shrine::Storage::S3#initialize`], except the following:
@@ -37,27 +38,25 @@ class Shrine
         @upload_options : Hash(String, String) = Hash(String, String).new,
         @public : Bool = false
       )
+
+        @uploader = Awscr::S3::FileUploader.new(client: client)
       end
 
       # Copies the file into the given location.
-      def upload(
-        io : IO,
-        id : String,
-        metadata : Shrine::UploadedFile::MetadataType? = nil,
-        move = false,
-        **upload_options
-      )
+      #
+      def upload(io : IO, id : String, metadata : Shrine::UploadedFile::MetadataType? = nil, move = false, **upload_options)
         options = Hash(String, String).new
         options["Content-Disposition"] = ContentDisposition.inline(metadata["filename"].to_s) if metadata && metadata["filename"]
         options["x-amz-acl"] = "public-read" if public?
-        uploader = Awscr::S3::FileUploader.new(client)
 
-        upload_options = upload_options.map { |k, v| {k.to_s => v.to_s} }
-        upload_options.each do |item|
-          options.merge!(item)
-        end
-        options.merge!(@upload_options) if @upload_options
+        options.merge!(@upload_options)
+        upload_options.each{ |key, value| options[key.to_s] = value.to_s }
+
         uploader.upload(bucket, object_key(id), io, options)
+      end
+
+      def upload(io : UploadedFile, id : String, move = false, **upload_options)
+        upload(io, id, **upload_options.merge(move: move))
       end
 
       # Returns a IO object from S3
@@ -66,6 +65,9 @@ class Shrine
         client.get_object(bucket, object_key(id)) do |obj|
           io << obj
         end
+
+        # io
+        # client.get_object(bucket, object_key(id)).body_io
       end
 
       # Returns the presigned URL to the file.
@@ -97,6 +99,10 @@ class Shrine
       end
 
       def clean(path)
+      end
+
+      def path(id : String)
+        object_key(id)
       end
 
       # Returns object key with potential prefix.
