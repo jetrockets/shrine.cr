@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="shrine">
-  <title>Shrine::Plugins::Column::AttacherMethods - shrine HEAD</title>
+  <title>Shrine::Plugins::StoreDimensions::BuiltInAnalyzer - shrine HEAD</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../../";
   </script>
@@ -126,7 +126,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="shrine/Shrine/Plugins/Column" data-name="shrine::plugins::column">
+  <li class="parent " data-id="shrine/Shrine/Plugins/Column" data-name="shrine::plugins::column">
       <a href="../../../Shrine/Plugins/Column.html">Column</a>
       
         <ul>
@@ -136,7 +136,7 @@
       
     </li>
   
-  <li class=" current" data-id="shrine/Shrine/Plugins/Column/AttacherMethods" data-name="shrine::plugins::column::attachermethods">
+  <li class=" " data-id="shrine/Shrine/Plugins/Column/AttacherMethods" data-name="shrine::plugins::column::attachermethods">
       <a href="../../../Shrine/Plugins/Column/AttacherMethods.html">AttacherMethods</a>
       
     </li>
@@ -186,12 +186,12 @@
       
     </li>
   
-  <li class="parent " data-id="shrine/Shrine/Plugins/StoreDimensions" data-name="shrine::plugins::storedimensions">
+  <li class="parent open current" data-id="shrine/Shrine/Plugins/StoreDimensions" data-name="shrine::plugins::storedimensions">
       <a href="../../../Shrine/Plugins/StoreDimensions.html">StoreDimensions</a>
       
         <ul>
   
-  <li class=" " data-id="shrine/Shrine/Plugins/StoreDimensions/BuiltInAnalyzer" data-name="shrine::plugins::storedimensions::builtinanalyzer">
+  <li class=" current" data-id="shrine/Shrine/Plugins/StoreDimensions/BuiltInAnalyzer" data-name="shrine::plugins::storedimensions::builtinanalyzer">
       <a href="../../../Shrine/Plugins/StoreDimensions/BuiltInAnalyzer.html">BuiltInAnalyzer</a>
       
     </li>
@@ -305,13 +305,26 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Shrine::Plugins::Column::AttacherMethods
+  <span class="kind">class</span> Shrine::Plugins::StoreDimensions::BuiltInAnalyzer
 
 </h1>
 
 
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../../Shrine/Plugins/StoreDimensions/BuiltInAnalyzer.html">Shrine::Plugins::StoreDimensions::BuiltInAnalyzer</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>A bare-bones wrapper for ImageMagick's identify command</p>
 
 
 
@@ -336,8 +349,8 @@
   </h2>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/6518bb67d7941b5fa90c3959e4dc46edae0c87e8/src/shrine/plugins/column.cr#L43" target="_blank">
-        shrine/plugins/column.cr
+      <a href="https://github.com/jetrockets/shrine.cr/blob/6518bb67d7941b5fa90c3959e4dc46edae0c87e8/src/shrine/plugins/store_dimensions.cr#L101" target="_blank">
+        shrine/plugins/store_dimensions.cr
       </a>
     
     <br/>
@@ -358,9 +371,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new(column_serializer=self.class.shrine_class.plugin_settings.column[:column_serializer],**options)-class-method" class="signature"><strong>.new</strong>(column_serializer = <span class="k">self</span>.<span class="k">class</span>.shrine_class.plugin_settings.column[<span class="n">:column_serializer</span>], **options)</a>
-        
-          <div class="summary"><p>Allows overriding the default column serializer.</p></div>
+        <a href="#new(file:File)-class-method" class="signature"><strong>.new</strong>(file : File)</a>
         
       </li>
     
@@ -381,28 +392,9 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#column_data:String?-instance-method" class="signature"><strong>#column_data</strong> : String?</a>
+        <a href="#dimensions:Array(Int32)-instance-method" class="signature"><strong>#dimensions</strong> : Array(Int32)</a>
         
-          <div class="summary"><p>Returns attacher data as a serialized string (JSON by default).</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#column_serializer:Shrine::Plugins::Column::BaseSerializer.class-instance-method" class="signature"><strong>#column_serializer</strong> : <span class="t">Shrine</span><span class="t">::</span><span class="t">Plugins</span><span class="t">::</span><span class="t">Column</span><span class="t">::</span><span class="t">BaseSerializer</span>.<span class="k">class</span></a>
-        
-          <div class="summary"><p>Column serializer object.</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#load_column(data:String):UploadedFile-instance-method" class="signature"><strong>#load_column</strong>(data : String) : UploadedFile</a>
-        
-          <div class="summary"><p>Loads attachment from column data.</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#load_column(data:Nil):Nil-instance-method" class="signature"><strong>#load_column</strong>(data : Nil) : Nil</a>
+          <div class="summary"><p>Extract dimensions from a given file</p></div>
         
       </li>
     
@@ -413,6 +405,26 @@
 
 
 <div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
   
 </div>
 
@@ -426,23 +438,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(column_serializer=self.class.shrine_class.plugin_settings.column[:column_serializer],**options)-class-method">
+    <div class="entry-detail" id="new(file:File)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(column_serializer = <span class="k">self</span>.<span class="k">class</span>.shrine_class.plugin_settings.column[<span class="n">:column_serializer</span>], **options)
+        def self.<strong>new</strong>(file : File)
 
-        <a class="method-permalink" href="#new(column_serializer=self.class.shrine_class.plugin_settings.column[:column_serializer],**options)-class-method">#</a>
+        <a class="method-permalink" href="#new(file:File)-class-method">#</a>
       </div>
-      
-        <div class="doc">
-          
-          <p>Allows overriding the default column serializer.</p>
-        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/6518bb67d7941b5fa90c3959e4dc46edae0c87e8/src/shrine/plugins/column.cr#L48" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/6518bb67d7941b5fa90c3959e4dc46edae0c87e8/src/shrine/plugins/store_dimensions.cr#L102" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -461,86 +468,23 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="column_data:String?-instance-method">
+    <div class="entry-detail" id="dimensions:Array(Int32)-instance-method">
       <div class="signature">
         
-        def <strong>column_data</strong> : String?
+        def <strong>dimensions</strong> : Array(Int32)
 
-        <a class="method-permalink" href="#column_data:String?-instance-method">#</a>
+        <a class="method-permalink" href="#dimensions:Array(Int32)-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p>Returns attacher data as a serialized string (JSON by default).</p>
-
-<pre><code>attacher.column_data <span class="c">#=&gt; &#39;{&quot;id&quot;:&quot;...&quot;,&quot;storage&quot;:&quot;...&quot;,&quot;metadata&quot;:{...}}&#39;</span></code></pre>
+          <p>Extract dimensions from a given file</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/6518bb67d7941b5fa90c3959e4dc46edae0c87e8/src/shrine/plugins/column.cr#L68" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="column_serializer:Shrine::Plugins::Column::BaseSerializer.class-instance-method">
-      <div class="signature">
-        
-        def <strong>column_serializer</strong> : <span class="t">Shrine</span><span class="t">::</span><span class="t">Plugins</span><span class="t">::</span><span class="t">Column</span><span class="t">::</span><span class="t">BaseSerializer</span>.<span class="k">class</span>
-
-        <a class="method-permalink" href="#column_serializer:Shrine::Plugins::Column::BaseSerializer.class-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Column serializer object.</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/6518bb67d7941b5fa90c3959e4dc46edae0c87e8/src/shrine/plugins/column.cr#L45" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="load_column(data:String):UploadedFile-instance-method">
-      <div class="signature">
-        
-        def <strong>load_column</strong>(data : String) : <a href="../../../Shrine/UploadedFile.html">UploadedFile</a>
-
-        <a class="method-permalink" href="#load_column(data:String):UploadedFile-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Loads attachment from column data.</p>
-
-<pre><code>attacher.file <span class="c">#=&gt; nil</span>
-attacher.load_column(</code></pre>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/6518bb67d7941b5fa90c3959e4dc46edae0c87e8/src/shrine/plugins/column.cr#L57" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="load_column(data:Nil):Nil-instance-method">
-      <div class="signature">
-        
-        def <strong>load_column</strong>(data : Nil) : Nil
-
-        <a class="method-permalink" href="#load_column(data:Nil):Nil-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/6518bb67d7941b5fa90c3959e4dc46edae0c87e8/src/shrine/plugins/column.cr#L61" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/6518bb67d7941b5fa90c3959e4dc46edae0c87e8/src/shrine/plugins/store_dimensions.cr#L106" target="_blank">View source</a>]
         
       </div>
     </div>
