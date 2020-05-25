@@ -582,6 +582,33 @@
 <pre><code class="language-crystal">image.metadata[<span class="s">&quot;custom_1&quot;</span>]
 image.metadata[<span class="s">&quot;custom_2&quot;</span>]</code></pre>
 
+<h3><a id="store-dimensions" class="anchor" href="#store-dimensions">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Store Dimensions</h3>
+
+<p>The <code>StoreDimensions</code> plugin extracts dimensions of uploaded images and stores them into the metadata.</p>
+
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">Uploader</span> <span class="o">&lt;</span> <span class="t">Shrine</span>
+  load_plugin(<span class="t">Shrine</span><span class="t">::</span><span class="t">Plugins</span><span class="t">::</span><span class="t">StoreDimensions</span>,
+    analyzer: <span class="t">Shrine</span><span class="t">::</span><span class="t">Plugins</span><span class="t">::</span><span class="t">StoreDimensions</span><span class="t">::</span><span class="t">Tools</span><span class="t">::</span><span class="t">BuiltIn</span>)
+
+  finalize_plugins!
+<span class="k">end</span></code></pre>
+
+<pre><code class="language-crystal">image.metadata[<span class="s">&quot;width&quot;</span>]
+image.metadata[<span class="s">&quot;height&quot;</span>]</code></pre>
+
+<p><strong>Analyzers</strong></p>
+
+<p>The following analyzers are accepted:</p>
+
+<p>| Name            | Description                                                                                                                                                                                                         |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <code>BuiltIn</code>         | (<strong>Default</strong>). A built-in solution that wrapps ImageMagick's <code>identify</code> command                                                                           |
+| <code>Pixie</code>         | Uses the <a href="https://github.com/watzon/pixie" target="_blank">Pixie</a>.</p>
+
 <h2><a id="feature-progress" class="anchor" href="#feature-progress">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
@@ -591,7 +618,7 @@ image.metadata[<span class="s">&quot;custom_2&quot;</span>]</code></pre>
 <p>In no particular order, features that have been implemented and are planned.
 Items not marked as completed may have partial implementations.</p>
 
-<ul><li>[X] Shrine</li><li>[X] Shrine::UploadedFile</li><ul><li>[ ] ==</li><li>[X] #original_filename</li><li>[X] #extension</li><li>[X] #size</li><li>[X] #mime_type</li><li>[X] #close</li><li>[X] #url</li><li>[X] #exists?</li><li>[X] #open</li><li>[X] #download</li><li>[X] #stream</li><li>[X] #replace</li><li>[X] #delete</li></ul><li>[ ] Shrine::Attacher</li><li>[ ] Shrine::Attachment</li><li>[ ] Shrine::Storage</li><ul><li>[X] Shrine::Storage::Memory</li><li>[X] Shrine::Storage::FileSystem</li><li>[X] Shrine::Storage::S3</li></ul><li>[ ] Uploaders</li><ul><li>[X] Custom uploaders</li><li>[ ] Derivatives</li></ul><li>[ ] ORM adapters</li><ul><li>[ ] <code>Granite</code> <a href="https://github.com/amberframework/granite" target="_blank">https://github.com/amberframework/granite</a></li><li>[ ] <code>crecto</code> <a href="https://github.com/Crecto/crecto" target="_blank">https://github.com/Crecto/crecto</a></li><li>[ ] <code>jennifer.cr</code> <a href="https://github.com/imdrasil/jennifer.cr" target="_blank">https://github.com/imdrasil/jennifer.cr</a></li><li>[ ] <code>Avram</code> <a href="https://github.com/luckyframework/avram" target="_blank">https://github.com/luckyframework/avram</a></li></ul><li>[X] Plugins</li><li>[ ] Background processing</li></ul>
+<ul><li>[X] Shrine</li><li>[X] Shrine::UploadedFile</li><ul><li>[ ] ==</li><li>[X] #original_filename</li><li>[X] #extension</li><li>[X] #size</li><li>[X] #mime_type</li><li>[X] #close</li><li>[X] #url</li><li>[X] #exists?</li><li>[X] #open</li><li>[X] #download</li><li>[X] #stream</li><li>[X] #replace</li><li>[X] #delete</li></ul><li>[X] Shrine::Attacher</li><li>[ ] Shrine::Attachment</li><li>[ ] Shrine::Storage</li><ul><li>[X] Shrine::Storage::Memory</li><li>[X] Shrine::Storage::FileSystem</li><li>[X] Shrine::Storage::S3</li></ul><li>[ ] Uploaders</li><ul><li>[X] Custom uploaders</li><li>[ ] Derivatives</li></ul><li>[ ] ORM adapters</li><ul><li>[ ] <code>Granite</code> <a href="https://github.com/amberframework/granite" target="_blank">https://github.com/amberframework/granite</a></li><li>[ ] <code>crecto</code> <a href="https://github.com/Crecto/crecto" target="_blank">https://github.com/Crecto/crecto</a></li><li>[ ] <code>jennifer.cr</code> <a href="https://github.com/imdrasil/jennifer.cr" target="_blank">https://github.com/imdrasil/jennifer.cr</a></li><li>[ ] <code>Avram</code> <a href="https://github.com/luckyframework/avram" target="_blank">https://github.com/luckyframework/avram</a></li></ul><li>[X] Plugins</li><li>[ ] Background processing</li></ul>
 
 <h2><a id="contributing" class="anchor" href="#contributing">
   <svg class="octicon-link" aria-hidden="true">
