@@ -263,6 +263,35 @@ image.metadata["custom_1"]
 image.metadata["custom_2"]
 ```
 
+### Store Dimensions
+
+The `StoreDimensions` plugin extracts dimensions of uploaded images and stores them into the metadata.
+
+``` crystal
+class Uploader < Shrine
+  load_plugin(Shrine::Plugins::StoreDimensions,
+    analyzer: Shrine::Plugins::StoreDimensions::Tools::BuiltIn)
+
+  finalize_plugins!
+end
+```
+
+``` crystal
+image.metadata["width"]
+image.metadata["height"]
+```
+
+**Analyzers**
+
+The following analyzers are accepted:
+
+| Name            | Description                                                                                                                                                                                                         |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `BuiltIn`         | (**Default**). A built-in solution that wrapps ImageMagick's `identify` command                                                                           |
+| `Pixie`         | Uses the [Pixie](https://github.com/watzon/pixie).
+
+
+
 
 ## Feature Progress
 
@@ -284,7 +313,7 @@ Items not marked as completed may have partial implementations.
     - [X] #stream
     - [X] #replace
     - [X] #delete
-- [ ] Shrine::Attacher
+- [X] Shrine::Attacher
 - [ ] Shrine::Attachment
 - [ ] Shrine::Storage
     - [X] Shrine::Storage::Memory
