@@ -13,7 +13,7 @@ module FileHelpers
     FakeIO.new(content, **options)
   end
 
-  def image
-    File.open("spec/support/300x300.png")
+  def image(basename : String = "300x300.png")
+    File.open("spec/support/#{basename}")
   end
 end

@@ -69,7 +69,8 @@ Spectator.describe Shrine::Storage::FileSystem do
       end
 
       it "sets directory permissions" do
-        expect(File.info(subject.expanded_directory).permissions.value).to eq(Shrine::Storage::FileSystem::DEFAULT_DIRECTORY_PERMISSIONS)
+        expect(File.info(subject.expanded_directory).permissions.value)
+          .to eq(Shrine::Storage::FileSystem::DEFAULT_DIRECTORY_PERMISSIONS)
       end
     end
 

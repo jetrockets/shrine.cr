@@ -198,6 +198,33 @@ class Shrine
       object
     end
 
+    # Temporarily converts an IO-like object into a file. If the input IO object
+    # is already a file, it simply yields it to the block, otherwise it copies
+    # IO content into a Tempfile object which is then yielded and afterwards
+    # deleted.
+    #
+    # ```crystal
+    # Shrine.with_file(io) { |file| file.path }
+    # ```
+    #
+    def with_file(io : IO)
+      if io.responds_to?(:path)
+        yield io
+      else
+        File.tempfile("shrine-file") do |file|
+          File.write(file.path, io.gets_to_end)
+          io.rewind
+          yield file
+        end
+      end
+    end
+
+    def with_file(uploaded_file : UploadedFile)
+      uploaded_file.download do |tempfile|
+        yield tempfile
+      end
+    end
+
     # Prints a warning to the logger.
     def warn(message)
       Log.warn { "SHRINE WARNING: #{message}" }
