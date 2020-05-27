@@ -17,5 +17,4 @@ deploy:
   skip_cleanup: true
   keep_history: true
   local_dir: docs
-  token:
-    secure: JNKPN9sLGiYphB7Q/fK1ktNcbPyduQyWEjWruv5H1GKnNAna7D8U+u/ADR8K+w/hrkPUDUtJ7Q/ocV/jBwtMA29am8+fSXa7DJgTwD4+zxPGIwV7BwUd60MVqNo4L7TLtB4p7k6RO77l8D7BRYdeBPVRzk0j0/oTSAwL2paUK8I51gV+hgNcxD+GwZmx0/3oZUx/AB3yjC4k38EQs7SKYSDe5GOJQwlQaUwjtv9tsTYxI4SNJLPNk3hRcBPxWlEO2lstK1G6xhaP0Nsa9NR861I8O+cjaEscmt3AoxBs4/CDzL43KJ1iPk1JdbOUE6mFNQDxdnUkpfqV8Q8YJIVqAVaDIp9YLvGtvK/EswYqJaRYxp8t5/ljknUPVGe+UaZ9HnE5J1rAT4TjzAQoPcoKENviN9lgHU9mvkFiIwhYacyi/GGDThtuNUTT21LXILB3wnUy3MnNCk+8hjFB3nrG/1Vm5pu+TC74BS0zGywwTltN2di8IGxlmX/kn1zF2wvMOsAqSeiToWIBXZZWJAzgJjIz8PGvvk3KpOQjt+BNJQNpmz6QVAQW+3+ne83m95vRwEoVB4F8C2zdsOreerrh/gW/4mdpvOXxutPiRF/PxKU6S2lwVAMdJyro5ekjPfe6oQ0rMSeshwwujkSXUStLnEx4jngDZVhU3KpdglK0vko=
+  github_token: $GITHUB_TOKEN
