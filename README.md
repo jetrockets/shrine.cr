@@ -1,13 +1,10 @@
-<p align="center">
-  <p align="center">
-    <a href="https://travis-ci.org/jetrockets/shrine.cr"><img src="https://api.travis-ci.org/jetrockets/shrine.cr.svg?branch=master"></a>
-    <a href="https://github.com/jetrockets/shrine.cr/releases"><img src="https://img.shields.io/github/release/jetrockets/shrine.cr.svg?maxAge=360"></a>
-    <a href="https://github.com/jetrockets/shrine.cr/blob/master/LICENSE"><img src="https://img.shields.io/github/license/jetrockets/shrine.cr.svg"></a>
-  </p>
-</p>
+![Shrine Logo](logo/shrine-cr-logo-small.png)
 
 # shrine.cr
 
+[![Build Status](https://travis-ci.org/jetrockets/shrine.cr.svg?branch=master)](https://travis-ci.org/jetrockets/shrine.cr)
+[![GitHub release](https://img.shields.io/github/release/jetrockets/shrine.cr.svg)](https://GitHub.com/jetrockets/shrine.cr/releases/)
+[![GitHub license](https://img.shields.io/github/license/jetrockets/shrine.cr)](https://github.com/jetrockets/shrine.cr/blob/master/LICENSE)
 [![Join the chat at https://gitter.im/shrine-cr/community](https://badges.gitter.im/shrine-cr/community.svg)](https://gitter.im/shrine-cr/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Shrine is a toolkit for file attachments in Crystal applications. Heavily inspired by [Shrine for Ruby](https://shrinerb.com).
