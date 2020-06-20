@@ -96,7 +96,7 @@ class Shrine
       protected def clean(path)
         Path[path].each_parent do |pathname|
           if Dir.empty?(pathname.to_s) && pathname != directory
-            Dir.rmdir(pathname.to_s)
+            Dir.delete(pathname.to_s)
           else
             break
           end
