@@ -39,7 +39,7 @@ Spectator.describe Shrine do
           expect(file).to be_a(File)
           expect(file.closed?).to be_false
           expect(file.gets_to_end).to eq("file_from_io")
-          expect(file.path).to match(/^\/tmp\//)
+          expect(file.path).to match(/^#{Dir.tempdir}\/*/)
         end
       end
     end

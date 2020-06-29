@@ -5,8 +5,9 @@ description: |
 
 authors:
   - Igor Alexandrov <igor.alexandrov@gmail.com>
+  - Mick Wout <wout@mick-wout.com>
 
-crystal: 0.34.0
+crystal: 0.35.1
 
 license: MIT
 
@@ -16,15 +17,18 @@ dependencies:
     version: ~> 0.8.0
   content_disposition:
     github: jetrockets/content_disposition.cr
+    branch: master
   habitat:
     github: luckyframework/habitat
-  pixie:
-    github: watzon/pixie
 
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
-    version: ~> 0.11.0
+  fastimage:
+    github: jetrockets/fastimage.cr
+    branch: master
+  pixie:
+    github: watzon/pixie
   spectator:
     gitlab: arctic-fox/spectator
   webmock:

@@ -1,4 +1,5 @@
 require "../../spec_helper"
+require "../../../src/shrine/plugins/determine_mime_type"
 
 class ShrineWithDetermineMimeTypeFile < Shrine
   load_plugin(Shrine::Plugins::DetermineMimeType,

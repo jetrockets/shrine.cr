@@ -190,6 +190,9 @@ Shrine.cr has a plugins interface similar to Shrine.rb. You can extend functiona
 The `DetermineMimeType` plugin is used to get mime type of uploaded file in several ways.
 
 ``` crystal
+
+require "shrine/plugins/determine_mime_type"
+
 class Uploader < Shrine
   load_plugin(
     Shrine::Plugins::DetermineMimeType,
@@ -201,12 +204,13 @@ end
 ```
 **Analyzers**
 
+
 The following analyzers are accepted:
 
-| Name            | Description                                                                                                                                                                                                         |
-|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `File`         | (**Default**). Uses the file utility to determine the MIME type from file contents. It is installed by default on most operating systems.                                                                           |
-| `Mime`         | Uses the [MIME.from_filename](https://crystal-lang.org/api/0.31.1/MIME.html) method to determine the MIME type from file.                                                                                               |
+| Name | Description |
+| --- | --- |
+| `File`| (**Default**). Uses the file utility to determine the MIME type from file contents. It is installed by default on most operating systems. |
+| `Mime` | Uses the [MIME.from_filename](https://crystal-lang.org/api/0.31.1/MIME.html) method to determine the MIME type from file.|
 | `ContentType` | Retrieves the value of the `#content_type` attribute of the IO object. Note that this value normally comes from the "Content-Type" request header, so it's not guaranteed to hold the actual MIME type of the file. |
 
 
@@ -216,6 +220,7 @@ The `AddMetadata` plugin provides a convenient method for extracting and adding 
 
 ``` crystal
 require "base64"
+require "shrine/plugins/add_metadata"
 
 class Uploader < Shrine
   load_plugin(Shrine::Plugins::AddMetadata)
@@ -262,12 +267,16 @@ image.metadata["custom_2"]
 
 ### Store Dimensions
 
-The `StoreDimensions` plugin extracts dimensions of uploaded images and stores them into the metadata.
+The `StoreDimensions` plugin extracts dimensions of uploaded images and stores them into the metadata. Additional dependency [https://github.com/jetrockets/fastimage.cr](https://github.com/jetrockets/fastimage.cr) needed for this plugin.
 
 ``` crystal
+
+require "fastimage"
+require "shrine/plugins/store_dimensions"
+
 class Uploader < Shrine
   load_plugin(Shrine::Plugins::StoreDimensions,
-    analyzer: Shrine::Plugins::StoreDimensions::Tools::BuiltIn)
+    analyzer: Shrine::Plugins::StoreDimensions::Tools::FastImage)
 
   finalize_plugins!
 end
@@ -282,13 +291,11 @@ image.metadata["height"]
 
 The following analyzers are accepted:
 
-| Name            | Description                                                                                                                                                                                                         |
-|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `BuiltIn`         | (**Default**). A built-in solution that wrapps ImageMagick's `identify` command                                                                           |
-| `Pixie`         | Uses the [Pixie](https://github.com/watzon/pixie).
 
-
-
+| Name | Description |
+| --- | --- |
+| `FastImage` | (**Default**) Uses the [FastImage](https://github.com/jetrockets/fastimage.cr). |
+| `Identify` | A built-in solution that wrapps ImageMagick's `identify` command. |
 
 ## Feature Progress
 
@@ -340,3 +347,4 @@ Items not marked as completed may have partial implementations.
 
 - [Igor Alexandrov](https://github.com/igor-alexandrov) - creator and maintainer
 - [Arina Shmeleva](https://github.com/arina1004) - helped with S3 Storage
+- [Mick Wout](https://github.com/wout) - Plugins and Lucky integration

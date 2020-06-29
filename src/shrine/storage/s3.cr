@@ -38,7 +38,6 @@ class Shrine
         @upload_options : Hash(String, String) = Hash(String, String).new,
         @public : Bool = false
       )
-
         @uploader = Awscr::S3::FileUploader.new(client: client)
       end
 
@@ -50,7 +49,7 @@ class Shrine
         options["x-amz-acl"] = "public-read" if public?
 
         options.merge!(@upload_options)
-        upload_options.each{ |key, value| options[key.to_s] = value.to_s }
+        upload_options.each { |key, value| options[key.to_s] = value.to_s }
 
         uploader.upload(bucket, object_key(id), io, options)
       end

@@ -4,7 +4,7 @@ class Shrine
   class UploadedFile
     include JSON::Serializable
 
-    alias MetadataType = Hash(String, String | Int32 | UInt32 | Int64 | UInt64 | Nil)
+    alias MetadataType = Hash(String, String | Int16 | UInt16 | Int32 | UInt32 | Int64 | UInt64 | Nil)
 
     struct Mapper
       include JSON::Serializable

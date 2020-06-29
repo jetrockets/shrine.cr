@@ -4,11 +4,16 @@ crystal:
   - latest
   - nightly
 
+jobs:
+  allow_failures:
+    - crystal: nightly
+
 install:
   - shards install
 
 script:
-  - crystal spec
+  - crystal spec --error-on-warnings
+  - crystal tool format --check
   - crystal bin/ameba.cr
   - crystal docs
 

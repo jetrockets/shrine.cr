@@ -1,8 +1,16 @@
 require "../../spec_helper"
+require "../../../src/shrine/plugins/store_dimensions"
 
-class ShrineWithStoreDimensionsUsingBuiltIn < Shrine
+class ShrineWithStoreDimensionsUsingIdentify < Shrine
   load_plugin(Shrine::Plugins::StoreDimensions,
-    analyzer: Shrine::Plugins::StoreDimensions::Tools::BuiltIn)
+    analyzer: Shrine::Plugins::StoreDimensions::Tools::Identify)
+
+  finalize_plugins!
+end
+
+class ShrineWithStoreDimensionsUsingFastImage < Shrine
+  load_plugin(Shrine::Plugins::StoreDimensions,
+    analyzer: Shrine::Plugins::StoreDimensions::Tools::FastImage)
 
   # redefine Shrine#extract_metadata to make it public
   def extract_metadata(io : IO, **options) : Shrine::UploadedFile::MetadataType
@@ -12,19 +20,12 @@ class ShrineWithStoreDimensionsUsingBuiltIn < Shrine
   finalize_plugins!
 end
 
-class ShrineWithStoreDimensionsUsingPixie < Shrine
-  load_plugin(Shrine::Plugins::StoreDimensions,
-    analyzer: Shrine::Plugins::StoreDimensions::Tools::Pixie)
-
-  finalize_plugins!
-end
-
 Spectator.describe Shrine::Plugins::StoreDimensions do
   include FileHelpers
 
   describe "primary purpose" do
     let(uploader) {
-      ShrineWithStoreDimensionsUsingBuiltIn.new("store")
+      ShrineWithStoreDimensionsUsingFastImage.new("store")
     }
 
     it "stores width and height in metadata" do
@@ -35,8 +36,8 @@ Spectator.describe Shrine::Plugins::StoreDimensions do
     end
   end
 
-  describe "built in analyzer" do
-    subject { ShrineWithStoreDimensionsUsingBuiltIn }
+  describe "fastimage in analyzer" do
+    subject { ShrineWithStoreDimensionsUsingFastImage }
 
     it "extracts image dimensions" do
       expect(subject.extract_dimensions(image)).to eq({300, 300})
@@ -49,8 +50,8 @@ Spectator.describe Shrine::Plugins::StoreDimensions do
     end
   end
 
-  describe "pixie analyzer" do
-    subject { ShrineWithStoreDimensionsUsingPixie }
+  describe "identify analyzer" do
+    subject { ShrineWithStoreDimensionsUsingIdentify }
 
     it "extracts image dimensions" do
       expect(subject.extract_dimensions(image)).to eq({300, 300})

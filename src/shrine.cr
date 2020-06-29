@@ -1,5 +1,4 @@
 require "./shrine/storage/*"
-require "./shrine/plugins/*"
 require "./shrine/attacher"
 require "./shrine/uploaded_file"
 

@@ -1,4 +1,5 @@
 require "../../spec_helper"
+require "../../../src/shrine/plugins/add_metadata"
 
 class ShrineWithAddMetadata < Shrine
   load_plugin Shrine::Plugins::AddMetadata
