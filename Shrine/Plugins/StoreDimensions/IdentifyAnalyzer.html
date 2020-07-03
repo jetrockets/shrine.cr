@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="shrine">
-  <title>Shrine::Plugins::StoreDimensions::Tools - shrine 0.6.0</title>
+  <title>Shrine::Plugins::StoreDimensions::IdentifyAnalyzer - shrine 0.6.0</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../../";
   </script>
@@ -211,7 +211,7 @@
       
     </li>
   
-  <li class=" " data-id="shrine/Shrine/Plugins/StoreDimensions/IdentifyAnalyzer" data-name="shrine::plugins::storedimensions::identifyanalyzer">
+  <li class=" current" data-id="shrine/Shrine/Plugins/StoreDimensions/IdentifyAnalyzer" data-name="shrine::plugins::storedimensions::identifyanalyzer">
       <a href="../../../Shrine/Plugins/StoreDimensions/IdentifyAnalyzer.html">IdentifyAnalyzer</a>
       
     </li>
@@ -221,7 +221,7 @@
       
     </li>
   
-  <li class=" current" data-id="shrine/Shrine/Plugins/StoreDimensions/Tools" data-name="shrine::plugins::storedimensions::tools">
+  <li class=" " data-id="shrine/Shrine/Plugins/StoreDimensions/Tools" data-name="shrine::plugins::storedimensions::tools">
       <a href="../../../Shrine/Plugins/StoreDimensions/Tools.html">Tools</a>
       
     </li>
@@ -305,13 +305,26 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">enum</span> Shrine::Plugins::StoreDimensions::Tools
+  <span class="kind">class</span> Shrine::Plugins::StoreDimensions::IdentifyAnalyzer
 
 </h1>
 
 
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../../Shrine/Plugins/StoreDimensions/IdentifyAnalyzer.html">Shrine::Plugins::StoreDimensions::IdentifyAnalyzer</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>A bare-bones wrapper for ImageMagick's identify command</p>
 
 
 
@@ -336,7 +349,7 @@
   </h2>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/v0.6.0/src/shrine/plugins/store_dimensions.cr#L45" target="_blank">
+      <a href="https://github.com/jetrockets/shrine.cr/blob/v0.6.0/src/shrine/plugins/store_dimensions.cr#L95" target="_blank">
         shrine/plugins/store_dimensions.cr
       </a>
     
@@ -345,31 +358,24 @@
 
 
 
-  
-    <h2>
-      <a id="enum-members" class="anchor" href="#enum-members">
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-      Enum Members
-    </h2>
-  
-  <dl>
+    Constructors
+  </h2>
+  <ul class="list-summary">
     
-      <dt class="entry-const" id="FastImage">
-        <strong>FastImage</strong> = <code><span class="n">0</span></code>
-      </dt>
-      
+      <li class="entry-summary">
+        <a href="#new(io:IO)-class-method" class="signature"><strong>.new</strong>(io : IO)</a>
+        
+      </li>
     
-      <dt class="entry-const" id="Identify">
-        <strong>Identify</strong> = <code><span class="n">1</span></code>
-      </dt>
-      
-    
-  </dl>
-
-
+  </ul>
 
 
 
@@ -386,12 +392,9 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#fast_image?-instance-method" class="signature"><strong>#fast_image?</strong></a>
+        <a href="#dimensions:Tuple(UInt16,UInt16)-instance-method" class="signature"><strong>#dimensions</strong> : Tuple(UInt16, UInt16)</a>
         
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#identify?-instance-method" class="signature"><strong>#identify?</strong></a>
+          <div class="summary"><p>Extract dimensions from a given file</p></div>
         
       </li>
     
@@ -423,28 +426,34 @@
 
 
   
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(io:IO)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(io : IO)
+
+        <a class="method-permalink" href="#new(io:IO)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/v0.6.0/src/shrine/plugins/store_dimensions.cr#L96" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
@@ -459,34 +468,23 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="fast_image?-instance-method">
+    <div class="entry-detail" id="dimensions:Tuple(UInt16,UInt16)-instance-method">
       <div class="signature">
         
-        def <strong>fast_image?</strong>
+        def <strong>dimensions</strong> : Tuple(UInt16, UInt16)
 
-        <a class="method-permalink" href="#fast_image?-instance-method">#</a>
+        <a class="method-permalink" href="#dimensions:Tuple(UInt16,UInt16)-instance-method">#</a>
       </div>
+      
+        <div class="doc">
+          
+          <p>Extract dimensions from a given file</p>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/v0.6.0/src/shrine/plugins/store_dimensions.cr#L46" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="identify?-instance-method">
-      <div class="signature">
-        
-        def <strong>identify?</strong>
-
-        <a class="method-permalink" href="#identify?-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/v0.6.0/src/shrine/plugins/store_dimensions.cr#L47" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/v0.6.0/src/shrine/plugins/store_dimensions.cr#L100" target="_blank">View source</a>]
         
       </div>
     </div>
