@@ -45,13 +45,13 @@ end
 Now you can use `Shrine` directly to upload your files.
 
 ``` crystal
-Shrine.upload(file, :store)
+Shrine.upload(file, "store")
 ```
 
 `Shrine.upload` method supports additional argument just like Shrine.rb. For example we want our file to have a custom filename.
 
 ``` crystal
-Shrine.upload(file, :store, metadata: { filename: "foo.bar" })
+Shrine.upload(file, "store", metadata: { "filename" => "foo.bar" })
 ```
 
 ### Custom uploaders
@@ -67,7 +67,7 @@ class FileImport::AssetUploader < Shrine
   end
 end
 
-FileImport::AssetUploader.upload(file, :store, context: { model: YOUR_ORM_MODEL } })
+FileImport::AssetUploader.upload(file, "store", context: { model: YOUR_ORM_MODEL } })
 ```
 
 ### S3 storage
