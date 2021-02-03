@@ -43,19 +43,22 @@ class Shrine
 
       # Copies the file into the given location.
       #
-      def upload(io : IO, id : String, metadata : Shrine::UploadedFile::MetadataType? = nil, move = false, **upload_options)
+      def upload(io : IO | UploadedFile, id : String, move = false, **upload_options)
         options = Hash(String, String).new
-        options["Content-Disposition"] = ContentDisposition.inline(metadata["filename"].to_s) if metadata && metadata["filename"]
+        if (metadata = upload_options[:metadata]?) && metadata.is_a?(Shrine::UploadedFile::MetadataType)
+          options["Content-Disposition"] = ContentDisposition.inline(metadata["filename"].to_s) if metadata["filename"]
+        end
         options["x-amz-acl"] = "public-read" if public?
 
         options.merge!(@upload_options)
         upload_options.each { |key, value| options[key.to_s] = value.to_s }
 
+        io = io.io if io.is_a?(UploadedFile)
         uploader.upload(bucket, object_key(id), io, options)
       end
 
-      def upload(io : IO | UploadedFile, id : String, move = false, **upload_options)
-        upload(io, id, **upload_options.merge(move: move))
+      def upload(io : IO | UploadedFile, id : String, metadata : Shrine::UploadedFile::MetadataType, move = false, **upload_options)
+        upload(io, id, move, **(upload_options.merge(metadata: metadata)))
       end
 
       # Returns a IO object from S3
