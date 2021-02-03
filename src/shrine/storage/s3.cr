@@ -54,7 +54,7 @@ class Shrine
         uploader.upload(bucket, object_key(id), io, options)
       end
 
-      def upload(io : UploadedFile, id : String, move = false, **upload_options)
+      def upload(io : IO | UploadedFile, id : String, move = false, **upload_options)
         upload(io, id, **upload_options.merge(move: move))
       end
 
