@@ -202,7 +202,7 @@ class Shrine
     # IO content into a Tempfile object which is then yielded and afterwards
     # deleted.
     #
-    # ```crystal
+    # ```
     # Shrine.with_file(io) { |file| file.path }
     # ```
     #
