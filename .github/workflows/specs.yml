@@ -19,7 +19,7 @@ jobs:
         with:
           crystal: ${{ matrix.crystal }}
 
-      - name: Download source
+      - name: Checkout
         uses: actions/checkout@v2
 
       - name: Install dependencies
