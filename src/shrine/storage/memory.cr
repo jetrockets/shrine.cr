@@ -9,7 +9,7 @@ class Shrine
         @store = {} of String => String
       end
 
-      def upload(io : IO | UploadedFile, id : String, **options)
+      def upload(io : IO | UploadedFile, id : String, move = false, **options)
         store[id.to_s] = io.gets_to_end
       end
 
@@ -18,6 +18,10 @@ class Shrine
         IO::Memory.new(store[id])
       rescue KeyError
         raise Shrine::FileNotFound.new("file #{id.inspect} not found on storage")
+      end
+
+      def open(id : String, **options) : IO
+        open(id)
       end
 
       def exists?(id : String) : Bool

@@ -77,7 +77,6 @@ Spectator.describe Shrine::Storage::S3 do
           .with(body: "", headers: {"Content-Type" => "binary/octet-stream", "Content-Disposition" => "inline; filename=\"ex\"; filename*=UTF-8''ex"})
           .to_return(status: 200, body: "", headers: {"ETag" => "etag"})
         response = subject.upload(FakeIO.new, "a/a/a.jpg", metadata)
-        p response
         expect(
           subject.upload(FakeIO.new, "a/a/a.jpg", metadata)
         ).to be_true

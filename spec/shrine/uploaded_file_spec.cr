@@ -65,26 +65,26 @@ Spectator.describe Shrine::UploadedFile do
 
     context "with extension in `id`" do
       let(id) { "foo.jpg" }
-      it is_expected.to eq("jpg")
+      it { is_expected.to eq("jpg") }
     end
 
     context "without extension in `id`" do
       let(id) { "foo" }
-      it is_expected.to be_nil
+      it { is_expected.to be_nil }
     end
 
     context "with filename and extension in `metadata`" do
       let(filename) { "foo.jpg" }
-      it is_expected.to eq("jpg")
+      it { is_expected.to eq("jpg") }
     end
 
     context "with filename in `metadata`" do
       let(filename) { "foo" }
-      it is_expected.to be_nil
+      it { is_expected.to be_nil }
     end
 
     context "without filename in `metadata`" do
-      it is_expected.to be_nil
+      it { is_expected.to be_nil }
     end
 
     context "with extension in `id` and in `metadata`" do
