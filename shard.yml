@@ -1,5 +1,5 @@
 name: shrine
-version: 0.6.0
+version: 0.6.1
 description: |
   File Attachment toolkit for Crystal applications
 
@@ -7,7 +7,7 @@ authors:
   - Igor Alexandrov <igor.alexandrov@gmail.com>
   - Mick Wout <wout@mick-wout.com>
 
-crystal: 0.35.1
+crystal: 0.36.1
 
 license: MIT
 
