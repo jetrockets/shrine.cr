@@ -3,28 +3,28 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.34.0">
-<meta name="crystal_docs.project_version" content="0.6.0">
+<meta name="generator" content="Crystal Docs 0.35.1">
+<meta name="crystal_docs.project_version" content="feature/deploy_to_pages">
 <meta name="crystal_docs.project_name" content="shrine">
+
 
 
 <link href="../../css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../../js/doc.js"></script>
 
-<svg class="hidden">
-  <symbol id="octicon-link" viewBox="0 0 16 16">
-    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
-  </symbol>
-</svg>
-
-  <meta id="repository-name" content="shrine">
-  <title>Shrine::Storage::Memory - shrine 0.6.0</title>
+  <meta name="repository-name" content="shrine">
+  <title>Shrine::Storage::Memory - shrine feature/deploy_to_pages</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
 </head>
 <body>
 
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
 <div class="sidebar">
   <div class="sidebar-header">
     <div class="search-box">
@@ -39,12 +39,12 @@
       </h1>
 
       <span class="project-version">
-        0.6.0
+        feature/deploy_to_pages
       </span>
     </div>
   </div>
 
-  <div class="search-results" class="hidden">
+  <div class="search-results hidden">
     <ul class="search-list"></ul>
   </div>
 
@@ -338,7 +338,7 @@
   </h2>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/v0.6.0/src/shrine/storage/memory.cr#L5" target="_blank">
+      <a href="https://github.com/jetrockets/shrine.cr/blob/2666b73e5bc9c464d99e7001bc4a79ef7382ac5b/src/shrine/storage/memory.cr#L5" target="_blank">
         shrine/storage/memory.cr
       </a>
     
@@ -407,6 +407,11 @@
       <li class="entry-summary">
         <a href="#open(id:String):IO-instance-method" class="signature"><strong>#open</strong>(id : String) : IO</a>
         
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#open(id:String,**options):IO-instance-method" class="signature"><strong>#open</strong>(id : String, **options) : IO</a>
+        
           <div class="summary"><p>returns the remote file as an IO-like object</p></div>
         
       </li>
@@ -422,7 +427,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#upload(io:IO%7CUploadedFile,id:String,**options)-instance-method" class="signature"><strong>#upload</strong>(io : IO | UploadedFile, id : String, **options)</a>
+        <a href="#upload(io:IO%7CUploadedFile,id:String,move=false,**options)-instance-method" class="signature"><strong>#upload</strong>(io : IO | UploadedFile, id : String, move = <span class="n">false</span>, **options)</a>
         
           <div class="summary"><p>uploads <code>io</code> to the location <code>id</code>, can accept upload options</p></div>
         
@@ -535,7 +540,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/v0.6.0/src/shrine/storage/memory.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/2666b73e5bc9c464d99e7001bc4a79ef7382ac5b/src/shrine/storage/memory.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -565,7 +570,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/v0.6.0/src/shrine/storage/memory.cr#L44" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/2666b73e5bc9c464d99e7001bc4a79ef7382ac5b/src/shrine/storage/memory.cr#L48" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -590,7 +595,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/v0.6.0/src/shrine/storage/memory.cr#L35" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/2666b73e5bc9c464d99e7001bc4a79ef7382ac5b/src/shrine/storage/memory.cr#L39" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -606,7 +611,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/v0.6.0/src/shrine/storage/memory.cr#L39" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/2666b73e5bc9c464d99e7001bc4a79ef7382ac5b/src/shrine/storage/memory.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -631,7 +636,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/v0.6.0/src/shrine/storage/memory.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/2666b73e5bc9c464d99e7001bc4a79ef7382ac5b/src/shrine/storage/memory.cr#L27" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -642,6 +647,22 @@
         def <strong>open</strong>(id : String) : IO
 
         <a class="method-permalink" href="#open(id:String):IO-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/2666b73e5bc9c464d99e7001bc4a79ef7382ac5b/src/shrine/storage/memory.cr#L16" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="open(id:String,**options):IO-instance-method">
+      <div class="signature">
+        
+        def <strong>open</strong>(id : String, **options) : IO
+
+        <a class="method-permalink" href="#open(id:String,**options):IO-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -656,7 +677,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/v0.6.0/src/shrine/storage/memory.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/2666b73e5bc9c464d99e7001bc4a79ef7382ac5b/src/shrine/storage/memory.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -672,7 +693,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/v0.6.0/src/shrine/storage/memory.cr#L31" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/2666b73e5bc9c464d99e7001bc4a79ef7382ac5b/src/shrine/storage/memory.cr#L35" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -688,17 +709,17 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/v0.6.0/src/shrine/storage/memory.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/2666b73e5bc9c464d99e7001bc4a79ef7382ac5b/src/shrine/storage/memory.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="upload(io:IO|UploadedFile,id:String,**options)-instance-method">
+    <div class="entry-detail" id="upload(io:IO|UploadedFile,id:String,move=false,**options)-instance-method">
       <div class="signature">
         
-        def <strong>upload</strong>(io : IO | <a href="../../Shrine/UploadedFile.html">UploadedFile</a>, id : String, **options)
+        def <strong>upload</strong>(io : IO | <a href="../../Shrine/UploadedFile.html">UploadedFile</a>, id : String, move = <span class="n">false</span>, **options)
 
-        <a class="method-permalink" href="#upload(io:IO%7CUploadedFile,id:String,**options)-instance-method">#</a>
+        <a class="method-permalink" href="#upload(io:IO%7CUploadedFile,id:String,move=false,**options)-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -713,7 +734,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/v0.6.0/src/shrine/storage/memory.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/2666b73e5bc9c464d99e7001bc4a79ef7382ac5b/src/shrine/storage/memory.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -738,7 +759,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/v0.6.0/src/shrine/storage/memory.cr#L27" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/2666b73e5bc9c464d99e7001bc4a79ef7382ac5b/src/shrine/storage/memory.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>
