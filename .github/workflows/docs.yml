@@ -2,8 +2,11 @@ name: docs
 
 on:
   push:
+    branches:
+      - master
   pull_request:
-
+    branches:
+      - master
 jobs:
   generate-and-deploy:
     runs-on: ubuntu-latest
