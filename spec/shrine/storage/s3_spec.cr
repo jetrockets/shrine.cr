@@ -76,7 +76,7 @@ Spectator.describe Shrine::Storage::S3 do
         WebMock.stub(:put, "https://s3-us-east-2.amazonaws.com/test/a/a/a.jpg?")
           .with(body: "", headers: {"Content-Type" => "binary/octet-stream", "Content-Disposition" => "inline; filename=\"ex\"; filename*=UTF-8''ex"})
           .to_return(status: 200, body: "", headers: {"ETag" => "etag"})
-        response = subject.upload(FakeIO.new, "a/a/a.jpg", metadata)
+
         expect(
           subject.upload(FakeIO.new, "a/a/a.jpg", metadata)
         ).to be_true
