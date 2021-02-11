@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  build-and-deploy:
+  generate-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Install Crystal
