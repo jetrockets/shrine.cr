@@ -16,6 +16,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Install dependencies
+        run: shards install
+        env:
+          SHARDS_OPTS: --ignore-crystal-version
+
       - name: Generate
         run: crystal docs
 
