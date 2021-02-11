@@ -2,7 +2,7 @@
 
 # shrine.cr
 
-[![Build Status](https://travis-ci.org/jetrockets/shrine.cr.svg?branch=master)](https://travis-ci.org/jetrockets/shrine.cr)
+![Build Status](https://github.com/jetrockets/shrine.cr/workflows/specs/badge.svg)
 [![GitHub release](https://img.shields.io/github/release/jetrockets/shrine.cr.svg)](https://GitHub.com/jetrockets/shrine.cr/releases/)
 [![GitHub license](https://img.shields.io/github/license/jetrockets/shrine.cr)](https://github.com/jetrockets/shrine.cr/blob/master/LICENSE)
 [![Join the chat at https://gitter.im/shrine-cr/community](https://badges.gitter.im/shrine-cr/community.svg)](https://gitter.im/shrine-cr/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
