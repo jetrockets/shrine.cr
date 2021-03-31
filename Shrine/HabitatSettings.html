@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.35.1">
+<meta name="generator" content="Crystal Docs 0.36.1">
 <meta name="crystal_docs.project_version" content="master">
 <meta name="crystal_docs.project_name" content="shrine">
 
@@ -338,7 +338,7 @@
   </h2>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/544e2df992a5fe547f0ed5ea069ac0f0e786fec3/src/shrine.cr#L31" target="_blank">
+      <a href="https://github.com/jetrockets/shrine.cr/blob/ac3f730c3f8207d68b046bf4652062ead755181e/src/shrine.cr#L31" target="_blank">
         shrine.cr
       </a>
     
@@ -362,7 +362,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#storages-class-method" class="signature"><strong>.storages</strong></a>
+        <a href="#storages:Hash(String,Storage::Base)-class-method" class="signature"><strong>.storages</strong> : Hash(String, Storage::Base)</a>
         
       </li>
     
@@ -373,6 +373,8 @@
     
       <li class="entry-summary">
         <a href="#storages?-class-method" class="signature"><strong>.storages?</strong></a>
+        
+          <div class="summary"><p>Used for checking missing settings on non-nilable types It's advised to use storages in your apps to ensure the propper type is checked.</p></div>
         
       </li>
     
@@ -427,12 +429,12 @@
     Class Method Detail
   </h2>
   
-    <div class="entry-detail" id="storages-class-method">
+    <div class="entry-detail" id="storages:Hash(String,Storage::Base)-class-method">
       <div class="signature">
         
-        def self.<strong>storages</strong>
+        def self.<strong>storages</strong> : Hash(String, <a href="../Shrine/Storage/Base.html">Storage::Base</a>)
 
-        <a class="method-permalink" href="#storages-class-method">#</a>
+        <a class="method-permalink" href="#storages:Hash(String,Storage::Base)-class-method">#</a>
       </div>
       
       <br/>
@@ -462,6 +464,13 @@
 
         <a class="method-permalink" href="#storages?-class-method">#</a>
       </div>
+      
+        <div class="doc">
+          
+          <p>Used for checking missing settings on non-nilable types
+It's advised to use storages in your apps to ensure
+the propper type is checked.</p>
+        </div>
       
       <br/>
       <div>
