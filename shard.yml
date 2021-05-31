@@ -14,7 +14,7 @@ license: MIT
 dependencies:
   awscr-s3:
     github: taylorfinnell/awscr-s3
-    branch: master
+    version: ~> 0.8.2
   content_disposition:
     github: jetrockets/content_disposition.cr
     version: ~> 1.2.0
