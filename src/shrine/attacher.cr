@@ -201,7 +201,7 @@ class Shrine
       end
 
       def load_data(**data)
-        @file = uploaded_file(data.to_h.transform_keys { |key| key.to_s })
+        @file = uploaded_file(data.to_h.transform_keys(&.to_s))
       end
 
       def load_data(data : Nil)
