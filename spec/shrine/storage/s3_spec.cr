@@ -48,8 +48,7 @@ Spectator.describe Shrine::Storage::S3 do
     context "without `prefix`" do
       it "creates subdirectories" do
         WebMock.stub(:put, "https://s3-us-east-2.amazonaws.com/test/object?")
-          .with(body: "", headers: {"Content-Type" => "binary/octet-stream"})
-          .to_return(status: 200, body: "", headers: {"ETag" => "etag"})
+          .with(body: "").to_return(status: 200, body: "", headers: {"ETag" => "etag"})
 
         expect(
           subject.upload(FakeIO.new, "object")
@@ -62,8 +61,7 @@ Spectator.describe Shrine::Storage::S3 do
 
       it "creates subdirectories" do
         WebMock.stub(:put, "https://s3-us-east-2.amazonaws.com/test/#{prefix}/a/a/a.jpg?")
-          .with(body: "", headers: {"Content-Type" => "binary/octet-stream"})
-          .to_return(status: 200, body: "", headers: {"ETag" => "etag"})
+          .with(body: "").to_return(status: 200, body: "", headers: {"ETag" => "etag"})
 
         expect(
           subject.upload(FakeIO.new, "a/a/a.jpg")
@@ -74,8 +72,7 @@ Spectator.describe Shrine::Storage::S3 do
     context "with metadata" do
       it "file uploads" do
         WebMock.stub(:put, "https://s3-us-east-2.amazonaws.com/test/a/a/a.jpg?")
-          .with(body: "", headers: {"Content-Type" => "binary/octet-stream", "Content-Disposition" => "inline; filename=\"ex\"; filename*=UTF-8''ex"})
-          .to_return(status: 200, body: "", headers: {"ETag" => "etag"})
+          .with(body: "").to_return(status: 200, body: "", headers: {"ETag" => "etag"})
 
         expect(
           subject.upload(FakeIO.new, "a/a/a.jpg", metadata)

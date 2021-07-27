@@ -9,7 +9,6 @@ class Shrine
       getter bucket : String
       getter client : Awscr::S3::Client
       getter? public : Bool
-      getter uploader : Awscr::S3::FileUploader
 
       # Initializes a storage for uploading to S3. All options are forwarded to
       # [`Shrine::Storage::S3#initialize`], except the following:
@@ -38,7 +37,6 @@ class Shrine
         @upload_options : Hash(String, String) = Hash(String, String).new,
         @public : Bool = false
       )
-        @uploader = Awscr::S3::FileUploader.new(client: client)
       end
 
       # Copies the file into the given location.
@@ -54,7 +52,9 @@ class Shrine
         upload_options.each { |key, value| options[key.to_s] = value.to_s }
 
         io = io.io if io.is_a?(UploadedFile)
-        uploader.upload(bucket, object_key(id), io, options)
+        client.put_object(bucket, object_key(id), io.gets_to_end, options)
+
+        true
       end
 
       def upload(io : IO | UploadedFile, id : String, metadata : Shrine::UploadedFile::MetadataType, move = false, **upload_options)
