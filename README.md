@@ -109,7 +109,13 @@ storage = Shrine::Storage::S3.new(bucket: "bucket_name", client: client, public:
 
 Currently ORM adapters are not implmented.
 
-#### Granite.
+#### Lucky (Avram)
+
+<a href="https://luckycasts.com/videos/file-uploads"><img src="https://i.imgur.com/8Hi6NS7.png" title="Write Better Crystal Code with the Ameba Shard" width="500" /></a>
+
+[🎬 Watch the LuckyCast showing how to use Shrine for user profile images](https://luckycasts.com/videos/file-uploads)
+
+#### Granite
 
 ``` crystal
 class FileImport < Granite::Base
