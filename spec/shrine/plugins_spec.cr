@@ -49,13 +49,12 @@ class PluginUploader < NonPluginUploader
 end
 
 Spectator.describe "Shrine.plugin" do
-  describe "NonPluginUploader" do
-    let(uploader) { NonPluginUploader }
-    let(uploader_instance) { uploader.new("store") }
+  describe NonPluginUploader do
+    let(uploader_instance) { described_class.new("store") }
 
     it "responds to .foo with \"foo\"" do
-      expect(uploader).to respond_to("foo")
-      expect(uploader.foo).to eq("foo")
+      expect(described_class).to respond_to("foo")
+      expect(described_class.foo).to eq("foo")
     end
 
     it "responds to #foo with \"foo\"" do
@@ -64,13 +63,12 @@ Spectator.describe "Shrine.plugin" do
     end
   end
 
-  describe "PluginUploader" do
-    let(uploader) { PluginUploader }
-    let(uploader_instance) { uploader.new("store") }
+  describe PluginUploader do
+    let(uploader_instance) { described_class.new("store") }
 
     it "responds to .foo with \"foo\"" do
-      expect(uploader).to respond_to("foo")
-      expect(uploader.foo).to eq("plugin_foo")
+      expect(described_class).to respond_to("foo")
+      expect(described_class.foo).to eq("plugin_foo")
     end
 
     it "responds to #foo with \"foo\"" do
@@ -79,19 +77,16 @@ Spectator.describe "Shrine.plugin" do
     end
   end
 
-  describe "PluginUploader::UploadedFile" do
-    let(superclass_file) { Shrine::UploadedFile }
+  describe PluginUploader::UploadedFile do
     let(uploaded_file) { PluginUploader::UploadedFile }
 
     it "responds to .foo with \"foo\"" do
       expect(uploaded_file).to respond_to("foo")
       expect(uploaded_file.foo).to eq("plugin_foo")
-
-      # expect(Shrine::UploadedFile.new).to be_true
     end
 
     it "does not pollute superclass" do
-      expect(superclass_file).not_to respond_to("foo")
+      expect(Shrine::UploadedFile).not_to respond_to("foo")
     end
   end
 end

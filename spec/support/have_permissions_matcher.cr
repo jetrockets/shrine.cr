@@ -5,21 +5,21 @@ module Spectator::Matchers
     end
 
     # Checks whether the matcher is satisfied with the expression given to it.
-    private def match?(actual : Spectator::TestExpression(T)) : Bool forall T
+    private def match?(actual : Spectator::Expression(T)) : Bool forall T
       File.info(actual.value).permissions.value == expected.value
     end
 
-    private def failure_message(actual : Spectator::TestExpression(T)) : String forall T
+    private def failure_message(actual : Spectator::Expression(T)) : String forall T
       "#{actual.label} does not have permissions of #{expected.label}"
     end
 
-    private def failure_message_when_negated(actual : Spectator::TestExpression(T)) : String
+    private def failure_message_when_negated(actual : Spectator::Expression(T)) : String
       "#{actual.label} should not have permissions of #{expected.label}"
     end
   end
 end
 
 macro have_permissions(expected)
-  %test_value = ::Spectator::TestValue.new({{expected}}, {{expected.stringify}})
+  %test_value = ::Spectator::Value.new({{expected}}, {{expected.stringify}})
   ::Spectator::Matchers::HavePermissionsMatcher.new(%test_value)
 end
