@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 1.0.0">
-<meta name="crystal_docs.project_version" content="master">
+<meta name="generator" content="Crystal Docs 1.2.2">
+<meta name="crystal_docs.project_version" content="HEAD">
 <meta name="crystal_docs.project_name" content="shrine">
 
 
@@ -13,7 +13,7 @@
 <script type="text/javascript" src="../../js/doc.js"></script>
 
   <meta name="repository-name" content="shrine">
-  <title>Shrine::Attacher::InstanceMethods - shrine master</title>
+  <title>Shrine::Attacher::InstanceMethods - shrine HEAD</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -39,7 +39,7 @@
       </h1>
 
       <span class="project-version">
-        master
+        HEAD
       </span>
     </div>
   </div>
@@ -350,7 +350,7 @@
   </h2>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L23" target="_blank">
+      <a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L23" target="_blank">
         shrine/attacher.cr
       </a>
     
@@ -372,7 +372,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new(file:Shrine::UploadedFile?=nil,cache_key:String=%22cache%22,store_key:String=%22store%22)-class-method" class="signature"><strong>.new</strong>(file : Shrine::UploadedFile? = <span class="n">nil</span>, cache_key : String = <span class="s">&quot;cache&quot;</span>, store_key : String = <span class="s">&quot;store&quot;</span>)</a>
+        <a href="#new%28file%3AShrine%3A%3AUploadedFile%3F%3Dnil%2Ccache_key%3AString%3D%22cache%22%2Cstore_key%3AString%3D%22store%22%29-class-method" class="signature"><strong>.new</strong>(file : Shrine::UploadedFile? = <span class="n">nil</span>, cache_key : String = <span class="s">&quot;cache&quot;</span>, store_key : String = <span class="s">&quot;store&quot;</span>)</a>
         
           <div class="summary"><p>Initializes the attached file, temporary and permanent storage.</p></div>
         
@@ -395,33 +395,33 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#assign(value:IO?,**options)-instance-method" class="signature"><strong>#assign</strong>(value : IO?, **options)</a>
+        <a href="#assign%28value%3AIO%3F%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#assign</strong>(value : IO?, **options)</a>
         
           <div class="summary"><p>Calls #attach_cached, but skips if value is an empty string (this is useful when the uploaded file comes from form fields).</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#attach(io:IO%7CShrine::UploadedFile%7CNil,storage=store_key,**options):UploadedFile?-instance-method" class="signature"><strong>#attach</strong>(io : IO | Shrine::UploadedFile | Nil, storage = store_key, **options) : UploadedFile?</a>
+        <a href="#attach%28io%3AIO%7CShrine%3A%3AUploadedFile%7CNil%2Cstorage%3Dstore_key%2C%2A%2Aoptions%29%3AUploadedFile%3F-instance-method" class="signature"><strong>#attach</strong>(io : IO | Shrine::UploadedFile | Nil, storage = store_key, **options) : UploadedFile?</a>
         
           <div class="summary"><p>Uploads given IO object and changes the uploaded file.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#attach_cached(value:IO%7CUploadedFile%7CNil,**options)-instance-method" class="signature"><strong>#attach_cached</strong>(value : IO | UploadedFile | Nil, **options)</a>
+        <a href="#attach_cached%28value%3AIO%7CUploadedFile%7CNil%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#attach_cached</strong>(value : IO | UploadedFile | Nil, **options)</a>
         
           <div class="summary"><p>Sets an existing cached file, or uploads an IO object to temporary storage and sets it via #attach.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#attach_cached(value:String%7CHash(String,String%7CUploadedFile::MetadataType),**options)-instance-method" class="signature"><strong>#attach_cached</strong>(value : String | Hash(String, String | UploadedFile::MetadataType), **options)</a>
+        <a href="#attach_cached%28value%3AString%7CHash%28String%2CString%7CUploadedFile%3A%3AMetadataType%29%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#attach_cached</strong>(value : String | Hash(String, String | UploadedFile::MetadataType), **options)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#attached?-instance-method" class="signature"><strong>#attached?</strong></a>
+        <a href="#attached%3F-instance-method" class="signature"><strong>#attached?</strong></a>
         
           <div class="summary"><p>Returns whether a file is attached.</p></div>
         
@@ -433,21 +433,21 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#cached?(file=self.file)-instance-method" class="signature"><strong>#cached?</strong>(file = <span class="k">self</span>.file)</a>
+        <a href="#cached%3F%28file%3Dself.file%29-instance-method" class="signature"><strong>#cached?</strong>(file = <span class="k">self</span>.file)</a>
         
           <div class="summary"><p>Returns whether the file is uploaded to temporary storage.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#change(file:Shrine::UploadedFile?):Shrine::UploadedFile?-instance-method" class="signature"><strong>#change</strong>(file : Shrine::UploadedFile?) : Shrine::UploadedFile?</a>
+        <a href="#change%28file%3AShrine%3A%3AUploadedFile%3F%29%3AShrine%3A%3AUploadedFile%3F-instance-method" class="signature"><strong>#change</strong>(file : Shrine::UploadedFile?) : Shrine::UploadedFile?</a>
         
           <div class="summary"><p>Sets the uploaded file with dirty tracking, and runs validations.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#changed?-instance-method" class="signature"><strong>#changed?</strong></a>
+        <a href="#changed%3F-instance-method" class="signature"><strong>#changed?</strong></a>
         
           <div class="summary"><p>Returns whether the attachment has changed.</p></div>
         
@@ -489,21 +489,21 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#file:Shrine::UploadedFile?-instance-method" class="signature"><strong>#file</strong> : Shrine::UploadedFile?</a>
+        <a href="#file%3AShrine%3A%3AUploadedFile%3F-instance-method" class="signature"><strong>#file</strong> : Shrine::UploadedFile?</a>
         
           <div class="summary"><p>Returns the attached uploaded file.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#file!-instance-method" class="signature"><strong>#file!</strong></a>
+        <a href="#file%21-instance-method" class="signature"><strong>#file!</strong></a>
         
           <div class="summary"><p>Returns attached file or raises an exception if no file is attached.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#file=(file:Shrine::UploadedFile?)-instance-method" class="signature"><strong>#file=</strong>(file : Shrine::UploadedFile?)</a>
+        <a href="#file%3D%28file%3AShrine%3A%3AUploadedFile%3F%29-instance-method" class="signature"><strong>#file=</strong>(file : Shrine::UploadedFile?)</a>
         
           <div class="summary"><p>Returns the attached uploaded file.</p></div>
         
@@ -524,38 +524,38 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#load_data(data:Hash(String,String%7CUploadedFile::MetadataType))-instance-method" class="signature"><strong>#load_data</strong>(data : Hash(String, String | UploadedFile::MetadataType))</a>
+        <a href="#load_data%28data%3AHash%28String%2CString%7CUploadedFile%3A%3AMetadataType%29%29-instance-method" class="signature"><strong>#load_data</strong>(data : Hash(String, String | UploadedFile::MetadataType))</a>
         
           <div class="summary"><p>Loads the uploaded file from data generated by <code>Attacher#data</code>.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#load_data(data:Nil)-instance-method" class="signature"><strong>#load_data</strong>(data : Nil)</a>
+        <a href="#load_data%28data%3ANil%29-instance-method" class="signature"><strong>#load_data</strong>(data : Nil)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#load_data(**data)-instance-method" class="signature"><strong>#load_data</strong>(**data)</a>
+        <a href="#load_data%28%2A%2Adata%29-instance-method" class="signature"><strong>#load_data</strong>(**data)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#promote(storage=store_key,**options):Shrine::UploadedFile?-instance-method" class="signature"><strong>#promote</strong>(storage = store_key, **options) : Shrine::UploadedFile?</a>
+        <a href="#promote%28storage%3Dstore_key%2C%2A%2Aoptions%29%3AShrine%3A%3AUploadedFile%3F-instance-method" class="signature"><strong>#promote</strong>(storage = store_key, **options) : Shrine::UploadedFile?</a>
         
           <div class="summary"><p>Uploads current file to permanent storage and sets the stored file.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#promote_cached(**options)-instance-method" class="signature"><strong>#promote_cached</strong>(**options)</a>
+        <a href="#promote_cached%28%2A%2Aoptions%29-instance-method" class="signature"><strong>#promote_cached</strong>(**options)</a>
         
           <div class="summary"><p>If a new cached file has been attached, uploads it to permanent storage.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#set(file:Shrine::UploadedFile?):Shrine::UploadedFile?-instance-method" class="signature"><strong>#set</strong>(file : Shrine::UploadedFile?) : Shrine::UploadedFile?</a>
+        <a href="#set%28file%3AShrine%3A%3AUploadedFile%3F%29%3AShrine%3A%3AUploadedFile%3F-instance-method" class="signature"><strong>#set</strong>(file : Shrine::UploadedFile?) : Shrine::UploadedFile?</a>
         
           <div class="summary"><p>Sets the uploaded file.</p></div>
         
@@ -574,28 +574,28 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#stored?(file=self.file)-instance-method" class="signature"><strong>#stored?</strong>(file = <span class="k">self</span>.file)</a>
+        <a href="#stored%3F%28file%3Dself.file%29-instance-method" class="signature"><strong>#stored?</strong>(file = <span class="k">self</span>.file)</a>
         
           <div class="summary"><p>Returns whether the file is uploaded to permanent storage.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#upload(io:IO%7CShrine::UploadedFile,storage=store_key,**options):Shrine::UploadedFile-instance-method" class="signature"><strong>#upload</strong>(io : IO | Shrine::UploadedFile, storage = store_key, **options) : Shrine::UploadedFile</a>
+        <a href="#upload%28io%3AIO%7CShrine%3A%3AUploadedFile%2Cstorage%3Dstore_key%2C%2A%2Aoptions%29%3AShrine%3A%3AUploadedFile-instance-method" class="signature"><strong>#upload</strong>(io : IO | Shrine::UploadedFile, storage = store_key, **options) : Shrine::UploadedFile</a>
         
           <div class="summary"><p>Delegates to <code>Shrine.upload</code>, passing the #context.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#uploaded_file(value)-instance-method" class="signature"><strong>#uploaded_file</strong>(value)</a>
+        <a href="#uploaded_file%28value%29-instance-method" class="signature"><strong>#uploaded_file</strong>(value)</a>
         
           <div class="summary"><p>Converts JSON or Hash data into a Shrine::UploadedFile object.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#url(**options)-instance-method" class="signature"><strong>#url</strong>(**options)</a>
+        <a href="#url%28%2A%2Aoptions%29-instance-method" class="signature"><strong>#url</strong>(**options)</a>
         
           <div class="summary"><p>If a file is attached, returns the uploaded file URL, otherwise returns nil.</p></div>
         
@@ -626,7 +626,7 @@
         
         def self.<strong>new</strong>(file : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>? = <span class="n">nil</span>, cache_key : String = <span class="s">&quot;cache&quot;</span>, store_key : String = <span class="s">&quot;store&quot;</span>)
 
-        <a class="method-permalink" href="#new(file:Shrine::UploadedFile?=nil,cache_key:String=%22cache%22,store_key:String=%22store%22)-class-method">#</a>
+        <a class="method-permalink" href="#new%28file%3AShrine%3A%3AUploadedFile%3F%3Dnil%2Ccache_key%3AString%3D%22cache%22%2Cstore_key%3AString%3D%22store%22%29-class-method">#</a>
       </div>
       
         <div class="doc">
@@ -637,7 +637,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L37" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L37" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -661,7 +661,7 @@
         
         def <strong>assign</strong>(value : IO?, **options)
 
-        <a class="method-permalink" href="#assign(value:IO?,**options)-instance-method">#</a>
+        <a class="method-permalink" href="#assign%28value%3AIO%3F%2C%2A%2Aoptions%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -669,9 +669,8 @@
           <p>Calls #attach_cached, but skips if value is an empty string (this is
 useful when the uploaded file comes from form fields). Forwards any
 additional options to #attach_cached.</p>
-
 <pre><code class="language-crystal">attacher.assign(<span class="t">File</span>.open(...))
-attacher.assign(<span class="t">File</span>.open(...), metadata: { <span class="s">&quot;foo&quot;</span> => <span class="s">&quot;bar&quot;</span> })
+attacher.assign(<span class="t">File</span>.open(...), metadata: { <span class="s">&quot;foo&quot;</span> =&gt; <span class="s">&quot;bar&quot;</span> })
 
 <span class="c"># ignores the assignment when a blank string is given</span>
 attacher.assign(<span class="s">&quot;&quot;</span>)</code></pre>
@@ -680,7 +679,7 @@ attacher.assign(<span class="s">&quot;&quot;</span>)</code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L53" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L53" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -690,13 +689,12 @@ attacher.assign(<span class="s">&quot;&quot;</span>)</code></pre>
         
         def <strong>attach</strong>(io : IO | <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a> | Nil, storage = store_key, **options) : <a href="../../Shrine/UploadedFile.html">UploadedFile</a>?
 
-        <a class="method-permalink" href="#attach(io:IO%7CShrine::UploadedFile%7CNil,storage=store_key,**options):UploadedFile?-instance-method">#</a>
+        <a class="method-permalink" href="#attach%28io%3AIO%7CShrine%3A%3AUploadedFile%7CNil%2Cstorage%3Dstore_key%2C%2A%2Aoptions%29%3AUploadedFile%3F-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Uploads given IO object and changes the uploaded file.</p>
-
 <pre><code class="language-crystal"><span class="c"># uploads the file to permanent storage</span>
 attacher.attach(io)
 
@@ -704,7 +702,7 @@ attacher.attach(io)
 attacher.attach(io, storage: <span class="n">:other_store</span>)
 
 <span class="c"># forwards additional options to the uploader</span>
-attacher.attach(io, upload_options: { <span class="s">&quot;x-amz-acl&quot;</span>: <span class="s">&quot;public-read&quot;</span> }, metadata: { <span class="s">&quot;foo&quot;</span> => <span class="s">&quot;bar&quot;</span> })
+attacher.attach(io, upload_options: { <span class="s">&quot;x-amz-acl&quot;</span>: <span class="s">&quot;public-read&quot;</span> }, metadata: { <span class="s">&quot;foo&quot;</span> =&gt; <span class="s">&quot;bar&quot;</span> })
 
 <span class="c"># removes the attachment</span>
 attacher.attach(<span class="n">nil</span>)</code></pre>
@@ -713,7 +711,7 @@ attacher.attach(<span class="n">nil</span>)</code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L95" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L95" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -723,37 +721,31 @@ attacher.attach(<span class="n">nil</span>)</code></pre>
         
         def <strong>attach_cached</strong>(value : IO | <a href="../../Shrine/UploadedFile.html">UploadedFile</a> | Nil, **options)
 
-        <a class="method-permalink" href="#attach_cached(value:IO%7CUploadedFile%7CNil,**options)-instance-method">#</a>
+        <a class="method-permalink" href="#attach_cached%28value%3AIO%7CUploadedFile%7CNil%2C%2A%2Aoptions%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Sets an existing cached file, or uploads an IO object to temporary
-storage and sets it via #attach. Forwards any additional options to</p>
-
-<h1><a id="attach." class="anchor" href="#attach.">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>attach.</h1>
-
+storage and sets it via #attach. Forwards any additional options to
+#attach.</p>
 <pre><code class="language-crystal"># upload file to temporary storage and set the uploaded file.
 attacher.attach_cached(File.open(...))
 
 # foward additional options to the uploader
-attacher.attach_cached(File.open(...), metadata: { "foo" => "bar" })
+attacher.attach_cached(File.open(...), metadata: { &quot;foo&quot; =&gt; &quot;bar&quot; })
 
 # sets an existing cached file from JSON data
-attacher.attach_cached("{\"id\":\"...\",\"storage\":\"cache\",\"metadata\ ":{...}}")
+attacher.attach_cached(&quot;{\&quot;id\&quot;:\&quot;...\&quot;,\&quot;storage\&quot;:\&quot;cache\&quot;,\&quot;metadata\ &quot;:{...}}&quot;)
 
 # sets an existing cached file from Hash data
-attacher.attach_cached({ "id" => "...", "storage" => "cache", "metadata" => {} })</code></pre>
+attacher.attach_cached({ &quot;id&quot; =&gt; &quot;...&quot;, &quot;storage&quot; =&gt; &quot;cache&quot;, &quot;metadata&quot; =&gt; {} })</code></pre>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L74" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L74" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -763,13 +755,13 @@ attacher.attach_cached({ "id" => "...", "storage" => "cache", "metadata" => {} }
         
         def <strong>attach_cached</strong>(value : String | Hash(String, String | <a href="../../Shrine/UploadedFile/MetadataType.html">UploadedFile::MetadataType</a>), **options)
 
-        <a class="method-permalink" href="#attach_cached(value:String%7CHash(String,String%7CUploadedFile::MetadataType),**options)-instance-method">#</a>
+        <a class="method-permalink" href="#attach_cached%28value%3AString%7CHash%28String%2CString%7CUploadedFile%3A%3AMetadataType%29%2C%2A%2Aoptions%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L78" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L78" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -779,13 +771,12 @@ attacher.attach_cached({ "id" => "...", "storage" => "cache", "metadata" => {} }
         
         def <strong>attached?</strong>
 
-        <a class="method-permalink" href="#attached?-instance-method">#</a>
+        <a class="method-permalink" href="#attached%3F-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Returns whether a file is attached.</p>
-
 <pre><code class="language-crystal">attacher.attach(io)
 attacher.attached? <span class="c">#=&gt; true</span>
 
@@ -796,7 +787,7 @@ attacher.attached? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L272" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L272" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -812,7 +803,7 @@ attacher.attached? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L31" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -822,13 +813,12 @@ attacher.attached? <span class="c">#=&gt; false</span></code></pre>
         
         def <strong>cached?</strong>(file = <span class="k">self</span>.file)
 
-        <a class="method-permalink" href="#cached?(file=self.file)-instance-method">#</a>
+        <a class="method-permalink" href="#cached%3F%28file%3Dself.file%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Returns whether the file is uploaded to temporary storage.</p>
-
 <pre><code class="language-crystal">attacher.cached?       <span class="c"># checks current file</span>
 attacher.cached?(file) <span class="c"># checks given file</span></code></pre>
         </div>
@@ -836,7 +826,7 @@ attacher.cached?(file) <span class="c"># checks given file</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L280" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L280" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -846,13 +836,12 @@ attacher.cached?(file) <span class="c"># checks given file</span></code></pre>
         
         def <strong>change</strong>(file : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>?) : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>?
 
-        <a class="method-permalink" href="#change(file:Shrine::UploadedFile?):Shrine::UploadedFile?-instance-method">#</a>
+        <a class="method-permalink" href="#change%28file%3AShrine%3A%3AUploadedFile%3F%29%3AShrine%3A%3AUploadedFile%3F-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Sets the uploaded file with dirty tracking, and runs validations.</p>
-
 <pre><code class="language-crystal">attacher.change(uploaded_file)
 attacher.file <span class="c">#=&gt; #&lt;Shrine::UploadedFile&gt;</span>
 attacher.changed? <span class="c">#=&gt; true</span></code></pre>
@@ -861,7 +850,7 @@ attacher.changed? <span class="c">#=&gt; true</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L216" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L216" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -871,24 +860,22 @@ attacher.changed? <span class="c">#=&gt; true</span></code></pre>
         
         def <strong>changed?</strong>
 
-        <a class="method-permalink" href="#changed?-instance-method">#</a>
+        <a class="method-permalink" href="#changed%3F-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Returns whether the attachment has changed.</p>
-
 <pre><code class="language-crystal">attacher.changed? <span class="c">#=&gt; false</span>
 attacher.attach(file)
 attacher.changed? <span class="c">#=&gt; true</span></code></pre>
-
 <p><span class="flag orange">TODO</span>  This will work incorrect if <code>@previous</code> is nil</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L261" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L261" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -910,7 +897,7 @@ Can be modified with additional data.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -926,14 +913,13 @@ Can be modified with additional data.</p>
         <div class="doc">
           
           <p>Generates serializable data for the attachment.</p>
-
 <pre><code class="language-crystal">attacher.data <span class="c">#=&gt; { &quot;id&quot; =&gt; &quot;...&quot;, &quot;storage&quot; =&gt; &quot;...&quot;, &quot;metadata&quot;: { ... } }</span></code></pre>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L295" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L295" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -949,7 +935,6 @@ Can be modified with additional data.</p>
         <div class="doc">
           
           <p>Destroys the attachment.</p>
-
 <pre><code class="language-crystal">attacher.file.exists? <span class="c">#=&gt; true</span>
 attacher.destroy
 attacher.file.exists? <span class="c">#=&gt; false</span></code></pre>
@@ -958,7 +943,7 @@ attacher.file.exists? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L185" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L185" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -975,7 +960,6 @@ attacher.file.exists? <span class="c">#=&gt; false</span></code></pre>
           
           <p>Destroys the attached file if it exists and is uploaded to permanent
 storage.</p>
-
 <pre><code class="language-crystal">attacher.file.exists? <span class="c">#=&gt; true</span>
 attacher.destroy_attached
 attacher.file.exists? <span class="c">#=&gt; false</span></code></pre>
@@ -984,7 +968,7 @@ attacher.file.exists? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L176" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L176" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1000,7 +984,6 @@ attacher.file.exists? <span class="c">#=&gt; false</span></code></pre>
         <div class="doc">
           
           <p>If a new file was attached, deletes previously attached file if any.</p>
-
 <pre><code class="language-crystal">previous_file <span class="o">=</span> attacher.file
 attacher.attach(file)
 attacher.destroy_previous
@@ -1010,7 +993,7 @@ previous_file.exists? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L166" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L166" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1020,7 +1003,7 @@ previous_file.exists? <span class="c">#=&gt; false</span></code></pre>
         
         def <strong>file</strong> : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>?
 
-        <a class="method-permalink" href="#file:Shrine::UploadedFile?-instance-method">#</a>
+        <a class="method-permalink" href="#file%3AShrine%3A%3AUploadedFile%3F-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1031,7 +1014,7 @@ previous_file.exists? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1041,7 +1024,7 @@ previous_file.exists? <span class="c">#=&gt; false</span></code></pre>
         
         def <strong>file!</strong>
 
-        <a class="method-permalink" href="#file!-instance-method">#</a>
+        <a class="method-permalink" href="#file%21-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1052,7 +1035,7 @@ previous_file.exists? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L190" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L190" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1062,7 +1045,7 @@ previous_file.exists? <span class="c">#=&gt; false</span></code></pre>
         
         def <strong>file=</strong>(file : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>?)
 
-        <a class="method-permalink" href="#file=(file:Shrine::UploadedFile?)-instance-method">#</a>
+        <a class="method-permalink" href="#file%3D%28file%3AShrine%3A%3AUploadedFile%3F%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1073,7 +1056,7 @@ previous_file.exists? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1090,7 +1073,6 @@ previous_file.exists? <span class="c">#=&gt; false</span></code></pre>
           
           <p>Deletes any previous file and promotes newly attached cached file.
 It also clears any dirty tracking.</p>
-
 <pre><code class="language-crystal"><span class="c"># promoting cached file</span>
 attacher.assign(io)
 attacher.cached? <span class="c">#=&gt; true</span>
@@ -1114,7 +1096,7 @@ attacher.changed? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L122" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L122" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1130,7 +1112,6 @@ attacher.changed? <span class="c">#=&gt; false</span></code></pre>
         <div class="doc">
           
           <p>Returns the attached file.</p>
-
 <pre><code class="language-crystal"><span class="c"># when a file is attached</span>
 attacher.get <span class="c">#=&gt; #&lt;Shrine::UploadedFile&gt;</span>
 
@@ -1141,7 +1122,7 @@ attacher.get <span class="c">#=&gt; nil</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L238" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L238" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1151,22 +1132,21 @@ attacher.get <span class="c">#=&gt; nil</span></code></pre>
         
         def <strong>load_data</strong>(data : Hash(String, String | <a href="../../Shrine/UploadedFile/MetadataType.html">UploadedFile::MetadataType</a>))
 
-        <a class="method-permalink" href="#load_data(data:Hash(String,String%7CUploadedFile::MetadataType))-instance-method">#</a>
+        <a class="method-permalink" href="#load_data%28data%3AHash%28String%2CString%7CUploadedFile%3A%3AMetadataType%29%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Loads the uploaded file from data generated by <code>Attacher#data</code>.</p>
-
 <pre><code class="language-crystal">attacher.file <span class="c">#=&gt; nil</span>
-attacher.load_data({ <span class="s">&quot;id&quot;</span> => <span class="s">&quot;...&quot;</span>, <span class="s">&quot;storage&quot;</span> => <span class="s">&quot;...&quot;</span>, <span class="s">&quot;metadata&quot;</span> => { ... } })
+attacher.load_data({ <span class="s">&quot;id&quot;</span> =&gt; <span class="s">&quot;...&quot;</span>, <span class="s">&quot;storage&quot;</span> =&gt; <span class="s">&quot;...&quot;</span>, <span class="s">&quot;metadata&quot;</span> =&gt; { ... } })
 attacher.file <span class="c">#=&gt; #&lt;Shrine::UploadedFile&gt;</span></code></pre>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L199" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L199" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1176,13 +1156,13 @@ attacher.file <span class="c">#=&gt; #&lt;Shrine::UploadedFile&gt;</span></code>
         
         def <strong>load_data</strong>(data : Nil)
 
-        <a class="method-permalink" href="#load_data(data:Nil)-instance-method">#</a>
+        <a class="method-permalink" href="#load_data%28data%3ANil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L207" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L207" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1192,13 +1172,13 @@ attacher.file <span class="c">#=&gt; #&lt;Shrine::UploadedFile&gt;</span></code>
         
         def <strong>load_data</strong>(**data)
 
-        <a class="method-permalink" href="#load_data(**data)-instance-method">#</a>
+        <a class="method-permalink" href="#load_data%28%2A%2Adata%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L203" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L203" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1208,13 +1188,12 @@ attacher.file <span class="c">#=&gt; #&lt;Shrine::UploadedFile&gt;</span></code>
         
         def <strong>promote</strong>(storage = store_key, **options) : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>?
 
-        <a class="method-permalink" href="#promote(storage=store_key,**options):Shrine::UploadedFile?-instance-method">#</a>
+        <a class="method-permalink" href="#promote%28storage%3Dstore_key%2C%2A%2Aoptions%29%3AShrine%3A%3AUploadedFile%3F-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Uploads current file to permanent storage and sets the stored file.</p>
-
 <pre><code class="language-crystal">attacher.cached? <span class="c">#=&gt; true</span>
 attacher.promote
 attacher.stored? <span class="c">#=&gt; true</span></code></pre>
@@ -1223,7 +1202,7 @@ attacher.stored? <span class="c">#=&gt; true</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L144" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L144" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1233,14 +1212,13 @@ attacher.stored? <span class="c">#=&gt; true</span></code></pre>
         
         def <strong>promote_cached</strong>(**options)
 
-        <a class="method-permalink" href="#promote_cached(**options)-instance-method">#</a>
+        <a class="method-permalink" href="#promote_cached%28%2A%2Aoptions%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>If a new cached file has been attached, uploads it to permanent storage.
 Any additional options are forwarded to #promote.</p>
-
 <pre><code class="language-crystal">attacher.assign(io)
 attacher.cached? <span class="c">#=&gt; true</span>
 attacher.promote_cached
@@ -1250,7 +1228,7 @@ attacher.stored? <span class="c">#=&gt; true</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L135" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L135" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1260,13 +1238,12 @@ attacher.stored? <span class="c">#=&gt; true</span></code></pre>
         
         def <strong>set</strong>(file : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>?) : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>?
 
-        <a class="method-permalink" href="#set(file:Shrine::UploadedFile?):Shrine::UploadedFile?-instance-method">#</a>
+        <a class="method-permalink" href="#set%28file%3AShrine%3A%3AUploadedFile%3F%29%3AShrine%3A%3AUploadedFile%3F-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Sets the uploaded file.</p>
-
 <pre><code class="language-crystal">attacher.set(uploaded_file)
 attacher.file <span class="c">#=&gt; #&lt;Shrine::UploadedFile&gt;</span>
 attacher.changed? <span class="c">#=&gt; false</span></code></pre>
@@ -1275,7 +1252,7 @@ attacher.changed? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L227" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L227" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1297,7 +1274,7 @@ under.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L312" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L312" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1313,7 +1290,7 @@ under.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L32" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1323,13 +1300,12 @@ under.</p>
         
         def <strong>stored?</strong>(file = <span class="k">self</span>.file)
 
-        <a class="method-permalink" href="#stored?(file=self.file)-instance-method">#</a>
+        <a class="method-permalink" href="#stored%3F%28file%3Dself.file%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Returns whether the file is uploaded to permanent storage.</p>
-
 <pre><code class="language-crystal">attacher.stored?       <span class="c"># checks current file</span>
 attacher.stored?(file) <span class="c"># checks given file</span></code></pre>
         </div>
@@ -1337,7 +1313,7 @@ attacher.stored?(file) <span class="c"># checks given file</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L288" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L288" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1347,24 +1323,23 @@ attacher.stored?(file) <span class="c"># checks given file</span></code></pre>
         
         def <strong>upload</strong>(io : IO | <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>, storage = store_key, **options) : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>
 
-        <a class="method-permalink" href="#upload(io:IO%7CShrine::UploadedFile,storage=store_key,**options):Shrine::UploadedFile-instance-method">#</a>
+        <a class="method-permalink" href="#upload%28io%3AIO%7CShrine%3A%3AUploadedFile%2Cstorage%3Dstore_key%2C%2A%2Aoptions%29%3AShrine%3A%3AUploadedFile-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Delegates to <code>Shrine.upload</code>, passing the #context.</p>
-
 <pre><code class="language-crystal"><span class="c"># upload file to specified storage</span>
 attacher.upload(io, <span class="s">&quot;store&quot;</span>) <span class="c">#=&gt; #&lt;Shrine::UploadedFile&gt;</span>
 
 <span class="c"># pass additional options for the uploader</span>
-attacher.upload(io, <span class="s">&quot;store&quot;</span>, metadata: { <span class="s">&quot;foo&quot;</span> => <span class="s">&quot;bar&quot;</span> })</code></pre>
+attacher.upload(io, <span class="s">&quot;store&quot;</span>, metadata: { <span class="s">&quot;foo&quot;</span> =&gt; <span class="s">&quot;bar&quot;</span> })</code></pre>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L155" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L155" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1374,24 +1349,23 @@ attacher.upload(io, <span class="s">&quot;store&quot;</span>, metadata: { <span 
         
         def <strong>uploaded_file</strong>(value)
 
-        <a class="method-permalink" href="#uploaded_file(value)-instance-method">#</a>
+        <a class="method-permalink" href="#uploaded_file%28value%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Converts JSON or Hash data into a Shrine::UploadedFile object.</p>
-
 <pre><code class="language-crystal">attacher.uploaded_file(<span class="s">&quot;{\&quot;id\&quot;:\&quot;...\&quot;,\&quot;storage\&quot;:\&quot;...\&quot;,\&quot;metadata\&quot;:{...}}&quot;</span>)
 <span class="c">#=&gt; #&lt;Shrine::UploadedFile ...&gt;</span>
 
-attacher.uploaded_file({ <span class="s">&quot;id&quot;</span> => <span class="s">&quot;...&quot;</span>, <span class="s">&quot;storage&quot;</span> => <span class="s">&quot;...&quot;</span>, <span class="s">&quot;metadata&quot;</span> => {} })
+attacher.uploaded_file({ <span class="s">&quot;id&quot;</span> =&gt; <span class="s">&quot;...&quot;</span>, <span class="s">&quot;storage&quot;</span> =&gt; <span class="s">&quot;...&quot;</span>, <span class="s">&quot;metadata&quot;</span> =&gt; {} })
 <span class="c">#=&gt; #&lt;Shrine::UploadedFile ...&gt;</span></code></pre>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L306" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L306" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1401,14 +1375,13 @@ attacher.uploaded_file({ <span class="s">&quot;id&quot;</span> => <span class="s
         
         def <strong>url</strong>(**options)
 
-        <a class="method-permalink" href="#url(**options)-instance-method">#</a>
+        <a class="method-permalink" href="#url%28%2A%2Aoptions%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>If a file is attached, returns the uploaded file URL, otherwise returns
 nil. Any options are forwarded to the storage.</p>
-
 <pre><code class="language-crystal">attacher.file <span class="o">=</span> file
 attacher.url <span class="c">#=&gt; &quot;https://...&quot;</span>
 
@@ -1419,7 +1392,7 @@ attacher.url <span class="c">#=&gt; nil</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/attacher.cr#L250" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/attacher.cr#L250" target="_blank">View source</a>]
         
       </div>
     </div>

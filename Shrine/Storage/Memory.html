@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 1.0.0">
-<meta name="crystal_docs.project_version" content="master">
+<meta name="generator" content="Crystal Docs 1.2.2">
+<meta name="crystal_docs.project_version" content="HEAD">
 <meta name="crystal_docs.project_name" content="shrine">
 
 
@@ -13,7 +13,7 @@
 <script type="text/javascript" src="../../js/doc.js"></script>
 
   <meta name="repository-name" content="shrine">
-  <title>Shrine::Storage::Memory - shrine master</title>
+  <title>Shrine::Storage::Memory - shrine HEAD</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -39,7 +39,7 @@
       </h1>
 
       <span class="project-version">
-        master
+        HEAD
       </span>
     </div>
   </div>
@@ -338,7 +338,7 @@
   </h2>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/memory.cr#L5" target="_blank">
+      <a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/memory.cr#L5" target="_blank">
         shrine/storage/memory.cr
       </a>
     
@@ -381,60 +381,60 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#clear!-instance-method" class="signature"><strong>#clear!</strong></a>
+        <a href="#clear%21-instance-method" class="signature"><strong>#clear!</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#delete(id:String)-instance-method" class="signature"><strong>#delete</strong>(id : String)</a>
+        <a href="#delete%28id%3AString%29-instance-method" class="signature"><strong>#delete</strong>(id : String)</a>
         
           <div class="summary"><p>deletes the file from the storage</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#delete_prefixed(delete_prefix:String)-instance-method" class="signature"><strong>#delete_prefixed</strong>(delete_prefix : String)</a>
+        <a href="#delete_prefixed%28delete_prefix%3AString%29-instance-method" class="signature"><strong>#delete_prefixed</strong>(delete_prefix : String)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#exists?(id:String):Bool-instance-method" class="signature"><strong>#exists?</strong>(id : String) : Bool</a>
+        <a href="#exists%3F%28id%3AString%29%3ABool-instance-method" class="signature"><strong>#exists?</strong>(id : String) : Bool</a>
         
           <div class="summary"><p>returns whether the file exists on storage</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#open(id:String):IO-instance-method" class="signature"><strong>#open</strong>(id : String) : IO</a>
+        <a href="#open%28id%3AString%29%3AIO-instance-method" class="signature"><strong>#open</strong>(id : String) : IO</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#open(id:String,**options):IO-instance-method" class="signature"><strong>#open</strong>(id : String, **options) : IO</a>
+        <a href="#open%28id%3AString%2C%2A%2Aoptions%29%3AIO-instance-method" class="signature"><strong>#open</strong>(id : String, **options) : IO</a>
         
           <div class="summary"><p>returns the remote file as an IO-like object</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#path(id:String):String-instance-method" class="signature"><strong>#path</strong>(id : String) : String</a>
+        <a href="#path%28id%3AString%29%3AString-instance-method" class="signature"><strong>#path</strong>(id : String) : String</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#store:Hash(String,String)-instance-method" class="signature"><strong>#store</strong> : Hash(String, String)</a>
+        <a href="#store%3AHash%28String%2CString%29-instance-method" class="signature"><strong>#store</strong> : Hash(String, String)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#upload(io:IO%7CUploadedFile,id:String,move=false,**options)-instance-method" class="signature"><strong>#upload</strong>(io : IO | UploadedFile, id : String, move = <span class="n">false</span>, **options)</a>
+        <a href="#upload%28io%3AIO%7CUploadedFile%2Cid%3AString%2Cmove%3Dfalse%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#upload</strong>(io : IO | UploadedFile, id : String, move = <span class="n">false</span>, **options)</a>
         
           <div class="summary"><p>uploads <code>io</code> to the location <code>id</code>, can accept upload options</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#url(id:String,**options):String-instance-method" class="signature"><strong>#url</strong>(id : String, **options) : String</a>
+        <a href="#url%28id%3AString%2C%2A%2Aoptions%29%3AString-instance-method" class="signature"><strong>#url</strong>(id : String, **options) : String</a>
         
           <div class="summary"><p>returns URL to the remote file, can accept URL options</p></div>
         
@@ -453,37 +453,37 @@
   <h3>Instance methods inherited from class <code><a href="../../Shrine/Storage/Base.html">Shrine::Storage::Base</a></code></h3>
   
   
-    <a href="../../Shrine/Storage/Base.html#clean(path:String)-instance-method" class="tooltip">
+    <a href="../../Shrine/Storage/Base.html#clean%28path%3AString%29-instance-method" class="tooltip">
       <span>clean(path : String)</span>
     clean</a>, 
     
   
-    <a href="../../Shrine/Storage/Base.html#clean?:Bool-instance-method" class="tooltip">
+    <a href="../../Shrine/Storage/Base.html#clean%3F%3ABool-instance-method" class="tooltip">
       <span>clean? : Bool</span>
     clean?</a>, 
     
   
-    <a href="../../Shrine/Storage/Base.html#delete(id:String)-instance-method" class="tooltip">
+    <a href="../../Shrine/Storage/Base.html#delete%28id%3AString%29-instance-method" class="tooltip">
       <span>delete(id : String)</span>
     delete</a>, 
     
   
-    <a href="../../Shrine/Storage/Base.html#exists?(id:String):Bool-instance-method" class="tooltip">
+    <a href="../../Shrine/Storage/Base.html#exists%3F%28id%3AString%29%3ABool-instance-method" class="tooltip">
       <span>exists?(id : String) : Bool</span>
     exists?</a>, 
     
   
-    <a href="../../Shrine/Storage/Base.html#open(id:String,**options):IO-instance-method" class="tooltip">
+    <a href="../../Shrine/Storage/Base.html#open%28id%3AString%2C%2A%2Aoptions%29%3AIO-instance-method" class="tooltip">
       <span>open(id : String, **options) : IO</span>
     open</a>, 
     
   
-    <a href="../../Shrine/Storage/Base.html#upload(io:IO%7CUploadedFile,id:String,move=false,**options)-instance-method" class="tooltip">
+    <a href="../../Shrine/Storage/Base.html#upload%28io%3AIO%7CUploadedFile%2Cid%3AString%2Cmove%3Dfalse%2C%2A%2Aoptions%29-instance-method" class="tooltip">
       <span>upload(io : IO | UploadedFile, id : String, move = <span class="n">false</span>, **options)</span>
     upload</a>, 
     
   
-    <a href="../../Shrine/Storage/Base.html#url(id:String,**options):String-instance-method" class="tooltip">
+    <a href="../../Shrine/Storage/Base.html#url%28id%3AString%2C%2A%2Aoptions%29%3AString-instance-method" class="tooltip">
       <span>url(id : String, **options) : String</span>
     url</a>
     
@@ -540,7 +540,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/memory.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/memory.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -564,13 +564,13 @@
         
         def <strong>clear!</strong>
 
-        <a class="method-permalink" href="#clear!-instance-method">#</a>
+        <a class="method-permalink" href="#clear%21-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/memory.cr#L48" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/memory.cr#L48" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -580,7 +580,7 @@
         
         def <strong>delete</strong>(id : String)
 
-        <a class="method-permalink" href="#delete(id:String)-instance-method">#</a>
+        <a class="method-permalink" href="#delete%28id%3AString%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -595,7 +595,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/memory.cr#L39" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/memory.cr#L39" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -605,13 +605,13 @@
         
         def <strong>delete_prefixed</strong>(delete_prefix : String)
 
-        <a class="method-permalink" href="#delete_prefixed(delete_prefix:String)-instance-method">#</a>
+        <a class="method-permalink" href="#delete_prefixed%28delete_prefix%3AString%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/memory.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/memory.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -621,7 +621,7 @@
         
         def <strong>exists?</strong>(id : String) : Bool
 
-        <a class="method-permalink" href="#exists?(id:String):Bool-instance-method">#</a>
+        <a class="method-permalink" href="#exists%3F%28id%3AString%29%3ABool-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -636,7 +636,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/memory.cr#L27" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/memory.cr#L27" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -646,13 +646,13 @@
         
         def <strong>open</strong>(id : String) : IO
 
-        <a class="method-permalink" href="#open(id:String):IO-instance-method">#</a>
+        <a class="method-permalink" href="#open%28id%3AString%29%3AIO-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/memory.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/memory.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -662,7 +662,7 @@
         
         def <strong>open</strong>(id : String, **options) : IO
 
-        <a class="method-permalink" href="#open(id:String,**options):IO-instance-method">#</a>
+        <a class="method-permalink" href="#open%28id%3AString%2C%2A%2Aoptions%29%3AIO-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -677,7 +677,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/memory.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/memory.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -687,13 +687,13 @@
         
         def <strong>path</strong>(id : String) : String
 
-        <a class="method-permalink" href="#path(id:String):String-instance-method">#</a>
+        <a class="method-permalink" href="#path%28id%3AString%29%3AString-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/memory.cr#L35" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/memory.cr#L35" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -703,13 +703,13 @@
         
         def <strong>store</strong> : Hash(String, String)
 
-        <a class="method-permalink" href="#store:Hash(String,String)-instance-method">#</a>
+        <a class="method-permalink" href="#store%3AHash%28String%2CString%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/memory.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/memory.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -719,7 +719,7 @@
         
         def <strong>upload</strong>(io : IO | <a href="../../Shrine/UploadedFile.html">UploadedFile</a>, id : String, move = <span class="n">false</span>, **options)
 
-        <a class="method-permalink" href="#upload(io:IO%7CUploadedFile,id:String,move=false,**options)-instance-method">#</a>
+        <a class="method-permalink" href="#upload%28io%3AIO%7CUploadedFile%2Cid%3AString%2Cmove%3Dfalse%2C%2A%2Aoptions%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -734,7 +734,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/memory.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/memory.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -744,7 +744,7 @@
         
         def <strong>url</strong>(id : String, **options) : String
 
-        <a class="method-permalink" href="#url(id:String,**options):String-instance-method">#</a>
+        <a class="method-permalink" href="#url%28id%3AString%2C%2A%2Aoptions%29%3AString-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -759,7 +759,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/memory.cr#L31" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/memory.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>

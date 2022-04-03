@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 1.0.0">
-<meta name="crystal_docs.project_version" content="master">
+<meta name="generator" content="Crystal Docs 1.2.2">
+<meta name="crystal_docs.project_version" content="HEAD">
 <meta name="crystal_docs.project_name" content="shrine">
 
 
@@ -13,7 +13,7 @@
 <script type="text/javascript" src="../../js/doc.js"></script>
 
   <meta name="repository-name" content="shrine">
-  <title>Shrine::Storage::S3 - shrine master</title>
+  <title>Shrine::Storage::S3 - shrine HEAD</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -39,7 +39,7 @@
       </h1>
 
       <span class="project-version">
-        master
+        HEAD
       </span>
     </div>
   </div>
@@ -338,7 +338,7 @@
   </h2>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/s3.cr#L8" target="_blank">
+      <a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/s3.cr#L8" target="_blank">
         shrine/storage/s3.cr
       </a>
     
@@ -360,7 +360,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new(bucket:String,client:Awscr::S3::Client?,prefix:String?=nil,upload_options:Hash(String,String)=Hash(String,String).new,public:Bool=false)-class-method" class="signature"><strong>.new</strong>(bucket : String, client : Awscr::S3::Client?, prefix : String? = <span class="n">nil</span>, upload_options : Hash(String, String) = <span class="t">Hash</span>(<span class="t">String</span>, <span class="t">String</span>).<span class="k">new</span>, public : Bool = <span class="n">false</span>)</a>
+        <a href="#new%28bucket%3AString%2Cclient%3AAwscr%3A%3AS3%3A%3AClient%3F%2Cprefix%3AString%3F%3Dnil%2Cupload_options%3AHash%28String%2CString%29%3DHash%28String%2CString%29.new%2Cpublic%3ABool%3Dfalse%29-class-method" class="signature"><strong>.new</strong>(bucket : String, client : Awscr::S3::Client?, prefix : String? = <span class="n">nil</span>, upload_options : Hash(String, String) = <span class="t">Hash</span>(<span class="t">String</span>, <span class="t">String</span>).<span class="k">new</span>, public : Bool = <span class="n">false</span>)</a>
         
           <div class="summary"><p>Initializes a storage for uploading to S3.</p></div>
         
@@ -383,72 +383,72 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#bucket:String-instance-method" class="signature"><strong>#bucket</strong> : String</a>
+        <a href="#bucket%3AString-instance-method" class="signature"><strong>#bucket</strong> : String</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#clean(path)-instance-method" class="signature"><strong>#clean</strong>(path)</a>
+        <a href="#clean%28path%29-instance-method" class="signature"><strong>#clean</strong>(path)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#client:Awscr::S3::Client-instance-method" class="signature"><strong>#client</strong> : Awscr::S3::Client</a>
+        <a href="#client%3AAwscr%3A%3AS3%3A%3AClient-instance-method" class="signature"><strong>#client</strong> : Awscr::S3::Client</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#delete(id:String):Bool-instance-method" class="signature"><strong>#delete</strong>(id : String) : Bool</a>
+        <a href="#delete%28id%3AString%29%3ABool-instance-method" class="signature"><strong>#delete</strong>(id : String) : Bool</a>
         
           <div class="summary"><p>Delets the file, and by default deletes the containing directory if it's empty.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#exists?(id:String):Bool-instance-method" class="signature"><strong>#exists?</strong>(id : String) : Bool</a>
+        <a href="#exists%3F%28id%3AString%29%3ABool-instance-method" class="signature"><strong>#exists?</strong>(id : String) : Bool</a>
         
           <div class="summary"><p>Returns true if the file exists on the S3.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#object_key(id:String):String-instance-method" class="signature"><strong>#object_key</strong>(id : String) : String</a>
+        <a href="#object_key%28id%3AString%29%3AString-instance-method" class="signature"><strong>#object_key</strong>(id : String) : String</a>
         
           <div class="summary"><p>Returns object key with potential prefix.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#open(id:String,**options):IO-instance-method" class="signature"><strong>#open</strong>(id : String, **options) : IO</a>
+        <a href="#open%28id%3AString%2C%2A%2Aoptions%29%3AIO-instance-method" class="signature"><strong>#open</strong>(id : String, **options) : IO</a>
         
           <div class="summary"><p>Returns a IO object from S3</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#path(id:String)-instance-method" class="signature"><strong>#path</strong>(id : String)</a>
+        <a href="#path%28id%3AString%29-instance-method" class="signature"><strong>#path</strong>(id : String)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#public?:Bool-instance-method" class="signature"><strong>#public?</strong> : Bool</a>
+        <a href="#public%3F%3ABool-instance-method" class="signature"><strong>#public?</strong> : Bool</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#upload(io:IO%7CUploadedFile,id:String,metadata:Shrine::UploadedFile::MetadataType,move=false,**upload_options)-instance-method" class="signature"><strong>#upload</strong>(io : IO | UploadedFile, id : String, metadata : Shrine::UploadedFile::MetadataType, move = <span class="n">false</span>, **upload_options)</a>
+        <a href="#upload%28io%3AIO%7CUploadedFile%2Cid%3AString%2Cmetadata%3AShrine%3A%3AUploadedFile%3A%3AMetadataType%2Cmove%3Dfalse%2C%2A%2Aupload_options%29-instance-method" class="signature"><strong>#upload</strong>(io : IO | UploadedFile, id : String, metadata : Shrine::UploadedFile::MetadataType, move = <span class="n">false</span>, **upload_options)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#upload(io:IO%7CUploadedFile,id:String,move=false,**upload_options)-instance-method" class="signature"><strong>#upload</strong>(io : IO | UploadedFile, id : String, move = <span class="n">false</span>, **upload_options)</a>
+        <a href="#upload%28io%3AIO%7CUploadedFile%2Cid%3AString%2Cmove%3Dfalse%2C%2A%2Aupload_options%29-instance-method" class="signature"><strong>#upload</strong>(io : IO | UploadedFile, id : String, move = <span class="n">false</span>, **upload_options)</a>
         
           <div class="summary"><p>Copies the file into the given location.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#url(id:String,**options):String-instance-method" class="signature"><strong>#url</strong>(id : String, **options) : String</a>
+        <a href="#url%28id%3AString%2C%2A%2Aoptions%29%3AString-instance-method" class="signature"><strong>#url</strong>(id : String, **options) : String</a>
         
           <div class="summary"><p>Returns the presigned URL to the file.</p></div>
         
@@ -467,37 +467,37 @@
   <h3>Instance methods inherited from class <code><a href="../../Shrine/Storage/Base.html">Shrine::Storage::Base</a></code></h3>
   
   
-    <a href="../../Shrine/Storage/Base.html#clean(path:String)-instance-method" class="tooltip">
+    <a href="../../Shrine/Storage/Base.html#clean%28path%3AString%29-instance-method" class="tooltip">
       <span>clean(path : String)</span>
     clean</a>, 
     
   
-    <a href="../../Shrine/Storage/Base.html#clean?:Bool-instance-method" class="tooltip">
+    <a href="../../Shrine/Storage/Base.html#clean%3F%3ABool-instance-method" class="tooltip">
       <span>clean? : Bool</span>
     clean?</a>, 
     
   
-    <a href="../../Shrine/Storage/Base.html#delete(id:String)-instance-method" class="tooltip">
+    <a href="../../Shrine/Storage/Base.html#delete%28id%3AString%29-instance-method" class="tooltip">
       <span>delete(id : String)</span>
     delete</a>, 
     
   
-    <a href="../../Shrine/Storage/Base.html#exists?(id:String):Bool-instance-method" class="tooltip">
+    <a href="../../Shrine/Storage/Base.html#exists%3F%28id%3AString%29%3ABool-instance-method" class="tooltip">
       <span>exists?(id : String) : Bool</span>
     exists?</a>, 
     
   
-    <a href="../../Shrine/Storage/Base.html#open(id:String,**options):IO-instance-method" class="tooltip">
+    <a href="../../Shrine/Storage/Base.html#open%28id%3AString%2C%2A%2Aoptions%29%3AIO-instance-method" class="tooltip">
       <span>open(id : String, **options) : IO</span>
     open</a>, 
     
   
-    <a href="../../Shrine/Storage/Base.html#upload(io:IO%7CUploadedFile,id:String,move=false,**options)-instance-method" class="tooltip">
+    <a href="../../Shrine/Storage/Base.html#upload%28io%3AIO%7CUploadedFile%2Cid%3AString%2Cmove%3Dfalse%2C%2A%2Aoptions%29-instance-method" class="tooltip">
       <span>upload(io : IO | UploadedFile, id : String, move = <span class="n">false</span>, **options)</span>
     upload</a>, 
     
   
-    <a href="../../Shrine/Storage/Base.html#url(id:String,**options):String-instance-method" class="tooltip">
+    <a href="../../Shrine/Storage/Base.html#url%28id%3AString%2C%2A%2Aoptions%29%3AString-instance-method" class="tooltip">
       <span>url(id : String, **options) : String</span>
     url</a>
     
@@ -548,28 +548,23 @@
         
         def self.<strong>new</strong>(bucket : String, client : Awscr::S3::Client?, prefix : String? = <span class="n">nil</span>, upload_options : Hash(String, String) = <span class="t">Hash</span>(<span class="t">String</span>, <span class="t">String</span>).<span class="k">new</span>, public : Bool = <span class="n">false</span>)
 
-        <a class="method-permalink" href="#new(bucket:String,client:Awscr::S3::Client?,prefix:String?=nil,upload_options:Hash(String,String)=Hash(String,String).new,public:Bool=false)-class-method">#</a>
+        <a class="method-permalink" href="#new%28bucket%3AString%2Cclient%3AAwscr%3A%3AS3%3A%3AClient%3F%2Cprefix%3AString%3F%3Dnil%2Cupload_options%3AHash%28String%2CString%29%3DHash%28String%2CString%29.new%2Cpublic%3ABool%3Dfalse%29-class-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Initializes a storage for uploading to S3. All options are forwarded to
 [<code>Shrine::Storage::S3#initialize</code>], except the following:</p>
-
 <p>:bucket
 : (Required). Name of the S3 bucket.</p>
-
 <p>:client
 : By default an <code>Awscr::S3::Client</code> instance is created internally from
-  additional options, but you can use this option to provide your own
-  client.</p>
-
+additional options, but you can use this option to provide your own
+client.</p>
 <p>:prefix
-: "Directory" inside the bucket to store files into.</p>
-
+: &quot;Directory&quot; inside the bucket to store files into.</p>
 <p>:upload_options
 : Additional options that will be used for uploading files.</p>
-
 <p>:public
 : Sets public access to all uploading files.</p>
         </div>
@@ -577,7 +572,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/s3.cr#L33" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/s3.cr#L33" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -601,13 +596,13 @@
         
         def <strong>bucket</strong> : String
 
-        <a class="method-permalink" href="#bucket:String-instance-method">#</a>
+        <a class="method-permalink" href="#bucket%3AString-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/s3.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/s3.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -617,13 +612,13 @@
         
         def <strong>clean</strong>(path)
 
-        <a class="method-permalink" href="#clean(path)-instance-method">#</a>
+        <a class="method-permalink" href="#clean%28path%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/s3.cr#L103" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/s3.cr#L103" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -633,13 +628,13 @@
         
         def <strong>client</strong> : Awscr::S3::Client
 
-        <a class="method-permalink" href="#client:Awscr::S3::Client-instance-method">#</a>
+        <a class="method-permalink" href="#client%3AAwscr%3A%3AS3%3A%3AClient-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/s3.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/s3.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -649,7 +644,7 @@
         
         def <strong>delete</strong>(id : String) : Bool
 
-        <a class="method-permalink" href="#delete(id:String):Bool-instance-method">#</a>
+        <a class="method-permalink" href="#delete%28id%3AString%29%3ABool-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -661,7 +656,7 @@ it's empty.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/s3.cr#L99" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/s3.cr#L99" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -671,7 +666,7 @@ it's empty.</p>
         
         def <strong>exists?</strong>(id : String) : Bool
 
-        <a class="method-permalink" href="#exists?(id:String):Bool-instance-method">#</a>
+        <a class="method-permalink" href="#exists%3F%28id%3AString%29%3ABool-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -682,7 +677,7 @@ it's empty.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/s3.cr#L90" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/s3.cr#L90" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -692,7 +687,7 @@ it's empty.</p>
         
         def <strong>object_key</strong>(id : String) : String
 
-        <a class="method-permalink" href="#object_key(id:String):String-instance-method">#</a>
+        <a class="method-permalink" href="#object_key%28id%3AString%29%3AString-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -703,7 +698,7 @@ it's empty.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/s3.cr#L111" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/s3.cr#L111" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -713,7 +708,7 @@ it's empty.</p>
         
         def <strong>open</strong>(id : String, **options) : IO
 
-        <a class="method-permalink" href="#open(id:String,**options):IO-instance-method">#</a>
+        <a class="method-permalink" href="#open%28id%3AString%2C%2A%2Aoptions%29%3AIO-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -724,7 +719,7 @@ it's empty.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/s3.cr#L65" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/s3.cr#L65" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -734,13 +729,13 @@ it's empty.</p>
         
         def <strong>path</strong>(id : String)
 
-        <a class="method-permalink" href="#path(id:String)-instance-method">#</a>
+        <a class="method-permalink" href="#path%28id%3AString%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/s3.cr#L106" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/s3.cr#L106" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -750,13 +745,13 @@ it's empty.</p>
         
         def <strong>public?</strong> : Bool
 
-        <a class="method-permalink" href="#public?:Bool-instance-method">#</a>
+        <a class="method-permalink" href="#public%3F%3ABool-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/s3.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/s3.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -766,13 +761,13 @@ it's empty.</p>
         
         def <strong>upload</strong>(io : IO | <a href="../../Shrine/UploadedFile.html">UploadedFile</a>, id : String, metadata : <a href="../../Shrine/UploadedFile/MetadataType.html">Shrine::UploadedFile::MetadataType</a>, move = <span class="n">false</span>, **upload_options)
 
-        <a class="method-permalink" href="#upload(io:IO%7CUploadedFile,id:String,metadata:Shrine::UploadedFile::MetadataType,move=false,**upload_options)-instance-method">#</a>
+        <a class="method-permalink" href="#upload%28io%3AIO%7CUploadedFile%2Cid%3AString%2Cmetadata%3AShrine%3A%3AUploadedFile%3A%3AMetadataType%2Cmove%3Dfalse%2C%2A%2Aupload_options%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/s3.cr#L60" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/s3.cr#L60" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -782,7 +777,7 @@ it's empty.</p>
         
         def <strong>upload</strong>(io : IO | <a href="../../Shrine/UploadedFile.html">UploadedFile</a>, id : String, move = <span class="n">false</span>, **upload_options)
 
-        <a class="method-permalink" href="#upload(io:IO%7CUploadedFile,id:String,move=false,**upload_options)-instance-method">#</a>
+        <a class="method-permalink" href="#upload%28io%3AIO%7CUploadedFile%2Cid%3AString%2Cmove%3Dfalse%2C%2A%2Aupload_options%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -793,7 +788,7 @@ it's empty.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/s3.cr#L44" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/s3.cr#L44" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -803,7 +798,7 @@ it's empty.</p>
         
         def <strong>url</strong>(id : String, **options) : String
 
-        <a class="method-permalink" href="#url(id:String,**options):String-instance-method">#</a>
+        <a class="method-permalink" href="#url%28id%3AString%2C%2A%2Aoptions%29%3AString-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -814,7 +809,7 @@ it's empty.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/afe92db7a3191e479df0f1bc55f812ba16711cb4/src/shrine/storage/s3.cr#L76" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/a503da89022600b9a57f62a830ae0de6317b292e/src/shrine/storage/s3.cr#L76" target="_blank">View source</a>]
         
       </div>
     </div>
