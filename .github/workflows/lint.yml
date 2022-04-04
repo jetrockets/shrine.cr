@@ -12,7 +12,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-        crystal: [latest, nightly]
+        # crystal: [latest, nightly]
+        crystal: [latest]
     runs-on: ${{ matrix.os }}
 
     steps:
