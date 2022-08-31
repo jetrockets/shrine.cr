@@ -65,10 +65,10 @@ class Shrine
       def open(id : String, **options) : IO
         io = IO::Memory.new
         client.get_object(bucket, object_key(id)) do |obj|
-          io << obj
+          IO.copy(obj.body_io, io)
         end
 
-        # io
+        io
         # client.get_object(bucket, object_key(id)).body_io
       end
 
