@@ -41,8 +41,9 @@ class Shrine
       end
 
       def delete_prefixed(delete_prefix : String)
-        delete_prefix = delete_prefix.chomp("/") + "/"
-        store.delete_if { |key, _value| key.start_with?(delete_prefix) }
+        prefix = delete_prefix.chomp("/") + "/"
+        keys = store.keys.select(&.starts_with?(prefix))
+        keys.each { |key| store.delete(key) }
       end
 
       def clear!

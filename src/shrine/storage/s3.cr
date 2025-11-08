@@ -35,7 +35,7 @@ class Shrine
         @client : Awscr::S3::Client?,
         @prefix : String? = nil,
         @upload_options : Hash(String, String) = Hash(String, String).new,
-        @public : Bool = false
+        @public : Bool = false,
       )
       end
 
@@ -73,17 +73,70 @@ class Shrine
       end
 
       # Returns the presigned URL to the file.
+      #
+      # Behavior:
+      # - If the underlying Awscr::S3::Client has a custom endpoint configured
+      #   (for example when using MinIO), that endpoint will be used for the
+      #   generated URL.
+      # - Otherwise, a standard AWS S3 style URL is generated.
+      #
+      # Supported options (non-exhaustive, forwarded when present):
+      # - :expires_in  :: Int32 | Int64  - expiration time in seconds
+      # - :method      :: Symbol         - HTTP method for the presigned URL (default: :get)
+      # - :public      :: Bool           - if true, attempt to generate a public URL
+      # - :host        :: String         - override host name explicitly
+      #
+      # NOTE: This is intentionally opinionated and may differ from earlier
+      # versions. It prefers correctness with custom endpoints over strict
+      # backwards compatibility.
       def url(id : String, **options) : String
+        method = (options[:method]? || :get).to_s.downcase
+        expires_in = options[:expires_in]? || 86_400
+
+        # Prefer explicit host override, otherwise derive from client endpoint
+        # when available, and fall back to library defaults for AWS.
+        host_name =
+          if host = options[:host]?
+            host.to_s
+          elsif ep = client.@endpoint
+            begin
+              uri = URI.parse(ep.to_s)
+              host = uri.host || ep.to_s
+              if uri.port && uri.port != 80 && uri.port != 443
+                "#{host}:#{uri.port}"
+              else
+                host
+              end
+            rescue URI::Error
+              ep.to_s
+            end
+          else
+            nil
+          end
+
         presigned_options = Awscr::S3::Presigned::Url::Options.new(
           aws_access_key: client.@aws_access_key,
           aws_secret_key: client.@aws_secret_key,
           region: client.@region,
           object: "/#{object_key(id)}",
           bucket: bucket,
+          host_name: host_name,
+          expires: expires_in.to_i,
         )
 
         url = Awscr::S3::Presigned::Url.new(presigned_options)
-        url.for(:get)
+
+        # Only :get is used internally today, but support overriding via :method
+        # for future flexibility.
+        presign_method =
+          case method
+          when "get" then :get
+          when "put" then :put
+          else
+            :get
+          end
+
+        url.for(presign_method)
       end
 
       # Returns true if the file exists on the S3.

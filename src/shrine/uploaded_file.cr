@@ -23,6 +23,7 @@ class Shrine
       {% end %}
     {% end %}
 
+    @[JSON::Field(ignore: true)]
     @io : IO?
     @mapper : Mapper
 
@@ -42,7 +43,7 @@ class Shrine
 
     def extension
       result = File.extname(id)[1..-1]?
-      result ||= File.extname(original_filename.not_nil!)[1..-1]? if original_filename
+      result ||= File.extname(original_filename)[1..-1]? if original_filename
       result = result.downcase if result
 
       result
@@ -92,15 +93,15 @@ class Shrine
     # ```
     #
     def open(**options)
-      @io.not_nil!.close if @io
+      @io.try &.close
       @io = _open(**options)
     end
 
-    def open(**options, &block)
+    def open(**options, &)
       open(**options)
 
       begin
-        yield @io.not_nil!
+        yield @io.not_nil! # @io is always set by open above
       ensure
         close
         @io = nil
@@ -129,13 +130,13 @@ class Shrine
     # uploaded_file.download { |tempfile| tempfile.gets_to_end } # tempfile is deleted
     # ```
     #
-    def download(**options, &block)
+    def download(**options, &)
       tempfile = download(**options)
       yield(tempfile)
     ensure
       if tempfile
-        tempfile.not_nil!.close
-        tempfile.not_nil!.delete
+        tempfile.close
+        tempfile.delete
       end
     end
 
@@ -161,7 +162,7 @@ class Shrine
     # Part of complying to the IO interface. It delegates to the internally
     # opened IO object.
     def close
-      io.close if opened?
+      @io.try &.close if opened?
     end
 
     # Returns whether the file has already been opened.
@@ -198,11 +199,11 @@ class Shrine
 
     # Returns the storage that this file was uploaded to.
     def storage : Shrine::Storage::Base
-      Shrine.find_storage(storage_key.not_nil!).not_nil!
+      Shrine.find_storage(storage_key) # storage_key is non-nil Metadata
     end
 
     def io : IO
-      (@io ||= _open).not_nil!
+      (@io ||= _open)
     end
 
     # Returns serializable hash representation of the uploaded file.

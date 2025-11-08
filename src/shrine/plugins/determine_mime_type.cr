@@ -90,7 +90,7 @@ class Shrine
 
         def extract_with_content_type(io, options)
           if io.responds_to?(:content_type) && io.content_type
-            io.content_type.not_nil!.split(";").first
+            io.content_type.to_s.split(";").first
           end
         end
 

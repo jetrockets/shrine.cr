@@ -20,46 +20,45 @@ class ShrineWithStoreDimensionsUsingFastImage < Shrine
   finalize_plugins!
 end
 
-Spectator.describe Shrine::Plugins::StoreDimensions do
-  include FileHelpers
-
+describe Shrine::Plugins::StoreDimensions do
   describe "primary purpose" do
-    let(uploader) {
-      ShrineWithStoreDimensionsUsingFastImage.new("store")
-    }
-
     it "stores width and height in metadata" do
+      uploader = ShrineWithStoreDimensionsUsingFastImage.new("store")
       metadata = uploader.extract_metadata(image("320x180.jpg"))
 
-      expect(metadata["width"]).to eq(320)
-      expect(metadata["height"]).to eq(180)
+      metadata["width"].should eq 320
+      metadata["height"].should eq 180
+    end
+
+    it "adds width/height metadata to uploaded file" do
+      uploader = ShrineWithStoreDimensionsUsingFastImage.new("store")
+      file = uploader.upload(image)
+
+      file.metadata["width"].should eq 300
+      file.metadata["height"].should eq 300
     end
   end
 
-  describe "fastimage in analyzer" do
-    subject { ShrineWithStoreDimensionsUsingFastImage }
-
+  describe "fastimage analyzer" do
     it "extracts image dimensions" do
-      expect(subject.extract_dimensions(image)).to eq({300, 300})
+      ShrineWithStoreDimensionsUsingFastImage.extract_dimensions(image).should eq({300, 300})
     end
 
     it "fails with missing image data" do
       expect_raises(Shrine::Error) do
-        subject.extract_dimensions(fakeio)
+        ShrineWithStoreDimensionsUsingFastImage.extract_dimensions(fakeio)
       end
     end
   end
 
   describe "identify analyzer" do
-    subject { ShrineWithStoreDimensionsUsingIdentify }
-
     it "extracts image dimensions" do
-      expect(subject.extract_dimensions(image)).to eq({300, 300})
+      ShrineWithStoreDimensionsUsingIdentify.extract_dimensions(image).should eq({300, 300})
     end
 
     it "fails with missing image data" do
       expect_raises(Shrine::Error) do
-        subject.extract_dimensions(fakeio)
+        ShrineWithStoreDimensionsUsingIdentify.extract_dimensions(fakeio)
       end
     end
   end

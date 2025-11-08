@@ -13,7 +13,7 @@ class Shrine
 
       def expanded_directory : String
         if relative_prefix
-          File.expand_path(File.join(directory, relative_prefix.not_nil!))
+          File.expand_path(File.join(directory, relative_prefix))
         else
           File.expand_path(directory)
         end
@@ -55,11 +55,32 @@ class Shrine
       end
 
       # Opens the file on the given location in read mode. Accepts additional
-      # `File.open` arguments.
-      def open(id : String, **options) : File
-        # TODO pass other options
-        File.open(path(id), mode: "rb")
-      rescue RuntimeError
+      # `File.open` arguments such as `mode`, `encoding`, and `perm`.
+      def open(id : String, **options) : IO
+        file_path = path(id)
+
+        # Extract supported options, defaulting to binary read mode
+        mode = options[:mode]?.as(String?)
+        mode = "rb" if mode.nil?
+        encoding = options[:encoding]?.as(String?)
+        perm = options[:perm]?.as(Int32?)
+
+        if perm
+          # For file creation, we need to use File.open with permissions
+          if encoding
+            File.open(file_path, mode: mode, encoding: encoding, perm: perm)
+          else
+            File.open(file_path, mode: mode, perm: perm)
+          end
+        else
+          # Standard file opening without permissions
+          if encoding
+            File.open(file_path, mode: mode, encoding: encoding)
+          else
+            File.open(file_path, mode: mode)
+          end
+        end
+      rescue File::Error
         raise Shrine::FileNotFound.new "file #{id.inspect} not found on storage"
       end
 
@@ -130,7 +151,7 @@ class Shrine
       end
 
       private def relative_path(id : String)
-        Path["/"] / relative_prefix.not_nil! / id.gsub("/", File::SEPARATOR)
+        Path["/"] / relative_prefix.as(String) / id.gsub("/", File::SEPARATOR)
       end
 
       private def relative(path)
@@ -138,7 +159,7 @@ class Shrine
       end
 
       private def relative_prefix : String?
-        relative(prefix.not_nil!) if prefix
+        prefix ? relative(prefix) : nil
       end
     end
   end

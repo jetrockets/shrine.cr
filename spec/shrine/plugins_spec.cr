@@ -48,45 +48,52 @@ class PluginUploader < NonPluginUploader
   finalize_plugins!
 end
 
-Spectator.describe "Shrine.plugin" do
+describe "Shrine.plugin" do
   describe NonPluginUploader do
-    let(uploader_instance) { described_class.new("store") }
-
     it "responds to .foo with \"foo\"" do
-      expect(described_class).to respond_to("foo")
-      expect(described_class.foo).to eq("foo")
+      NonPluginUploader.responds_to?(:foo).should be_true
+      NonPluginUploader.foo.should eq "foo"
     end
 
     it "responds to #foo with \"foo\"" do
-      expect(uploader_instance).to respond_to("foo")
-      expect(uploader_instance.foo).to eq("foo")
+      uploader = NonPluginUploader.new("store")
+      uploader.responds_to?(:foo).should be_true
+      uploader.foo.should eq "foo"
     end
   end
 
   describe PluginUploader do
-    let(uploader_instance) { described_class.new("store") }
+    it "overrides .foo and #foo with plugin_foo" do
+      PluginUploader.responds_to?(:foo).should be_true
+      PluginUploader.foo.should eq "plugin_foo"
 
-    it "responds to .foo with \"foo\"" do
-      expect(described_class).to respond_to("foo")
-      expect(described_class.foo).to eq("plugin_foo")
-    end
-
-    it "responds to #foo with \"foo\"" do
-      expect(uploader_instance).to respond_to("foo")
-      expect(uploader_instance.foo).to eq("plugin_foo")
+      uploader = PluginUploader.new("store")
+      uploader.responds_to?(:foo).should be_true
+      uploader.foo.should eq "plugin_foo"
     end
   end
 
   describe PluginUploader::UploadedFile do
-    let(uploaded_file) { PluginUploader::UploadedFile }
+    it "adds foo to UploadedFile subclass only" do
+      PluginUploader::UploadedFile.responds_to?(:foo).should be_true
+      PluginUploader::UploadedFile.foo.should eq "plugin_foo"
 
-    it "responds to .foo with \"foo\"" do
-      expect(uploaded_file).to respond_to("foo")
-      expect(uploaded_file.foo).to eq("plugin_foo")
+      Shrine::UploadedFile.responds_to?(:foo).should be_false
+    end
+  end
+
+  describe "Plugin settings" do
+    it "exposes plugin_settings with all plugins" do
+      settings = PluginUploader.plugin_settings
+      all = settings.all
+      all.size.should be > 0
+      all.any? { |plugin| plugin[:name] == "foo_plugin" }.should be_true
     end
 
-    it "does not pollute superclass" do
-      expect(Shrine::UploadedFile).not_to respond_to("foo")
+    it "provides accessor for each plugin" do
+      settings = PluginUploader.plugin_settings
+      settings.responds_to?(:foo_plugin).should be_true
+      settings.foo_plugin.should be_nil
     end
   end
 end

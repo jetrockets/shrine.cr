@@ -8,6 +8,13 @@ class ShrineWithDetermineMimeTypeFile < Shrine
   finalize_plugins!
 end
 
+class ShrineWithDetermineMimeTypeContentType < Shrine
+  load_plugin(Shrine::Plugins::DetermineMimeType,
+    analyzer: Shrine::Plugins::DetermineMimeType::Tools::ContentType)
+
+  finalize_plugins!
+end
+
 class ShrineWithDetermineMimeTypeMime < Shrine
   load_plugin(Shrine::Plugins::DetermineMimeType,
     analyzer: Shrine::Plugins::DetermineMimeType::Tools::Mime)
@@ -15,51 +22,64 @@ class ShrineWithDetermineMimeTypeMime < Shrine
   finalize_plugins!
 end
 
-Spectator.describe Shrine::Plugins::DetermineMimeType do
-  include FileHelpers
+describe Shrine::Plugins::DetermineMimeType do
+  it "exposes Tools enum" do
+    Shrine::Plugins::DetermineMimeType::Tools.values.size.should be > 0
+  end
 
-  context "file analyzer" do
-    subject { ShrineWithDetermineMimeTypeFile }
+  it "provides MimeTypeAnalyzer for each tool" do
+    Shrine::Plugins::DetermineMimeType::MimeTypeAnalyzer.new(
+      Shrine::Plugins::DetermineMimeType::Tools::File
+    ).should_not be_nil
 
-    describe ".determine_mime_type" do
-      it "determines MIME type from file contents" do
-        expect(subject.determine_mime_type(image)).to eq("image/png")
-      end
+    Shrine::Plugins::DetermineMimeType::MimeTypeAnalyzer.new(
+      Shrine::Plugins::DetermineMimeType::Tools::Mime
+    ).should_not be_nil
 
-      it "returns text/plain for unidentified MIME types" do
-        expect(subject.determine_mime_type(fakeio("a" * 1024))).to eq("text/plain")
-      end
+    Shrine::Plugins::DetermineMimeType::MimeTypeAnalyzer.new(
+      Shrine::Plugins::DetermineMimeType::Tools::ContentType
+    ).should_not be_nil
+  end
 
-      it "is able to determine MIME type for non-files" do
-        expect(subject.determine_mime_type(fakeio(image.gets_to_end))).to eq("image/png")
-      end
+  it "adds determine_mime_type to uploader" do
+    ShrineWithDetermineMimeTypeFile.responds_to?(:determine_mime_type).should be_true
+  end
 
-      it "returns nil for empty IOs" do
-        expect(subject.determine_mime_type(fakeio(""))).to be_nil
-      end
+  describe "file analyzer" do
+    it "determines MIME type from file contents" do
+      ShrineWithDetermineMimeTypeFile.determine_mime_type(image).should eq "image/png"
+    end
+
+    it "returns text/plain for unidentified MIME types" do
+      ShrineWithDetermineMimeTypeFile.determine_mime_type(fakeio("a" * 1024)).should eq "text/plain"
+    end
+
+    it "is able to determine MIME type for non-files" do
+      io = fakeio(image.gets_to_end)
+      ShrineWithDetermineMimeTypeFile.determine_mime_type(io).should eq "image/png"
+    end
+
+    it "returns nil for empty IOs" do
+      ShrineWithDetermineMimeTypeFile.determine_mime_type(fakeio("")).should be_nil
     end
   end
 
-  context "mime analyzer" do
-    subject { ShrineWithDetermineMimeTypeMime }
+  describe "mime analyzer" do
+    it "extracts MIME type from the file extension" do
+      ShrineWithDetermineMimeTypeMime.determine_mime_type(fakeio(filename: "image.png")).should eq "image/png"
+      ShrineWithDetermineMimeTypeMime.determine_mime_type(image).should eq "image/png"
+    end
 
-    describe ".determine_mime_type" do
-      it "extract MIME type from the file extension" do
-        expect(subject.determine_mime_type(fakeio(filename: "image.png"))).to eq("image/png")
-        expect(subject.determine_mime_type(image)).to eq("image/png")
-      end
+    it "extracts MIME type from file extension when IO is empty" do
+      ShrineWithDetermineMimeTypeMime.determine_mime_type(fakeio("", filename: "image.png")).should eq "image/png"
+    end
 
-      it "extracts MIME type from file extension when IO is empty" do
-        expect(subject.determine_mime_type(fakeio("", filename: "image.png"))).to eq("image/png")
-      end
+    it "returns nil on unknown extension" do
+      ShrineWithDetermineMimeTypeMime.determine_mime_type(fakeio(filename: "image.foo")).should be_nil
+    end
 
-      it "returns nil on unknown extension" do
-        expect(subject.determine_mime_type(fakeio(filename: "image.foo"))).to be_nil
-      end
-
-      it "returns nil when input is not a file" do
-        expect(subject.determine_mime_type(fakeio)).to be_nil
-      end
+    it "returns nil when input is not a file" do
+      ShrineWithDetermineMimeTypeMime.determine_mime_type(fakeio).should be_nil
     end
   end
 end

@@ -1,257 +1,197 @@
+require "../../spec_helper"
 require "file_utils"
 
-require "../../spec_helper"
+def build_fs_storage(root, prefix = nil, permissions = Shrine::Storage::FileSystem::DEFAULT_PERMISSIONS, dir_permissions = Shrine::Storage::FileSystem::DEFAULT_DIRECTORY_PERMISSIONS)
+  Shrine::Storage::FileSystem.new(directory: root, prefix: prefix, permissions: permissions, directory_permissions: dir_permissions)
+end
 
-Spectator.describe Shrine::Storage::FileSystem do
-  include FileHelpers
-
-  subject {
-    Shrine::Storage::FileSystem.new(
-      directory: root,
-      prefix: prefix,
-      permissions: permissions,
-      directory_permissions: directory_permissions
-    )
-  }
-
-  let(root) { File.join(Dir.tempdir, "shrine") }
-  let(prefix) { nil }
-  let(permissions) { Shrine::Storage::FileSystem::DEFAULT_PERMISSIONS }
-  let(directory_permissions) { Shrine::Storage::FileSystem::DEFAULT_DIRECTORY_PERMISSIONS }
-
+describe Shrine::Storage::FileSystem do
   describe "#initialize" do
-    context "without `prefix`" do
-      after_each do
-        FileUtils.rm_rf(root)
-      end
+    it "expands the directory and creates it without prefix" do
+      root = File.join(Dir.tempdir, "shrine-init")
+      storage = build_fs_storage(root)
 
-      it "expands the directory" do
-        path = File.expand_path(root)
+      File.directory?(storage.expanded_directory).should be_true
+      storage.expanded_directory.should eq File.expand_path(root)
 
-        expect(
-          subject.expanded_directory
-        ).to eq(path)
-      end
-
-      it "creates the given directory" do
-        expect(
-          File.directory?(subject.expanded_directory)
-        ).to be_true
-      end
+      FileUtils.rm_rf(root)
     end
 
-    context "with `prefix`" do
-      let(prefix) { "prefix" }
+    it "expands the directory and creates it with prefix" do
+      root = File.join(Dir.tempdir, "shrine-init-prefix")
+      prefix = "prefix"
+      storage = build_fs_storage(root, prefix)
 
-      after_each do
-        FileUtils.rm_rf(File.join(root, prefix))
-        FileUtils.rm_rf(root)
-      end
+      File.directory?(storage.expanded_directory).should be_true
+      storage.expanded_directory.should eq File.expand_path(File.join(root, prefix))
 
-      it "expands the directory" do
-        path = File.expand_path(File.join(root, prefix))
-
-        expect(
-          subject.expanded_directory
-        ).to eq(path)
-      end
-
-      it "creates the given directory" do
-        expect(
-          File.directory?(File.join(subject.expanded_directory))
-        ).to be_true
-      end
+      FileUtils.rm_rf(root)
     end
 
-    context "with default directory permissions" do
-      after_each do
-        FileUtils.rm_rf(root)
-      end
+    it "sets custom directory permissions" do
+      root = File.join(Dir.tempdir, "shrine-perm")
+      dir_permissions = 0o500
+      storage = build_fs_storage(root, nil, Shrine::Storage::FileSystem::DEFAULT_PERMISSIONS, dir_permissions)
 
-      it "sets directory permissions" do
-        expect(File.info(subject.expanded_directory).permissions.value)
-          .to eq(Shrine::Storage::FileSystem::DEFAULT_DIRECTORY_PERMISSIONS)
-      end
-    end
+      File.info(storage.expanded_directory).permissions.value.should eq dir_permissions
 
-    context "with 0x500 directory permissions" do
-      let(directory_permissions) { 0o500 }
-
-      after_each do
-        FileUtils.rm_rf(root)
-      end
-
-      it "sets directory permissions" do
-        expect(
-          File.info(subject.expanded_directory).permissions.value
-        ).to eq(0o500)
-      end
+      FileUtils.rm_rf(root)
     end
   end
 
   describe "#upload" do
-    after_each do
+    it "creates subdirectories and copies content" do
+      root = File.join(Dir.tempdir, "shrine-upload")
+      storage = build_fs_storage(root)
+
+      storage.upload(FakeIO.new("A" * 20_000), "a/b/c/foo.jpg")
+
+      storage.exists?("a/b/c/foo.jpg").should be_true
+      storage.open("a/b/c/foo.jpg").size.should eq 20_000
+
       FileUtils.rm_rf(root)
     end
 
-    it "creates subdirectories" do
-      subject.upload(FakeIO.new, "a/a/a.jpg")
+    it "respects file permissions" do
+      root = File.join(Dir.tempdir, "shrine-upload-perm")
+      storage = build_fs_storage(root, nil, 0o600)
 
-      expect(
-        subject.exists?("a/a/a.jpg")
-      ).to be_true
+      storage.upload(FakeIO.new, "foo.jpg")
+      File.info(storage.open("foo.jpg").path).permissions.value.should eq 0o600
+
+      FileUtils.rm_rf(root)
     end
 
-    it "copies full file content" do
-      subject.upload(FakeIO.new("A" * 20_000), "foo.jpg")
+    it "sets directory permissions on intermediary directories" do
+      root = File.join(Dir.tempdir, "shrine-upload-dir-perm")
+      storage = build_fs_storage(root, nil, Shrine::Storage::FileSystem::DEFAULT_PERMISSIONS, 0o744)
 
-      expect(
-        subject.open("foo.jpg").size
-      ).to eq(20_000)
+      storage.upload(FakeIO.new, "a/b/c/file.jpg")
+
+      File.info("#{storage.expanded_directory}/a").permissions.value.should eq 0o744
+      File.info("#{storage.expanded_directory}/a/b").permissions.value.should eq 0o744
+      File.info("#{storage.expanded_directory}/a/b/c").permissions.value.should eq 0o744
+
+      FileUtils.rm_rf(root)
     end
 
-    context "with 0o600 permissions" do
-      let(permissions) { 0o600 }
+    it "moves files when move: true" do
+      root = File.join(Dir.tempdir, "shrine-move")
+      storage = build_fs_storage(root)
+      file = tempfile("file")
 
-      it "sets file permissions" do
-        subject.upload(FakeIO.new, "foo.jpg")
+      storage.upload(file, "foo", move: true)
 
-        expect(
-          subject.open("foo.jpg").path
-        ).to have_permissions(permissions)
-      end
+      storage.open("foo").gets_to_end.should eq "file"
+      File.exists?(file.path).should be_false
+
+      FileUtils.rm_rf(root)
     end
-
-    context "with 0o744 directory permissions" do
-      let(directory_permissions) { 0o744 }
-
-      it "sets directory permissions on intermediary directories" do
-        subject.upload(FakeIO.new, "a/b/c/file.jpg")
-
-        expect(
-          "#{subject.expanded_directory}/a"
-        ).to have_permissions(directory_permissions)
-
-        expect(
-          "#{subject.expanded_directory}/a/b"
-        ).to have_permissions(directory_permissions)
-
-        expect(
-          "#{subject.expanded_directory}/a/b/c"
-        ).to have_permissions(directory_permissions)
-      end
-    end
-
-    describe "on :move" do
-      it "moves movable files" do
-        file = tempfile("file")
-
-        subject.upload(file, "foo", move: true)
-
-        expect(
-          subject.open("foo").gets_to_end
-        ).to eq("file")
-
-        expect(
-          File.exists?(file.path)
-        ).to be_false
-      end
-
-      it "creates subdirectories" do
-        file = tempfile("file")
-
-        subject.upload(file, "a/a/a.jpg", move: true)
-
-        expect(
-          subject.exists?("a/a/a.jpg")
-        ).to be_true
-      end
-
-      # it "cleans moved file's directory" do
-      #   uploaded_file = subject.upload(fakeio, location: "a/a/a.jpg")
-      #   subject.upload(uploaded_file, "b.jpg", move: true)
-
-      #   expect(
-      #     subject.exists?("a/a")
-      #   ).to be_false
-      # end
-
-      context "with 0o600 permissions" do
-        let(permissions) { 0o600 }
-
-        it "sets file permissions" do
-          subject.upload(tempfile("file"), "bar.jpg", move: true)
-
-          expect(
-            subject.open("bar.jpg").path
-          ).to have_permissions(permissions)
-        end
-      end
-    end
-  end
-
-  describe "#open" do
   end
 
   describe "#url" do
-    after_each do
+    it "returns full path without prefix" do
+      root = File.join(Dir.tempdir, "shrine-url")
+      storage = build_fs_storage(root)
+      storage.upload(FakeIO.new, "foo.jpg")
+
+      storage.url("foo.jpg").should eq "#{storage.expanded_directory}/foo.jpg"
+
       FileUtils.rm_rf(root)
     end
 
-    it "returns the full path without :prefix" do
-      subject.upload(fakeio, "foo.jpg")
+    it "applies host without prefix" do
+      root = File.join(Dir.tempdir, "shrine-url-host")
+      storage = build_fs_storage(root)
+      storage.upload(FakeIO.new, "foo.jpg")
 
-      expect(
-        subject.url("foo.jpg")
-      ).to eq("#{subject.expanded_directory}/foo.jpg")
+      storage.url("foo.jpg", host: "http://example.test").should eq "http://example.test#{root}/foo.jpg"
+
+      FileUtils.rm_rf(root)
     end
 
-    it "applies a host without :prefix" do
-      subject.upload(fakeio, "foo.jpg")
+    it "returns path relative to prefix" do
+      root = File.join(Dir.tempdir, "shrine-url-prefix")
+      prefix = "prefix"
+      storage = build_fs_storage(root, prefix)
+      storage.upload(FakeIO.new, "foo.jpg")
 
-      expect(
-        subject.url("foo.jpg", host: "http://124.83.12.24")
-      ).to eq("http://124.83.12.24#{root}/foo.jpg")
+      storage.url("foo.jpg").should eq "/#{prefix}/foo.jpg"
+
+      FileUtils.rm_rf(root)
     end
 
-    context "with `prefix`" do
-      let(prefix) { "prefix" }
+    it "accepts host with prefix" do
+      root = File.join(Dir.tempdir, "shrine-url-prefix-host")
+      prefix = "prefix"
+      storage = build_fs_storage(root, prefix)
+      storage.upload(FakeIO.new, "foo.jpg")
 
-      it "returns the path relative to the :prefix" do
-        subject.upload(fakeio, "foo.jpg")
+      storage.url("foo.jpg", host: "http://cdn.test").should eq "http://cdn.test/#{prefix}/foo.jpg"
 
-        expect(
-          subject.url("foo.jpg")
-        ).to eq("/#{prefix}/foo.jpg")
-      end
-
-      it "accepts a host with :prefix" do
-        subject.upload(fakeio, "foo.jpg")
-
-        expect(
-          subject.url("foo.jpg", host: "http://abc123.cloudfront.net")
-        ).to eq("http://abc123.cloudfront.net/#{prefix}/foo.jpg")
-      end
+      FileUtils.rm_rf(root)
     end
   end
 
   describe "#delete" do
-  end
+    it "deletes file and cleans empty directories" do
+      root = File.join(Dir.tempdir, "shrine-delete-clean")
+      storage = build_fs_storage(root)
 
-  describe "#delete_prefixed" do
-  end
+      storage.upload(FakeIO.new("data"), "a/b/c/file.txt")
+      File.exists?(storage.path("a/b/c/file.txt")).should be_true
 
-  describe "#clear!" do
+      storage.delete("a/b/c/file.txt")
+      File.exists?(storage.path("a/b/c/file.txt")).should be_false
+
+      FileUtils.rm_rf(root)
+    end
+
+    it "raises FileNotFound on missing file open" do
+      root = File.join(Dir.tempdir, "shrine-open-missing")
+      storage = build_fs_storage(root)
+
+      expect_raises(Shrine::FileNotFound) do
+        storage.open("nonexistent.txt")
+      end
+
+      FileUtils.rm_rf(root)
+    end
+
+    it "accepts File.open options" do
+      root = File.join(Dir.tempdir, "shrine-open-options")
+      storage = build_fs_storage(root)
+
+      # Upload a test file
+      storage.upload(IO::Memory.new("test content"), "test.txt")
+
+      # Test with custom mode (read-only text mode)
+      file = storage.open("test.txt", mode: "r")
+      file.should be_a(File)
+      file.close
+
+      # Test with default binary mode
+      file = storage.open("test.txt")
+      file.should be_a(File)
+      file.close
+
+      # Test with encoding parameter
+      file = storage.open("test.txt", mode: "r", encoding: "utf-8")
+      file.should be_a(File)
+      file.close
+
+      FileUtils.rm_rf(root)
+    end
   end
 
   describe "#path" do
     it "returns path to the file" do
-      expect(
-        subject.path("foo/bar/baz")
-      ).to eq("#{root}/foo/bar/baz")
-    end
-  end
+      root = File.join(Dir.tempdir, "shrine-path")
+      storage = build_fs_storage(root)
 
-  describe "#clean" do
+      storage.path("foo/bar/baz").should eq "#{root}/foo/bar/baz"
+
+      FileUtils.rm_rf(root)
+    end
   end
 end

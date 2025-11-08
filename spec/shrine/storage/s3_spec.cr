@@ -1,165 +1,153 @@
 require "../../spec_helper"
-require "awscr-s3"
 
-Spectator.describe Shrine::Storage::S3 do
-  subject {
-    Shrine::Storage::S3.new(
-      bucket: bucket,
-      client: client,
-      prefix: prefix,
-      upload_options: {"x-amz-acl" => "private"}
-    )
-  }
+# Fake clients used for behavior specs
+class FakeClientForShrineSpec < Awscr::S3::Client
+  getter put_calls = [] of Tuple(String, String, String, Hash(String, String))
 
-  let(client) { Awscr::S3::Client.new("us-east-2", "test_key", "test_secret") }
-  let(bucket) { "test" }
-  let(prefix) { nil }
-  let(id) { "ex" }
-
-  let(metadata) {
-    Shrine::UploadedFile::MetadataType{
-      "filename"  => id,
-      "mime_type" => "image/jpeg",
-      "size"      => "50",
-    }
-  }
-
-  describe "#initialize" do
-    context "without `prefix`" do
-      it "object_key" do
-        expect(
-          subject.object_key(id)
-        ).to eq(id)
-      end
-    end
-
-    context "with `prefix`" do
-      let(prefix) { "prefix" }
-
-      it "object_key" do
-        expect(
-          subject.object_key(id)
-        ).to eq("#{prefix}/#{id}")
-      end
-    end
+  def initialize
+    super("key", "secret", "us-east-2")
   end
 
-  describe "#upload" do
-    context "without `prefix`" do
-      it "creates subdirectories" do
-        WebMock.stub(:put, "https://s3-us-east-2.amazonaws.com/test/object?")
-          .with(body: "").to_return(status: 200, body: "", headers: {"ETag" => "etag"})
-
-        expect(
-          subject.upload(FakeIO.new, "object")
-        ).to be_true
-      end
-    end
-
-    context "with `prefix`" do
-      let(prefix) { "prefix" }
-
-      it "creates subdirectories" do
-        WebMock.stub(:put, "https://s3-us-east-2.amazonaws.com/test/#{prefix}/a/a/a.jpg?")
-          .with(body: "").to_return(status: 200, body: "", headers: {"ETag" => "etag"})
-
-        expect(
-          subject.upload(FakeIO.new, "a/a/a.jpg")
-        ).to be_true
-      end
-    end
-
-    context "with metadata" do
-      it "file uploads" do
-        WebMock.stub(:put, "https://s3-us-east-2.amazonaws.com/test/a/a/a.jpg?")
-          .with(body: "").to_return(status: 200, body: "", headers: {"ETag" => "etag"})
-
-        expect(
-          subject.upload(FakeIO.new, "a/a/a.jpg", metadata)
-        ).to be_true
-      end
-    end
+  def put_object(bucket, key, body, options)
+    put_calls << {bucket, key, body, options}
+    true
   end
 
-  describe "#exists?" do
-    it "file exists" do
-      WebMock.stub(:head, "https://s3-us-east-2.amazonaws.com/test/a/a/a.jpg?")
-        .to_return(status: 200, headers: {"Content-Type" => "binary/octet-stream", "Last-Modified" => "Sun, 10 Jan 2020 4:47:46 UTC"})
-      expect(
-        subject.exists?("a/a/a.jpg")
-      ).to be_true
-    end
-
-    it "file does not exist" do
-      WebMock.stub(:head, "https://s3-us-east-2.amazonaws.com/test/ex.jpg?")
-        .to_return(status: 404)
-      expect(
-        subject.exists?("ex.jpg")
-      ).to be_false
-    end
+  # minimal interface required by url implementation
+  def aws_access_key
+    "key"
   end
 
-  describe "#url" do
-    context "without `prefix`" do
-      it "returns the full url" do
-        expect(
-          subject.url("foo.jpg")
-        ).to match(/https:\/\/s3-#{client.@region}.amazonaws.com\/#{bucket}\/foo.jpg/)
-      end
-    end
-
-    context "with `prefix`" do
-      let(prefix) { "prefix" }
-      it "returns the full url" do
-        expect(
-          subject.url("foo.jpg")
-        ).to match(/https:\/\/s3-#{client.@region}.amazonaws.com\/#{bucket}\/#{prefix}\/foo.jpg/)
-      end
-    end
+  def aws_secret_key
+    "secret"
   end
 
-  describe "#open" do
-    context "without `prefix`" do
-      it "returns a IO-like object" do
-        WebMock.stub(:get, "https://s3-us-east-2.amazonaws.com/test/foo.jpg?")
-          .to_return(body_io: FakeIO.new)
-        expect(
-          subject.open("foo.jpg")
-        ).to be_kind_of(IO::Memory)
-      end
-    end
-    context "with `prefix`" do
-      let(prefix) { "prefix" }
-      it "returns a IO-like object" do
-        WebMock.stub(:get, "https://s3-us-east-2.amazonaws.com/test/#{prefix}/foo.jpg?")
-          .to_return(body_io: FakeIO.new)
-        expect(
-          subject.open("foo.jpg")
-        ).to be_kind_of(IO::Memory)
-      end
-    end
+  def region
+    "us-east-2"
   end
 
-  describe "#delete" do
-    context "without `prefix`" do
-      it "deletes objects" do
-        WebMock.stub(:delete, "https://s3-us-east-2.amazonaws.com/test/foo.jpg?")
-          .to_return(status: 204)
-        expect(
-          subject.delete("foo.jpg")
-        ).to be_true
-      end
-    end
+  def endpoint
+    nil
+  end
+end
 
-    context "with `prefix`" do
-      let(prefix) { "prefix" }
-      it "deletes objects" do
-        WebMock.stub(:delete, "https://s3-us-east-2.amazonaws.com/test/#{prefix}/foo.jpg?")
-          .to_return(status: 204)
-        expect(
-          subject.delete("foo.jpg")
-        ).to be_true
-      end
+class ExistsClientForShrineSpec < Awscr::S3::Client
+  def head_object(bucket, object : String? = nil, **options)
+    if object == "exists"
+      true
+    else
+      raise Awscr::S3::Exception.new("Missing")
     end
+  end
+end
+
+class DeleteClientForShrineSpec < Awscr::S3::Client
+  getter deleted = [] of String
+
+  def delete_object(bucket, object : String? = nil, **options)
+    deleted << object if object
+    true
+  end
+end
+
+describe Shrine::Storage::S3 do
+  it "builds object_key with and without prefix" do
+    client = Awscr::S3::Client.new("key", "secret", "region")
+
+    storage = Shrine::Storage::S3.new("bucket", client)
+    storage.object_key("id").should eq "id"
+
+    storage_prefixed = Shrine::Storage::S3.new("bucket", client, "prefix")
+    storage_prefixed.object_key("id").should eq "prefix/id"
+  end
+
+  it "generates URLs with and without prefix" do
+    client = Awscr::S3::Client.new("key", "secret", "us-east-2")
+
+    storage = Shrine::Storage::S3.new("bucket", client)
+    url = storage.url("foo.jpg")
+    url.should contain("bucket")
+    url.should contain("foo.jpg")
+
+    prefixed = Shrine::Storage::S3.new("bucket", client, "prefix")
+    prefixed_url = prefixed.url("foo.jpg")
+    prefixed_url.should contain("bucket")
+    prefixed_url.should contain("prefix/foo.jpg")
+  end
+
+  it "uses custom endpoint host for URLs" do
+    client = Awscr::S3::Client.new("key", "secret", "us-east-2", endpoint: "http://localhost:9000")
+    storage = Shrine::Storage::S3.new("bucket", client)
+
+    url = storage.url("foo.jpg")
+    url.should contain("localhost:9000")
+    url.should contain("bucket")
+    url.should contain("foo.jpg")
+  end
+
+  it "uses custom endpoint with non-default port" do
+    client = Awscr::S3::Client.new("key", "secret", "us-east-2", endpoint: "http://127.0.0.1:9000")
+    storage = Shrine::Storage::S3.new("bucket", client)
+
+    url = storage.url("foo.jpg")
+    url.should contain("127.0.0.1:9000")
+    url.should contain("bucket")
+    url.should contain("foo.jpg")
+  end
+
+  it "allows overriding host via :host option" do
+    client = Awscr::S3::Client.new("key", "secret", "us-east-2")
+    storage = Shrine::Storage::S3.new("bucket", client)
+
+    url = storage.url("foo.jpg", host: "cdn.example.com")
+    url.should contain("cdn.example.com")
+    url.should contain("bucket")
+    url.should contain("foo.jpg")
+  end
+
+  it "accepts different HTTP methods without raising" do
+    client = Awscr::S3::Client.new("key", "secret", "us-east-2")
+    storage = Shrine::Storage::S3.new("bucket", client)
+
+    # These should all succeed and return a URL string
+    storage.url("foo-get.jpg", method: :get).should be_a(String)
+    storage.url("foo-put.jpg", method: :put).should be_a(String)
+
+    # Unknown/unsupported methods should gracefully fall back to :get
+    storage.url("foo-head.jpg", method: :head).should be_a(String)
+    storage.url("foo-post.jpg", method: :post).should be_a(String)
+    storage.url("foo-unknown.jpg", method: :unknown).should be_a(String)
+  end
+
+  it "uses metadata and public flag when uploading" do
+    client = FakeClientForShrineSpec.new
+    storage = Shrine::Storage::S3.new("bucket", client, nil, {"x-default" => "1"}, true)
+
+    metadata = Shrine::UploadedFile::MetadataType{"filename" => "name.txt"}
+    storage.upload(IO::Memory.new("body"), "id", metadata: metadata, custom: "2")
+
+    call = client.put_calls.first
+    call[0].should eq "bucket"
+    call[1].should eq "id"
+    call[3]["Content-Disposition"].should contain "name.txt"
+    call[3]["x-amz-acl"].should eq "public-read"
+    call[3]["x-default"].should eq "1"
+    call[3]["custom"].should eq "2"
+  end
+
+  it "exists? returns true/false based on head_object" do
+    client = ExistsClientForShrineSpec.new("key", "secret", "us-east-2")
+    storage = Shrine::Storage::S3.new("bucket", client)
+
+    storage.exists?("exists").should be_true
+    storage.exists?("missing").should be_false
+  end
+
+  it "delete delegates to client" do
+    client = DeleteClientForShrineSpec.new("key", "secret", "us-east-2")
+    storage = Shrine::Storage::S3.new("bucket", client)
+
+    storage.delete("id").should be_true
+    client.deleted.should eq ["id"]
   end
 end

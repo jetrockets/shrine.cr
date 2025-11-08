@@ -9,11 +9,11 @@ class ShrineWithAddMetadata < Shrine
     super
   end
 
-  add_metadata :custom, ->{
+  add_metadata :custom, -> {
     "value"
   }
 
-  add_metadata :multiple_values, ->{
+  add_metadata :multiple_values, -> {
     text = io.gets_to_end
 
     Shrine::UploadedFile::MetadataType{
@@ -25,43 +25,48 @@ class ShrineWithAddMetadata < Shrine
   finalize_plugins!
 end
 
-Spectator.describe Shrine::Plugins::AddMetadata do
-  include FileHelpers
-
-  let(:uploader) {
-    ShrineWithAddMetadata.new("store")
-  }
-
+describe Shrine::Plugins::AddMetadata do
   describe "Shrine.add_metadata" do
     describe "with argument" do
       it "adds declared metadata" do
-        metadata = uploader.extract_metadata(fakeio)
+        uploader = ShrineWithAddMetadata.new("store")
+        io = fakeio("text")
+        pos_before = io.pos
+        metadata = uploader.extract_metadata(io)
 
-        expect(metadata["custom"]).to eq("value")
-        expect(metadata["size"]).to be_a(Int32)
+        io.pos.should eq pos_before
+
+        metadata["custom"].should eq "value"
+        metadata["size"].should be_a(Int32)
       end
 
       it "adds the metadata method to UploadedFile" do
+        uploader = ShrineWithAddMetadata.new("store")
         uploaded_file = uploader.upload(fakeio)
 
-        expect(uploaded_file.metadata["custom"]).to eq("value")
+        uploaded_file.metadata["custom"].should eq "value"
       end
     end
 
-    describe "withщге argument" do
-      it "adds declared metadata" do
-        metadata = uploader.extract_metadata(fakeio)
+    describe "with multiple metadata values" do
+      it "adds declared metadata and preserves IO position" do
+        uploader = ShrineWithAddMetadata.new("store")
+        io = fakeio("text")
+        metadata = uploader.extract_metadata(io)
 
-        expect(metadata["custom_1"]).to eq(fakeio.gets_to_end)
-        expect(metadata["custom_2"]).to eq(fakeio.gets_to_end * 2)
-        expect(metadata["size"]).to be_a(Int32)
+        metadata["custom_1"].should eq "text"
+        metadata["custom_2"].should eq "text" * 2
+        metadata["size"].should be_a(Int32)
+        io.pos.should eq 0
       end
 
       it "adds the metadata method to UploadedFile" do
-        uploaded_file = uploader.upload(fakeio)
+        uploader = ShrineWithAddMetadata.new("store")
+        io = fakeio("text")
+        uploaded_file = uploader.upload(io)
 
-        expect(uploaded_file.metadata["custom_1"]).to eq(fakeio.gets_to_end)
-        expect(uploaded_file.metadata["custom_2"]).to eq(fakeio.gets_to_end * 2)
+        uploaded_file.metadata["custom_1"].should eq "text"
+        uploaded_file.metadata["custom_2"].should eq "text" * 2
       end
     end
   end

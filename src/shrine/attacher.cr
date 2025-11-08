@@ -123,6 +123,11 @@ class Shrine
         destroy_previous
         promote_cached
         @previous = nil if changed?
+      rescue Shrine::FileNotFound
+        # Best-effort cleanup: missing files can be ignored, especially
+        # when finalize is triggered from GC/at_exit where storages may
+        # already be cleared or files removed.
+
       end
 
       # If a new cached file has been attached, uploads it to permanent storage.
@@ -142,7 +147,7 @@ class Shrine
       #     attacher.promote
       #     attacher.stored? #=> true
       def promote(storage = store_key, **options) : Shrine::UploadedFile | Nil
-        set upload(file.not_nil!, storage, **options.merge(action: :store)) if file
+        set upload(file, storage, **options.merge(action: :store)) if file
       end
 
       # Delegates to `Shrine.upload`, passing the #context.
@@ -164,7 +169,7 @@ class Shrine
       #     attacher.destroy_previous
       #     previous_file.exists? #=> false
       def destroy_previous
-        @previous.not_nil!.destroy_attached if changed?
+        @previous.try &.destroy_attached if changed?
       end
 
       # Destroys the attached file if it exists and is uploaded to permanent
@@ -257,7 +262,8 @@ class Shrine
       #     attacher.attach(file)
       #     attacher.changed? #=> true
       #
-      # TODO: This will work incorrect if `@previous` is nil
+      #     attacher.finalize
+      #     attacher.changed? #=> false
       def changed?
         !!@previous
       end
