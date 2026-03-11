@@ -1,12 +1,12 @@
 name: shrine
-version: 0.6.5
+version: 0.7.0  # Bumped version since new features was added
 description: |
   File Attachment toolkit for Crystal applications
 
 authors:
   - Igor Alexandrov <igor.alexandrov@gmail.com>
   - Mick Wout <wout@mick-wout.com>
-
+  - slick phantom <ynwghosted@icloud.com>
 crystal: ">= 1.0.0, < 2.0.0"
 
 license: MIT
@@ -20,7 +20,7 @@ dependencies:
     version: ~> 1.2.0
   habitat:
     github: luckyframework/habitat
-
+ 
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba

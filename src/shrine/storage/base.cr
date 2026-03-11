@@ -4,7 +4,6 @@ class Shrine
   module Storage
     abstract class Base
       getter? clean : Bool = true
-
       # uploads `io` to the location `id`, can accept upload options
       abstract def upload(io : IO | UploadedFile, id : String, move = false, **options)
 
@@ -23,5 +22,5 @@ class Shrine
       # cleans the path in the storage
       abstract def clean(path : String)
     end
-  end
+  end   
 end
