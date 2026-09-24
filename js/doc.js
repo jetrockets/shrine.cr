@@ -143,14 +143,14 @@ CrystalDocs.runQuery = function(query) {
         matches = matches.concat(typeMatches);
       }
       results.push({
-        id: constant.html_id,
+        id: constant.id,
         type: type.full_name,
         result_type: "constant",
         name: constant.name,
         full_name: type.full_name + "#" + constant.name,
         value: constant.value,
         summary: constant.summary,
-        href: type.path + "#" + constant.html_id,
+        href: type.path + "#" + constant.id,
         matched_fields: matchedFields,
         matched_terms: matches
       });
@@ -607,7 +607,7 @@ Navigator = function(sidebar, searchInput, list, leaveSearchScope){
     var go = function() {
       if (!self.moveTimeout) return;
       self.move(upwards);
-      self.moveTimout = setTimeout(go, 600);
+      self.moveTimeout = setTimeout(go, 600);
     };
     self.moveTimeout = setTimeout(go, 800);*/
   }
@@ -930,7 +930,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var openTypes = typesList.querySelectorAll('.current');
     if (openTypes.length > 0) {
       var lastOpenType = openTypes[openTypes.length - 1];
-      lastOpenType.scrollIntoView();
+      lastOpenType.scrollIntoView(!(window.matchMedia('only screen and (max-width: 635px)')).matches);
     }
   }
 
@@ -1000,7 +1000,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // TODO: Add OpenSearch description
     var searchQuery = location.hash.substring(3);
     history.pushState({searchQuery: searchQuery}, "Search for " + searchQuery, location.href.replace(/#q=.*/, ""));
-    searchInput.value = searchQuery;
+    searchInput.value = decodeURIComponent(searchQuery);
     document.addEventListener('CrystalDocs:loaded', performSearch);
   }
 

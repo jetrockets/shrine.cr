@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 1.2.2">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Crystal Docs 1.20.3">
 <meta name="crystal_docs.project_version" content="master">
 <meta name="crystal_docs.project_name" content="shrine">
 
@@ -22,9 +23,14 @@
 
 <svg class="hidden">
   <symbol id="octicon-link" viewBox="0 0 16 16">
-    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+    <path fill="currentColor" fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
   </symbol>
 </svg>
+<input type="checkbox" id="sidebar-btn">
+<label for="sidebar-btn" id="sidebar-btn-label">
+  <svg class="open" xmlns="http://www.w3.org/2000/svg" height="2em" width="2em" viewBox="0 0 512 512"><title>Open Sidebar</title><path fill="currentColor" d="M80 96v64h352V96H80zm0 112v64h352v-64H80zm0 112v64h352v-64H80z"></path></svg>
+  <svg class="close" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 512 512"><title>Close Sidebar</title><path fill="currentColor" d="m118.6 73.4-45.2 45.2L210.7 256 73.4 393.4l45.2 45.2L256 301.3l137.4 137.3 45.2-45.2L301.3 256l137.3-137.4-45.2-45.2L256 210.7Z"></path></svg>
+</label>
 <div class="sidebar">
   <div class="sidebar-header">
     <div class="search-box">
@@ -305,9 +311,13 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Shrine::Attacher::InstanceMethods
+  <span class="kind">
+    module
+  </span> Shrine::<wbr>Attacher::<wbr>InstanceMethods
 
 </h1>
+
+
 
 
 
@@ -350,7 +360,7 @@
   </h2>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L23" target="_blank">
+      <a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L23" target="_blank">
         shrine/attacher.cr
       </a>
     
@@ -361,6 +371,7 @@
 
 
 
+  
   <h2>
     <a id="constructors" class="anchor" href="#constructors">
   <svg class="octicon-link" aria-hidden="true">
@@ -372,7 +383,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28file%3AShrine%3A%3AUploadedFile%3F%3Dnil%2Ccache_key%3AString%3D%22cache%22%2Cstore_key%3AString%3D%22store%22%29-class-method" class="signature"><strong>.new</strong>(file : Shrine::UploadedFile? = <span class="n">nil</span>, cache_key : String = <span class="s">&quot;cache&quot;</span>, store_key : String = <span class="s">&quot;store&quot;</span>)</a>
+        <a href="#new%28file%3AShrine%3A%3AUploadedFile%7CNil%3Dnil%2Ccache_key%3AString%3D%22cache%22%2Cstore_key%3AString%3D%22store%22%29-class-method" class="signature"><strong>.new</strong>(file : Shrine::UploadedFile | Nil = <span class="n">nil</span>, cache_key : String = <span class="s">&quot;cache&quot;</span>, store_key : String = <span class="s">&quot;store&quot;</span>)</a>
         
           <div class="summary"><p>Initializes the attached file, temporary and permanent storage.</p></div>
         
@@ -381,9 +392,11 @@
   </ul>
 
 
+  
 
+  
 
-
+  
   <h2>
     <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
   <svg class="octicon-link" aria-hidden="true">
@@ -395,14 +408,14 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#assign%28value%3AIO%3F%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#assign</strong>(value : IO?, **options)</a>
+        <a href="#assign%28value%3AIO%7CNil%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#assign</strong>(value : IO | Nil, **options)</a>
         
           <div class="summary"><p>Calls #attach_cached, but skips if value is an empty string (this is useful when the uploaded file comes from form fields).</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#attach%28io%3AIO%7CShrine%3A%3AUploadedFile%7CNil%2Cstorage%3Dstore_key%2C%2A%2Aoptions%29%3AUploadedFile%3F-instance-method" class="signature"><strong>#attach</strong>(io : IO | Shrine::UploadedFile | Nil, storage = store_key, **options) : UploadedFile?</a>
+        <a href="#attach%28io%3AIO%7CShrine%3A%3AUploadedFile%7CNil%2Cstorage%3Dstore_key%2C%2A%2Aoptions%29%3AUploadedFile%7CNil-instance-method" class="signature"><strong>#attach</strong>(io : IO | Shrine::UploadedFile | Nil, storage = store_key, **options) : UploadedFile | Nil</a>
         
           <div class="summary"><p>Uploads given IO object and changes the uploaded file.</p></div>
         
@@ -440,7 +453,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#change%28file%3AShrine%3A%3AUploadedFile%3F%29%3AShrine%3A%3AUploadedFile%3F-instance-method" class="signature"><strong>#change</strong>(file : Shrine::UploadedFile?) : Shrine::UploadedFile?</a>
+        <a href="#change%28file%3AShrine%3A%3AUploadedFile%7CNil%29%3AShrine%3A%3AUploadedFile%7CNil-instance-method" class="signature"><strong>#change</strong>(file : Shrine::UploadedFile | Nil) : Shrine::UploadedFile | Nil</a>
         
           <div class="summary"><p>Sets the uploaded file with dirty tracking, and runs validations.</p></div>
         
@@ -489,7 +502,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#file%3AShrine%3A%3AUploadedFile%3F-instance-method" class="signature"><strong>#file</strong> : Shrine::UploadedFile?</a>
+        <a href="#file%3AShrine%3A%3AUploadedFile%7CNil-instance-method" class="signature"><strong>#file</strong> : Shrine::UploadedFile | Nil</a>
         
           <div class="summary"><p>Returns the attached uploaded file.</p></div>
         
@@ -503,7 +516,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#file%3D%28file%3AShrine%3A%3AUploadedFile%3F%29-instance-method" class="signature"><strong>#file=</strong>(file : Shrine::UploadedFile?)</a>
+        <a href="#file%3D%28file%3AShrine%3A%3AUploadedFile%7CNil%29-instance-method" class="signature"><strong>#file=</strong>(file : Shrine::UploadedFile | Nil)</a>
         
           <div class="summary"><p>Returns the attached uploaded file.</p></div>
         
@@ -541,7 +554,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#promote%28storage%3Dstore_key%2C%2A%2Aoptions%29%3AShrine%3A%3AUploadedFile%3F-instance-method" class="signature"><strong>#promote</strong>(storage = store_key, **options) : Shrine::UploadedFile?</a>
+        <a href="#promote%28storage%3Dstore_key%2C%2A%2Aoptions%29%3AShrine%3A%3AUploadedFile%7CNil-instance-method" class="signature"><strong>#promote</strong>(storage = store_key, **options) : Shrine::UploadedFile | Nil</a>
         
           <div class="summary"><p>Uploads current file to permanent storage and sets the stored file.</p></div>
         
@@ -555,7 +568,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#set%28file%3AShrine%3A%3AUploadedFile%3F%29%3AShrine%3A%3AUploadedFile%3F-instance-method" class="signature"><strong>#set</strong>(file : Shrine::UploadedFile?) : Shrine::UploadedFile?</a>
+        <a href="#set%28file%3AShrine%3A%3AUploadedFile%7CNil%29%3AShrine%3A%3AUploadedFile%7CNil-instance-method" class="signature"><strong>#set</strong>(file : Shrine::UploadedFile | Nil) : Shrine::UploadedFile | Nil</a>
         
           <div class="summary"><p>Sets the uploaded file.</p></div>
         
@@ -605,13 +618,11 @@
 
 
 
+  <div class="methods-inherited">
+    
+  </div>
 
-
-<div class="methods-inherited">
   
-</div>
-
-
   <h2>
     <a id="constructor-detail" class="anchor" href="#constructor-detail">
   <svg class="octicon-link" aria-hidden="true">
@@ -621,12 +632,12 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(file:Shrine::UploadedFile?=nil,cache_key:String=&quot;cache&quot;,store_key:String=&quot;store&quot;)-class-method">
+    <div class="entry-detail" id="new(file:Shrine::UploadedFile|Nil=nil,cache_key:String=&quot;cache&quot;,store_key:String=&quot;store&quot;)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(file : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>? = <span class="n">nil</span>, cache_key : String = <span class="s">&quot;cache&quot;</span>, store_key : String = <span class="s">&quot;store&quot;</span>)
+        def self.<strong>new</strong>(file : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a> | Nil = <span class="n">nil</span>, cache_key : String = <span class="s">&quot;cache&quot;</span>, store_key : String = <span class="s">&quot;store&quot;</span>)
 
-        <a class="method-permalink" href="#new%28file%3AShrine%3A%3AUploadedFile%3F%3Dnil%2Ccache_key%3AString%3D%22cache%22%2Cstore_key%3AString%3D%22store%22%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28file%3AShrine%3A%3AUploadedFile%7CNil%3Dnil%2Ccache_key%3AString%3D%22cache%22%2Cstore_key%3AString%3D%22store%22%29-class-method">#</a>
       </div>
       
         <div class="doc">
@@ -637,16 +648,18 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L37" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L37" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
 
+  
 
+  
 
-
+  
   <h2>
     <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
   <svg class="octicon-link" aria-hidden="true">
@@ -656,12 +669,12 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="assign(value:IO?,**options)-instance-method">
+    <div class="entry-detail" id="assign(value:IO|Nil,**options)-instance-method">
       <div class="signature">
         
-        def <strong>assign</strong>(value : IO?, **options)
+        def <strong>assign</strong>(value : IO | Nil, **options)
 
-        <a class="method-permalink" href="#assign%28value%3AIO%3F%2C%2A%2Aoptions%29-instance-method">#</a>
+        <a class="method-permalink" href="#assign%28value%3AIO%7CNil%2C%2A%2Aoptions%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -670,7 +683,7 @@
 useful when the uploaded file comes from form fields). Forwards any
 additional options to #attach_cached.</p>
 <pre><code class="language-crystal">attacher.assign(<span class="t">File</span>.open(...))
-attacher.assign(<span class="t">File</span>.open(...), metadata: { <span class="s">&quot;foo&quot;</span> =&gt; <span class="s">&quot;bar&quot;</span> })
+attacher.assign(<span class="t">File</span>.open(...), metadata: { <span class="s">&quot;foo&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;bar&quot;</span> })
 
 <span class="c"># ignores the assignment when a blank string is given</span>
 attacher.assign(<span class="s">&quot;&quot;</span>)</code></pre>
@@ -679,17 +692,17 @@ attacher.assign(<span class="s">&quot;&quot;</span>)</code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L53" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L53" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="attach(io:IO|Shrine::UploadedFile|Nil,storage=store_key,**options):UploadedFile?-instance-method">
+    <div class="entry-detail" id="attach(io:IO|Shrine::UploadedFile|Nil,storage=store_key,**options):UploadedFile|Nil-instance-method">
       <div class="signature">
         
-        def <strong>attach</strong>(io : IO | <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a> | Nil, storage = store_key, **options) : <a href="../../Shrine/UploadedFile.html">UploadedFile</a>?
+        def <strong>attach</strong>(io : IO | <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a> | Nil, storage = store_key, **options) : <a href="../../Shrine/UploadedFile.html">UploadedFile</a> | Nil
 
-        <a class="method-permalink" href="#attach%28io%3AIO%7CShrine%3A%3AUploadedFile%7CNil%2Cstorage%3Dstore_key%2C%2A%2Aoptions%29%3AUploadedFile%3F-instance-method">#</a>
+        <a class="method-permalink" href="#attach%28io%3AIO%7CShrine%3A%3AUploadedFile%7CNil%2Cstorage%3Dstore_key%2C%2A%2Aoptions%29%3AUploadedFile%7CNil-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -702,7 +715,7 @@ attacher.attach(io)
 attacher.attach(io, storage: <span class="n">:other_store</span>)
 
 <span class="c"># forwards additional options to the uploader</span>
-attacher.attach(io, upload_options: { <span class="s">&quot;x-amz-acl&quot;</span>: <span class="s">&quot;public-read&quot;</span> }, metadata: { <span class="s">&quot;foo&quot;</span> =&gt; <span class="s">&quot;bar&quot;</span> })
+attacher.attach(io, upload_options: { <span class="s">&quot;x-amz-acl&quot;</span>: <span class="s">&quot;public-read&quot;</span> }, metadata: { <span class="s">&quot;foo&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;bar&quot;</span> })
 
 <span class="c"># removes the attachment</span>
 attacher.attach(<span class="n">nil</span>)</code></pre>
@@ -711,7 +724,7 @@ attacher.attach(<span class="n">nil</span>)</code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L95" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L95" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -745,7 +758,7 @@ attacher.attach_cached({ &quot;id&quot; =&gt; &quot;...&quot;, &quot;storage&quo
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L74" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L74" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -761,7 +774,7 @@ attacher.attach_cached({ &quot;id&quot; =&gt; &quot;...&quot;, &quot;storage&quo
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L78" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L78" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -787,7 +800,7 @@ attacher.attached? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L272" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L274" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -803,7 +816,7 @@ attacher.attached? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L31" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -826,17 +839,17 @@ attacher.cached?(file) <span class="c"># checks given file</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L280" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L282" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="change(file:Shrine::UploadedFile?):Shrine::UploadedFile?-instance-method">
+    <div class="entry-detail" id="change(file:Shrine::UploadedFile|Nil):Shrine::UploadedFile|Nil-instance-method">
       <div class="signature">
         
-        def <strong>change</strong>(file : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>?) : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>?
+        def <strong>change</strong>(file : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a> | Nil) : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a> | Nil
 
-        <a class="method-permalink" href="#change%28file%3AShrine%3A%3AUploadedFile%3F%29%3AShrine%3A%3AUploadedFile%3F-instance-method">#</a>
+        <a class="method-permalink" href="#change%28file%3AShrine%3A%3AUploadedFile%7CNil%29%3AShrine%3A%3AUploadedFile%7CNil-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -850,7 +863,7 @@ attacher.changed? <span class="c">#=&gt; true</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L216" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L218" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -875,7 +888,7 @@ attacher.changed? <span class="c">#=&gt; true</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L261" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L263" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -897,7 +910,7 @@ Can be modified with additional data.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -919,7 +932,7 @@ Can be modified with additional data.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L295" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L297" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -943,7 +956,7 @@ attacher.file.exists? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L185" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L187" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -968,7 +981,7 @@ attacher.file.exists? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L176" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L178" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -993,17 +1006,17 @@ previous_file.exists? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L166" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L168" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="file:Shrine::UploadedFile?-instance-method">
+    <div class="entry-detail" id="file:Shrine::UploadedFile|Nil-instance-method">
       <div class="signature">
         
-        def <strong>file</strong> : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>?
+        def <strong>file</strong> : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a> | Nil
 
-        <a class="method-permalink" href="#file%3AShrine%3A%3AUploadedFile%3F-instance-method">#</a>
+        <a class="method-permalink" href="#file%3AShrine%3A%3AUploadedFile%7CNil-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1014,7 +1027,7 @@ previous_file.exists? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1035,17 +1048,17 @@ previous_file.exists? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L190" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L192" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="file=(file:Shrine::UploadedFile?)-instance-method">
+    <div class="entry-detail" id="file=(file:Shrine::UploadedFile|Nil)-instance-method">
       <div class="signature">
         
-        def <strong>file=</strong>(file : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>?)
+        def <strong>file=</strong>(file : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a> | Nil)
 
-        <a class="method-permalink" href="#file%3D%28file%3AShrine%3A%3AUploadedFile%3F%29-instance-method">#</a>
+        <a class="method-permalink" href="#file%3D%28file%3AShrine%3A%3AUploadedFile%7CNil%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1056,7 +1069,7 @@ previous_file.exists? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1096,7 +1109,7 @@ attacher.changed? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L122" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L122" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1122,7 +1135,7 @@ attacher.get <span class="c">#=&gt; nil</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L238" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L240" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1139,14 +1152,14 @@ attacher.get <span class="c">#=&gt; nil</span></code></pre>
           
           <p>Loads the uploaded file from data generated by <code>Attacher#data</code>.</p>
 <pre><code class="language-crystal">attacher.file <span class="c">#=&gt; nil</span>
-attacher.load_data({ <span class="s">&quot;id&quot;</span> =&gt; <span class="s">&quot;...&quot;</span>, <span class="s">&quot;storage&quot;</span> =&gt; <span class="s">&quot;...&quot;</span>, <span class="s">&quot;metadata&quot;</span> =&gt; { ... } })
+attacher.load_data({ <span class="s">&quot;id&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;...&quot;</span>, <span class="s">&quot;storage&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;...&quot;</span>, <span class="s">&quot;metadata&quot;</span> <span class="o">=&gt;</span> { ... } })
 attacher.file <span class="c">#=&gt; #&lt;Shrine::UploadedFile&gt;</span></code></pre>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L199" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L201" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1162,7 +1175,7 @@ attacher.file <span class="c">#=&gt; #&lt;Shrine::UploadedFile&gt;</span></code>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L207" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L209" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1178,17 +1191,17 @@ attacher.file <span class="c">#=&gt; #&lt;Shrine::UploadedFile&gt;</span></code>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L203" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L205" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="promote(storage=store_key,**options):Shrine::UploadedFile?-instance-method">
+    <div class="entry-detail" id="promote(storage=store_key,**options):Shrine::UploadedFile|Nil-instance-method">
       <div class="signature">
         
-        def <strong>promote</strong>(storage = store_key, **options) : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>?
+        def <strong>promote</strong>(storage = store_key, **options) : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a> | Nil
 
-        <a class="method-permalink" href="#promote%28storage%3Dstore_key%2C%2A%2Aoptions%29%3AShrine%3A%3AUploadedFile%3F-instance-method">#</a>
+        <a class="method-permalink" href="#promote%28storage%3Dstore_key%2C%2A%2Aoptions%29%3AShrine%3A%3AUploadedFile%7CNil-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1202,7 +1215,7 @@ attacher.stored? <span class="c">#=&gt; true</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L144" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L144" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1228,17 +1241,17 @@ attacher.stored? <span class="c">#=&gt; true</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L135" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L135" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="set(file:Shrine::UploadedFile?):Shrine::UploadedFile?-instance-method">
+    <div class="entry-detail" id="set(file:Shrine::UploadedFile|Nil):Shrine::UploadedFile|Nil-instance-method">
       <div class="signature">
         
-        def <strong>set</strong>(file : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>?) : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a>?
+        def <strong>set</strong>(file : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a> | Nil) : <a href="../../Shrine/UploadedFile.html">Shrine::UploadedFile</a> | Nil
 
-        <a class="method-permalink" href="#set%28file%3AShrine%3A%3AUploadedFile%3F%29%3AShrine%3A%3AUploadedFile%3F-instance-method">#</a>
+        <a class="method-permalink" href="#set%28file%3AShrine%3A%3AUploadedFile%7CNil%29%3AShrine%3A%3AUploadedFile%7CNil-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1252,7 +1265,7 @@ attacher.changed? <span class="c">#=&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L227" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L229" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1274,7 +1287,7 @@ under.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L312" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L314" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1290,7 +1303,7 @@ under.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L32" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1313,7 +1326,7 @@ attacher.stored?(file) <span class="c"># checks given file</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L288" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L290" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1333,13 +1346,13 @@ attacher.stored?(file) <span class="c"># checks given file</span></code></pre>
 attacher.upload(io, <span class="s">&quot;store&quot;</span>) <span class="c">#=&gt; #&lt;Shrine::UploadedFile&gt;</span>
 
 <span class="c"># pass additional options for the uploader</span>
-attacher.upload(io, <span class="s">&quot;store&quot;</span>, metadata: { <span class="s">&quot;foo&quot;</span> =&gt; <span class="s">&quot;bar&quot;</span> })</code></pre>
+attacher.upload(io, <span class="s">&quot;store&quot;</span>, metadata: { <span class="s">&quot;foo&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;bar&quot;</span> })</code></pre>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L155" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L157" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1358,14 +1371,14 @@ attacher.upload(io, <span class="s">&quot;store&quot;</span>, metadata: { <span 
 <pre><code class="language-crystal">attacher.uploaded_file(<span class="s">&quot;{\&quot;id\&quot;:\&quot;...\&quot;,\&quot;storage\&quot;:\&quot;...\&quot;,\&quot;metadata\&quot;:{...}}&quot;</span>)
 <span class="c">#=&gt; #&lt;Shrine::UploadedFile ...&gt;</span>
 
-attacher.uploaded_file({ <span class="s">&quot;id&quot;</span> =&gt; <span class="s">&quot;...&quot;</span>, <span class="s">&quot;storage&quot;</span> =&gt; <span class="s">&quot;...&quot;</span>, <span class="s">&quot;metadata&quot;</span> =&gt; {} })
+attacher.uploaded_file({ <span class="s">&quot;id&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;...&quot;</span>, <span class="s">&quot;storage&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;...&quot;</span>, <span class="s">&quot;metadata&quot;</span> <span class="o">=&gt;</span> {} })
 <span class="c">#=&gt; #&lt;Shrine::UploadedFile ...&gt;</span></code></pre>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L306" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L308" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1392,12 +1405,11 @@ attacher.url <span class="c">#=&gt; nil</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/attacher.cr#L250" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/attacher.cr#L252" target="_blank">View source</a>]
         
       </div>
     </div>
   
-
 
 
 

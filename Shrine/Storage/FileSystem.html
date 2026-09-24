@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 1.2.2">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Crystal Docs 1.20.3">
 <meta name="crystal_docs.project_version" content="master">
 <meta name="crystal_docs.project_name" content="shrine">
 
@@ -22,9 +23,14 @@
 
 <svg class="hidden">
   <symbol id="octicon-link" viewBox="0 0 16 16">
-    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+    <path fill="currentColor" fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
   </symbol>
 </svg>
+<input type="checkbox" id="sidebar-btn">
+<label for="sidebar-btn" id="sidebar-btn-label">
+  <svg class="open" xmlns="http://www.w3.org/2000/svg" height="2em" width="2em" viewBox="0 0 512 512"><title>Open Sidebar</title><path fill="currentColor" d="M80 96v64h352V96H80zm0 112v64h352v-64H80zm0 112v64h352v-64H80z"></path></svg>
+  <svg class="close" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 512 512"><title>Close Sidebar</title><path fill="currentColor" d="m118.6 73.4-45.2 45.2L210.7 256 73.4 393.4l45.2 45.2L256 301.3l137.4 137.3 45.2-45.2L301.3 256l137.3-137.4-45.2-45.2L256 210.7Z"></path></svg>
+</label>
 <div class="sidebar">
   <div class="sidebar-header">
     <div class="search-box">
@@ -305,12 +311,16 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Shrine::Storage::FileSystem
+  <span class="kind">
+    class
+  </span> Shrine::<wbr>Storage::<wbr>FileSystem
 
 </h1>
 
 
   <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Shrine/Storage/FileSystem.html">Shrine::Storage::FileSystem</a></li><li class="superclass"><a href="../../Shrine/Storage/Base.html">Shrine::Storage::Base</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
 
 
 
@@ -338,7 +348,7 @@
   </h2>
   
     
-      <a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/storage/file_system.cr#L5" target="_blank">
+      <a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/storage/file_system.cr#L5" target="_blank">
         shrine/storage/file_system.cr
       </a>
     
@@ -373,6 +383,7 @@
 
 
 
+  
   <h2>
     <a id="constructors" class="anchor" href="#constructors">
   <svg class="octicon-link" aria-hidden="true">
@@ -384,7 +395,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28directory%3AString%2Cprefix%3AString%3F%3Dnil%2Cclean%3Dtrue%2Cpermissions%3AInt%3DDEFAULT_PERMISSIONS%2Cdirectory_permissions%3AInt%3DDEFAULT_DIRECTORY_PERMISSIONS%29-class-method" class="signature"><strong>.new</strong>(directory : String, prefix : String? = <span class="n">nil</span>, clean = <span class="n">true</span>, permissions : Int = <span class="t">DEFAULT_PERMISSIONS</span>, directory_permissions : Int = <span class="t">DEFAULT_DIRECTORY_PERMISSIONS</span>)</a>
+        <a href="#new%28directory%3AString%2Cprefix%3AString%7CNil%3Dnil%2Cclean%3Dtrue%2Cpermissions%3AInt%3DDEFAULT_PERMISSIONS%2Cdirectory_permissions%3AInt%3DDEFAULT_DIRECTORY_PERMISSIONS%29-class-method" class="signature"><strong>.new</strong>(directory : String, prefix : String | Nil = <span class="n">nil</span>, clean = <span class="n">true</span>, permissions : Int = <span class="t">DEFAULT_PERMISSIONS</span>, directory_permissions : Int = <span class="t">DEFAULT_DIRECTORY_PERMISSIONS</span>)</a>
         
           <div class="summary"><p>Initializes a storage for uploading to the filesystem.</p></div>
         
@@ -393,9 +404,11 @@
   </ul>
 
 
+  
 
+  
 
-
+  
   <h2>
     <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
   <svg class="octicon-link" aria-hidden="true">
@@ -455,7 +468,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#prefix%3AString%3F-instance-method" class="signature"><strong>#prefix</strong> : String?</a>
+        <a href="#prefix%3AString%7CNil-instance-method" class="signature"><strong>#prefix</strong> : String | Nil</a>
         
       </li>
     
@@ -467,7 +480,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#url%28id%3AString%2Chost%3AString%3F%3Dnil%2C%2A%2Aoptions%29%3AString-instance-method" class="signature"><strong>#url</strong>(id : String, host : String? = <span class="n">nil</span>, **options) : String</a>
+        <a href="#url%28id%3AString%2Chost%3AString%7CNil%3Dnil%2C%2A%2Aoptions%29%3AString-instance-method" class="signature"><strong>#url</strong>(id : String, host : String | Nil = <span class="n">nil</span>, **options) : String</a>
         
           <div class="summary"><p>If #relative_prefix is not present, returns a path composed of #directory and the given <code>id</code>.</p></div>
         
@@ -477,11 +490,9 @@
 
 
 
-
-
-<div class="methods-inherited">
-  
+  <div class="methods-inherited">
     
+      
 
   <h3>Instance methods inherited from class <code><a href="../../Shrine/Storage/Base.html">Shrine::Storage::Base</a></code></h3>
   
@@ -523,36 +534,45 @@
   
 
 
-    
+      
+
+
+      
+
+
+      
 
 
     
+      
 
+
+      
+
+
+      
+
+
+      
+
+
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+  </div>
 
   
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-</div>
-
-
   <h2>
     <a id="constructor-detail" class="anchor" href="#constructor-detail">
   <svg class="octicon-link" aria-hidden="true">
@@ -562,12 +582,12 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(directory:String,prefix:String?=nil,clean=true,permissions:Int=DEFAULT_PERMISSIONS,directory_permissions:Int=DEFAULT_DIRECTORY_PERMISSIONS)-class-method">
+    <div class="entry-detail" id="new(directory:String,prefix:String|Nil=nil,clean=true,permissions:Int=DEFAULT_PERMISSIONS,directory_permissions:Int=DEFAULT_DIRECTORY_PERMISSIONS)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(directory : String, prefix : String? = <span class="n">nil</span>, clean = <span class="n">true</span>, permissions : Int = <span class="t">DEFAULT_PERMISSIONS</span>, directory_permissions : Int = <span class="t">DEFAULT_DIRECTORY_PERMISSIONS</span>)
+        def self.<strong>new</strong>(directory : String, prefix : String | Nil = <span class="n">nil</span>, clean = <span class="n">true</span>, permissions : Int = <span class="t">DEFAULT_PERMISSIONS</span>, directory_permissions : Int = <span class="t">DEFAULT_DIRECTORY_PERMISSIONS</span>)
 
-        <a class="method-permalink" href="#new%28directory%3AString%2Cprefix%3AString%3F%3Dnil%2Cclean%3Dtrue%2Cpermissions%3AInt%3DDEFAULT_PERMISSIONS%2Cdirectory_permissions%3AInt%3DDEFAULT_DIRECTORY_PERMISSIONS%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28directory%3AString%2Cprefix%3AString%7CNil%3Dnil%2Cclean%3Dtrue%2Cpermissions%3AInt%3DDEFAULT_PERMISSIONS%2Cdirectory_permissions%3AInt%3DDEFAULT_DIRECTORY_PERMISSIONS%29-class-method">#</a>
       </div>
       
         <div class="doc">
@@ -593,16 +613,18 @@ filesystem, you can set this option to <code>false</code>.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/storage/file_system.cr#L42" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/storage/file_system.cr#L42" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
 
+  
 
+  
 
-
+  
   <h2>
     <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
   <svg class="octicon-link" aria-hidden="true">
@@ -629,7 +651,7 @@ it's empty.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/storage/file_system.cr#L89" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/storage/file_system.cr#L89" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -645,7 +667,7 @@ it's empty.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/storage/file_system.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/storage/file_system.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -661,7 +683,7 @@ it's empty.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/storage/file_system.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/storage/file_system.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -682,7 +704,7 @@ it's empty.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/storage/file_system.cr#L67" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/storage/file_system.cr#L67" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -698,7 +720,7 @@ it's empty.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/storage/file_system.cr#L14" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/storage/file_system.cr#L14" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -720,7 +742,7 @@ it's empty.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/storage/file_system.cr#L59" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/storage/file_system.cr#L59" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -741,7 +763,7 @@ it's empty.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/storage/file_system.cr#L72" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/storage/file_system.cr#L72" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -757,23 +779,23 @@ it's empty.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/storage/file_system.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/storage/file_system.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="prefix:String?-instance-method">
+    <div class="entry-detail" id="prefix:String|Nil-instance-method">
       <div class="signature">
         
-        def <strong>prefix</strong> : String?
+        def <strong>prefix</strong> : String | Nil
 
-        <a class="method-permalink" href="#prefix%3AString%3F-instance-method">#</a>
+        <a class="method-permalink" href="#prefix%3AString%7CNil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/storage/file_system.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/storage/file_system.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -794,17 +816,17 @@ it's empty.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/storage/file_system.cr#L49" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/storage/file_system.cr#L49" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="url(id:String,host:String?=nil,**options):String-instance-method">
+    <div class="entry-detail" id="url(id:String,host:String|Nil=nil,**options):String-instance-method">
       <div class="signature">
         
-        def <strong>url</strong>(id : String, host : String? = <span class="n">nil</span>, **options) : String
+        def <strong>url</strong>(id : String, host : String | Nil = <span class="n">nil</span>, **options) : String
 
-        <a class="method-permalink" href="#url%28id%3AString%2Chost%3AString%3F%3Dnil%2C%2A%2Aoptions%29%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#url%28id%3AString%2Chost%3AString%7CNil%3Dnil%2C%2A%2Aoptions%29%3AString-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -820,12 +842,11 @@ def url(id, host : String? = nil, **options)</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/jetrockets/shrine.cr/blob/da3c080b72469b0ce1b236f1574f4b90d249ef46/src/shrine/storage/file_system.cr#L82" target="_blank">View source</a>]
+          [<a href="https://github.com/jetrockets/shrine.cr/blob/891d5a07bb149051c141184f04ecc9528bc58419/src/shrine/storage/file_system.cr#L82" target="_blank">View source</a>]
         
       </div>
     </div>
   
-
 
 
 
