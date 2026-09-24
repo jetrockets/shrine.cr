@@ -16,7 +16,7 @@ class Shrine
   # Raised when a file is not a valid IO.
   class InvalidFile < Error
     def initialize(io, missing_methods)
-      super "#{io.inspect} is not a valid IO object (it doesn't respond to #{missing_methods.map { |m, _| "##{m}" }.join(", ")})"
+      super "#{io.inspect} is not a valid IO object (it doesn't respond to #{missing_methods.map { |_m, _| "##{_m}" }.join(", ")})"
     end
   end
 
@@ -161,7 +161,8 @@ class Shrine
 
     # Retrieves the storage under the given identifier (Symbol), raising Shrine::Error if the storage is missing.
     def find_storage(name : String)
-      settings.storages[name]? || raise Error.new("storage #{name.inspect} isn't registered on #{self}")
+      settings.storages[name]? ||
+        raise Error.new("storage #{name.inspect} isn't registered on #{self}")
     end
 
     # Uploads the file to the specified storage. It delegates to `Shrine#upload`.
@@ -206,7 +207,7 @@ class Shrine
     # Shrine.with_file(io) { |file| file.path }
     # ```
     #
-    def with_file(io : IO)
+    def with_file(io : IO, &)
       if io.responds_to?(:path)
         yield io
       else
@@ -218,7 +219,7 @@ class Shrine
       end
     end
 
-    def with_file(uploaded_file : UploadedFile)
+    def with_file(uploaded_file : UploadedFile, &)
       uploaded_file.download do |tempfile|
         yield tempfile
       end
@@ -309,9 +310,9 @@ class Shrine
 
     # Attempts to extract the MIME type from the IO object.
     private def extract_mime_type(io : IO)
-      if io.responds_to?(:content_type) && io.content_type
+      if io.responds_to?(:content_type) && (type = io.content_type)
         Shrine.warn "The \"mime_type\" Shrine metadata field will be set from the \"Content-Type\" request header, which might not hold the actual MIME type of the file. It is recommended to load the determine_mime_type plugin which determines MIME type from file content."
-        io.content_type.not_nil!.split(';').first # exclude media type parameters
+        type.split(';').first # exclude media type parameters
       end
     end
 

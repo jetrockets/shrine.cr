@@ -89,9 +89,9 @@ class Shrine
         end
 
         def extract_with_content_type(io, options)
-          if io.responds_to?(:content_type) && io.content_type
-            io.content_type.not_nil!.split(";").first
-          end
+          return unless io.responds_to?(:content_type) && (type = io.content_type)
+
+          type.split(";").first
         end
 
         def extract_filename(io)

@@ -142,7 +142,9 @@ class Shrine
       #     attacher.promote
       #     attacher.stored? #=> true
       def promote(storage = store_key, **options) : Shrine::UploadedFile | Nil
-        set upload(file.not_nil!, storage, **options.merge(action: :store)) if file
+        if _file = file
+          set upload(_file, storage, **options.merge(action: :store))
+        end
       end
 
       # Delegates to `Shrine.upload`, passing the #context.
@@ -164,7 +166,7 @@ class Shrine
       #     attacher.destroy_previous
       #     previous_file.exists? #=> false
       def destroy_previous
-        @previous.not_nil!.destroy_attached if changed?
+        @previous.try &.destroy_attached if changed?
       end
 
       # Destroys the attached file if it exists and is uploaded to permanent

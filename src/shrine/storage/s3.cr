@@ -35,7 +35,7 @@ class Shrine
         @client : Awscr::S3::Client?,
         @prefix : String? = nil,
         @upload_options : Hash(String, String) = Hash(String, String).new,
-        @public : Bool = false
+        @public : Bool = false,
       )
       end
 

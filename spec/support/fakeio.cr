@@ -5,7 +5,7 @@ class FakeIO < IO::Memory
   def initialize(
     content : String = "",
     filename : String? = nil,
-    content_type : String? = nil
+    content_type : String? = nil,
   )
     super(content.to_slice, writeable: false)
 

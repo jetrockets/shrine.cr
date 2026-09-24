@@ -42,7 +42,9 @@ class Shrine
 
     def extension
       result = File.extname(id)[1..-1]?
-      result ||= File.extname(original_filename.not_nil!)[1..-1]? if original_filename
+      if filename = original_filename
+        result ||= File.extname(filename)[1..-1]?
+      end
       result = result.downcase if result
 
       result
@@ -92,15 +94,15 @@ class Shrine
     # ```
     #
     def open(**options)
-      @io.not_nil!.close if @io
+      @io.try &.close
       @io = _open(**options)
     end
 
-    def open(**options, &block)
+    def open(**options, &)
       open(**options)
 
       begin
-        yield @io.not_nil!
+        yield @io.as(IO)
       ensure
         close
         @io = nil
@@ -129,13 +131,13 @@ class Shrine
     # uploaded_file.download { |tempfile| tempfile.gets_to_end } # tempfile is deleted
     # ```
     #
-    def download(**options, &block)
+    def download(**options, &)
       tempfile = download(**options)
       yield(tempfile)
     ensure
-      if tempfile
-        tempfile.not_nil!.close
-        tempfile.not_nil!.delete
+      if file = tempfile
+        file.close
+        file.delete
       end
     end
 
@@ -198,11 +200,11 @@ class Shrine
 
     # Returns the storage that this file was uploaded to.
     def storage : Shrine::Storage::Base
-      Shrine.find_storage(storage_key.not_nil!).not_nil!
+      Shrine.find_storage(storage_key)
     end
 
     def io : IO
-      (@io ||= _open).not_nil!
+      (@io ||= _open).as(IO)
     end
 
     # Returns serializable hash representation of the uploaded file.
